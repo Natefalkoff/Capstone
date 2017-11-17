@@ -6,7 +6,8 @@ using System.Web;
 namespace Capstone.Web.Models
 {
     public class RecipeModel
-    {
+    {   
+        public int RecipeID { get; set; }
         public string Name {get; set;}
         public string Directions { get; set; }
         public int UserID { get; set; }
