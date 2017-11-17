@@ -135,7 +135,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
@@ -152,7 +154,7 @@
     </Compile>
     <Compile Include="Models\PlanModel.cs" />
     <Compile Include="Models\RecipeModel.cs" />
-    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UserModelcs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -170,15 +172,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-<<<<<<< HEAD
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Capstone.UITests\Capstone.UITests.csproj">
       <Project>{510df254-1d72-487e-a577-6e7f4eedf9dc}</Project>
       <Name>Capstone.UITests</Name>
     </ProjectReference>
-=======
->>>>>>> 0719ef83a773021c989bd7be215ae7fe54e49c24
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
