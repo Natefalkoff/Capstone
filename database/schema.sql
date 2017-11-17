@@ -1,12 +1,21 @@
 -- *************************************************************************************************
 -- This script creates all of the database objects (tables, constraints, etc) for the database
 -- *************************************************************************************************
+DROP TABLE recipe
+DROP TABLE tags
+DROp Table category
+drop table website_user
+drop table user_recipes
+drop table user_plan
+drop table recipe_tags
+drop table recipe_category
+drop table plan_receipes
 
 BEGIN;
 
 -- CREATE statements go here
 
-CREATE TABLE Recipe
+CREATE TABLE recipe
 (
 recipe_id int identity not null,
 recipe_name varchar(1000) not null,
@@ -14,7 +23,8 @@ directions varchar(max) not null,
 user_id varchar(24) not null, 
 publics int not null,
 ingredients varchar(max) not null,
-image varbinary(max) not null,
+image_name varchar(max) not null,
+
 
 constraint pk_recipe_id primary key (recipe_id)
 );
@@ -54,7 +64,7 @@ recipe_id int not null,
 constraint pk_user_id_recipe_id primary key (user_id, recipe_id)
 );
 
-CREATE TABLE meal_plan
+CREATE TABLE user_plan
 (
 plan_id int identity not null,
 user_id int not null,
