@@ -141,9 +141,18 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DAL\IPlanSqlDAL.cs" />
+    <Compile Include="DAL\IRecipeSqlDAL.cs" />
+    <Compile Include="DAL\IUserSqlDAL.cs" />
+    <Compile Include="DAL\PlanSqlDAL.cs" />
+    <Compile Include="DAL\RecipeSqlDAL.cs" />
+    <Compile Include="DAL\UserSqlDAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PlanModel.cs" />
+    <Compile Include="Models\RecipeModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -161,7 +170,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Capstone.UITests\Capstone.UITests.csproj">
+      <Project>{510df254-1d72-487e-a577-6e7f4eedf9dc}</Project>
+      <Name>Capstone.UITests</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
