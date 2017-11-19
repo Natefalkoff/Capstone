@@ -50,7 +50,11 @@ INSERT INTO website_user (user_name, password, email, authorization_level)VALUES
 INSERT INTO website_user (user_name, password, email, authorization_level)VALUES ('batman', 'batman', 'batman@gmail.com', 3);
 
 --USER RECIPES
+<<<<<<< HEAD
 iNSERT INTO user_recipes (user_id, user_name, recipe_id, recipe_name) VALUES (1,'Cspinks',1, 'Roasted Cauliflower Dressed Up');
+=======
+iNSERT INTO user_recipes (user_id, recipe_id) VALUES (SELECT user_id FROM website_user WHERE user_name = 'RRankin');
+>>>>>>> 1dbba999d3776fd75d529a6aa4b17aad10eb0585
 
 --USER PLAN
 INSERT INTO user_plan (user_id) VALUES (user_id);
