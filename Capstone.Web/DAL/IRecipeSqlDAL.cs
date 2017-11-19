@@ -1,17 +1,16 @@
-﻿using System;
+﻿using Capstone.Web.Models;
+using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
-using Capstone.Web.Models;
-using System.Web.Mvc;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Capstone.Web.DAL
 {
     public interface IRecipeSqlDAL
     {
-        bool NewRecipe(RecipeModel recipe);
-        List<RecipeModel> GetRecipes();
-        RecipeModel RecipeDetail(int id);
+       bool NewRecipe(RecipeModel recipe);
+       List<RecipeModel> GetRecipes();
+       RecipeModel RecipeDetail(int id);
     }
 }

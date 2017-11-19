@@ -24,7 +24,8 @@ namespace Capstone.Web.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            List<RecipeModel> recipes = recipeDal.GetRecipes();
+            List<RecipeModel> recipes = new List<RecipeModel>();
+            recipes = recipeDal.GetRecipes();
             return View(recipes);
         }
 
@@ -39,6 +40,27 @@ namespace Capstone.Web.Controllers
             recipeDal.NewRecipe(recipe);
 
             return RedirectToAction("RecipeConfirmation");
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(RecipeModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Register", model);
+            }
+
+            return RedirectToAction("RegisterSuccess");
+        }
+
+        public ActionResult RegisterSuccess()
+        {
+            return View();
         }
     }
 }
