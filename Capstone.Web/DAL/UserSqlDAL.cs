@@ -13,6 +13,7 @@ namespace Capstone.Web.DAL
     {
         private string connectionString;
         private const string registerUserSql = "INSERT into website_user VALUES (@user_name, @password, @email, @authorization)";
+        private const string loginUserSql = "SELECT* FROM website_user WHERE user_name = @username";
 
         public UserSqlDAL(string connectionString)
         {
@@ -43,6 +44,33 @@ namespace Capstone.Web.DAL
             catch (SqlException e)
             {
                 throw new NotImplementedException();
+            }
+        }
+
+        public UserModel GetUser(string username)
+        {
+            UserModel result = new UserModel();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {   
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(loginUserSql, conn);
+                    cmd.Parameters.AddWithValue("@username", username);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        result.UserName = reader["user_name"].ToString();
+                        result.Password = reader["password"].ToString();
+                    }
+
+                    return result;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
             }
         }
 

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Capstone.Web.Models;
 using Capstone.Web.DAL;
+using System.Web.Security;
 
 namespace Capstone.Web.Controllers
 {
@@ -42,25 +43,6 @@ namespace Capstone.Web.Controllers
             return RedirectToAction("RecipeConfirmation");
         }
 
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Register(RecipeModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("Register", model);
-            }
-
-            return RedirectToAction("RegisterSuccess");
-        }
-
-        public ActionResult RegisterSuccess()
-        {
-            return View();
-        }
+       
     }
 }
