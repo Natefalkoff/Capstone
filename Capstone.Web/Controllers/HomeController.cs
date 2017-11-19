@@ -42,11 +42,16 @@ namespace Capstone.Web.Controllers
 
             return RedirectToAction("RecipeConfirmation");
         }
+        public ActionResult RecipeConfirmation()
+        {
+            return View();
+        }
 
         public ActionResult Register()
         {
             return View();
         }
+
 
         [HttpPost]
         public ActionResult Register(RecipeModel model)
