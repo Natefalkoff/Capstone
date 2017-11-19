@@ -26,7 +26,6 @@ namespace Capstone.Web.DAL
         }
         public bool InsertRecipeIdAndTagId(int recipeId, int tagId)
         {
-            bool result = true;
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
