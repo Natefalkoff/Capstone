@@ -13,5 +13,6 @@ namespace Capstone.Web.Models
         public string Password { get; set; }
         public List<RecipeModel> Recipes { get; set; }
         public List<RecipeModel> Plan { get; set; }
+        
     }
 }
