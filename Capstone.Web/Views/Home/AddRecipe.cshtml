@@ -17,10 +17,13 @@
         @Html.TextAreaFor(m => m.Directions)
     </div>
     <div>
-        @Html.Label("Ingredients", "Ingredients Separated By Comma (, )")
+        @Html.Label("Ingredients", "Ingredients Separated By Vertical Bar (|)")
         @Html.TextAreaFor(m => m.Ingredients)
     </div>
-    <div>
-
-    </div>
+    
+    @*<div>
+        @Html.Label("Public", "Make Recipe Public?")
+        @Html.CheckBoxFor(m => m.Publics, true)
+    </div>*@
+    <button>Submit</button>
 }
