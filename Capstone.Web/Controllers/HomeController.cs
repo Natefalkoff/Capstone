@@ -10,6 +10,7 @@ namespace Capstone.Web.Controllers
 {
     public class HomeController : Controller
     {
+       
         private readonly IPlanSqlDAL planDal;
         private readonly IRecipeSqlDAL recipeDal;
         private readonly IUserSqlDAL userDal;
@@ -50,6 +51,7 @@ namespace Capstone.Web.Controllers
         [HttpPost]
         public ActionResult Register(RecipeModel model)
         {
+
             if (!ModelState.IsValid)
             {
                 return View("Register", model);

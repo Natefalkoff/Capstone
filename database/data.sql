@@ -49,7 +49,7 @@ INSERT INTO website_user (user_name, password, email, authorization_level)VALUES
 INSERT INTO website_user (user_name, password, email, authorization_level)VALUES ('batman', 'batman', 'batman@gmail.com', 3);
 
 --USER RECIPES
-iNSERT INTO user_recipes (user_id, recipe_id) VALUES (user_id, recipe_id);
+iNSERT INTO user_recipes (user_id, recipe_id) VALUES (SELECT user_id FROM website_user WHERE user_name = 'RRankin');
 
 --USER PLAN
 INSERT INTO user_plan (user_id) VALUES (user_id);
