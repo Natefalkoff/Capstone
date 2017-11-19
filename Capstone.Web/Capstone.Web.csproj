@@ -144,6 +144,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\IPlanSqlDAL.cs" />
+    <Compile Include="DAL\IRecipeSqlDAL.cs" />
     <Compile Include="DAL\IUserSqlDAL.cs" />
     <Compile Include="DAL\PlanSqlDAL.cs" />
     <Compile Include="DAL\RecipeSqlDAL.cs" />

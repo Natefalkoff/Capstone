@@ -15,5 +15,6 @@ namespace Capstone.Web.Models
         public string ImageName { get; set; }
         public List<string> Tags { get; set; }
         public List<string> Categories { get; set; }
+        public int Publics { get; set; }
     }
 }
