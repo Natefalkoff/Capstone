@@ -5,9 +5,9 @@ namespace Capstone.Web.App_Start
 {
     using System;
     using System.Web;
-
+    using Capstone.Web.DAL;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
+    using System.Configuration;
     using Ninject;
     using Ninject.Web.Common;
 
@@ -61,6 +61,9 @@ namespace Capstone.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<IPlanSqlDAL>().To<PlanSqlDAL>().WithConstructorArgument("connectionString", ConfigurationManager.ConnectionStrings["recipeDB"].ConnectionString);
+            kernel.Bind<IUserSqlDAL>().To<UserSqlDAL>().WithConstructorArgument("connectionString", ConfigurationManager.ConnectionStrings["recipeDB"].ConnectionString);
+            kernel.Bind<IRecipeSqlDAL>().To<RecipeSqlDAL>().WithConstructorArgument("connectionString", ConfigurationManager.ConnectionStrings["recipeDB"].ConnectionString);
         }        
     }
 }
