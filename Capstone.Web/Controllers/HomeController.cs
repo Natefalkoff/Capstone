@@ -61,6 +61,6 @@ namespace Capstone.Web.Controllers
         public ActionResult RegisterSuccess()
         {
             return View();
-        }
+        }      
     }
 }

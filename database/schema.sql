@@ -27,6 +27,7 @@ image_name varchar(max) not null,
 
 constraint pk_recipe_id primary key (recipe_id)
 
+
 );
 
 --TAGS
@@ -63,10 +64,12 @@ constraint pk_user_id primary key (user_id)
 CREATE TABLE user_recipes
 (
 user_id int not null,
+user_name varchar(24) not null,
 recipe_id int not null,
+recipe_name varchar(1000) not null, 
 
-constraint pk_user_id_recipe_id primary key (user_id, recipe_id)
-
+constraint fk_user_recipes_user_id foreign key (user_id) REFERENCES website_user (user_id) 
+--constraint fk_user_recipes_user_name foreign key (user_name) REFERENCES website_user (user_name)
 );
 
 --USER PLAN
@@ -75,7 +78,8 @@ CREATE TABLE user_plan
 plan_id int identity not null,
 user_id int not null,
 
-constraint pk_plan_id_user_id primary key (plan_id, user_id)
+constraint pk_plan_id_user_id primary key (plan_id)
+
 );
 
 --RECIPE TAGS
@@ -103,7 +107,7 @@ plan_id int not null,
 recipe_id int not null, 
 days_of_week varchar(10) not null, 
 
-Constraint pk_plan_id_recipe_id primary key (plan_id, recipe_id)
+Constraint fk_plan_id_recipe_id foreign key (plan_id) REFERENCES user_plan (plan_id) 
 );
 
 COMMIT;

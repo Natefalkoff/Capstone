@@ -7,6 +7,7 @@ SELECT * FROM recipe
 SELECT * FROM tags
 SELECT * FROM website_user
 SELECT * FROM category
+SELECT * FROM user_recipes
 
 --RECIPE
 INSERT INTO recipe (recipe_name, directions, publics, ingredients, image_name) VALUES ('Roasted Cauliflower Dressed Up', '1. 1 head of cauliflower cut into small florets | 2. 1/3 cup olive oil | 3. Salt & pepper to taste | 4. 1 shallot, cut crosswise into thin rings | 5. 1 tbsp. white wine | 6. 1 tbsp. capers, rinsed and roughly chopped | 7. Grated zest of lemon | 8. Handful of flat leaf parsley roughly chopped', 1, '3 cups of cooked and cooled spinach, finely chopped, | 3 cups of bread crumbs, | 1 cup of grated parmesan, | 4 eggs lightly beaten, | 1/2 cup softened butter, | Italian parsley, | salt and pepper', 'Cooked Cauliflower picture');
@@ -49,7 +50,7 @@ INSERT INTO website_user (user_name, password, email, authorization_level)VALUES
 INSERT INTO website_user (user_name, password, email, authorization_level)VALUES ('batman', 'batman', 'batman@gmail.com', 3);
 
 --USER RECIPES
-iNSERT INTO user_recipes (user_id, recipe_id) VALUES (user_id, recipe_id);
+iNSERT INTO user_recipes (user_id, user_name, recipe_id, recipe_name) VALUES (1,'Cspinks',1, 'Roasted Cauliflower Dressed Up');
 
 --USER PLAN
 INSERT INTO user_plan (user_id) VALUES (user_id);
