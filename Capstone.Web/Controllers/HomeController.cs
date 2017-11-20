@@ -6,12 +6,12 @@ using System.Web.Mvc;
 using Capstone.Web.Models;
 using Capstone.Web.DAL;
 using System.IO;
+using System.Web.Security;
 
 namespace Capstone.Web.Controllers
 {
     public class HomeController : Controller
     {
-       
         private readonly IPlanSqlDAL planDal;
         private readonly IRecipeSqlDAL recipeDal;
         private readonly IUserSqlDAL userDal;
@@ -47,10 +47,12 @@ namespace Capstone.Web.Controllers
 
             return View(model);
         }
-
+        
         [HttpPost]
         public ActionResult AddRecipe(RecipeModel recipe, HttpPostedFileBase ImageName)
         {
+			            if (auth.Admin((int?)Session["authorizationlevel"]) == true)
+            {
             string fileName = "";
             try
             {
@@ -71,18 +73,30 @@ namespace Capstone.Web.Controllers
             string[] tagArray = recipe.Tags.Split(' ');
             List<int> exists = recipeDal.TagsExist(recipe.Tags);
             for(int i = 0; i < tagArray.Length; i++)
-            {
-                if(exists[i] > 0)
+            Authorize auth = new Authorize();
+
+            // When a user logs in, Session[authorizationlevel] stores their auth level as 1, 2 ,3 or null.  From the Authorize class,
+            // runs the Admin method, taking in Session cast as a int?
+            // If the method returns true, only admins will be able to do this action, else returns redirect to another action.
+
+                int recipeId = recipeDal.NewRecipe(recipe);
+                string[] tagArray = recipe.Tags.Split(' ');
+                List<int> exists = recipeDal.TagsExist(recipe.Tags);
+                for (int i = 0; i < tagArray.Length; i++)
                 {
-                    int tagId = recipeDal.GetTagIdIfExists(tagArray[i]);
-                    recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
+                    if (exists[i] > 0)
+                    {
+                        int tagId = recipeDal.GetTagIdIfExists(tagArray[i]);
+                        recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
+                    }
+                    else
+                    {
+                        int tagId = recipeDal.GetTagIdAfterInsert(tagArray[i]);
+                        recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
+                    }
                 }
-                else
-                {
-                    int tagId = recipeDal.GetTagIdAfterInsert(tagArray[i]);
-                    recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
-                }
-            }
+                return RedirectToAction("RecipeConfirmation");
+            
             foreach(KeyValuePair<string, bool> kvp in recipe.ChoseCategory)
             {
                 if(kvp.Value == true)
@@ -90,35 +104,26 @@ namespace Capstone.Web.Controllers
                     int catId = recipeDal.GetCategoryId(kvp.Key);
                     recipeDal.InsertRecipeAndCategoryId(recipeId, catId);
                 }
-            }         
+            }    
+			
             return RedirectToAction("RecipeConfirmation");
+}
+            else {
+                return RedirectToAction("Index");
+            }
         }
         public ActionResult RecipeConfirmation()
         {
             return View();
         }
 
-        public ActionResult Register()
+
+        public ActionResult Details (int id)
         {
-            return View();
+            RecipeModel details = recipeDal.RecipeDetail(id);
+            return View(details);
+            
         }
 
-
-        [HttpPost]
-        public ActionResult Register(RecipeModel model)
-        {
-
-            if (!ModelState.IsValid)
-            {
-                return View("Register", model);
-            }
-
-            return RedirectToAction("RegisterSuccess");
-        }
-
-        public ActionResult RegisterSuccess()
-        {
-            return View();
-        }      
     }
 }

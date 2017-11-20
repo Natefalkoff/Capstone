@@ -147,6 +147,7 @@
       <DependentUpon>ImageModel.edmx</DependentUpon>
       <LastGenOutput>ImageModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Img\Cancer-Support-Community.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.2.1-vsdoc.js" />
@@ -169,6 +170,8 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DAL\Authorize.cs" />
     <Compile Include="DAL\IPlanSqlDAL.cs" />
     <Compile Include="DAL\IRecipeSqlDAL.cs" />
     <Compile Include="DAL\IUserSqlDAL.cs" />
@@ -178,6 +181,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="ImageModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -207,10 +211,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Register.cshtml" />
-    <Content Include="Views\Home\RegisterSuccess.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\RegisterSuccess.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Home\RecipeConfirmation.cshtml" />
     <Content Include="Views\Home\AddRecipe.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -220,7 +226,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Img\" />
-  </ItemGroup>
+</ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Capstone.UITests\Capstone.UITests.csproj">
       <Project>{510df254-1d72-487e-a577-6e7f4eedf9dc}</Project>
