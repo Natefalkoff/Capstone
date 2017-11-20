@@ -215,6 +215,7 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Home\RecipeConfirmation.cshtml" />
     <Content Include="Views\Home\AddRecipe.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

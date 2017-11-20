@@ -43,7 +43,7 @@ namespace Capstone.Web.Controllers
 
             UserModel user = userDal.GetUser(model.UserName);
 
-            if (user != null)
+            if (user.UserName != null)
             {
                 ModelState.AddModelError("username-exists", "That user name is not available");
                 return View("Register", model);
@@ -92,6 +92,8 @@ namespace Capstone.Web.Controllers
             else
             {
                 FormsAuthentication.SetAuthCookie(user.UserName, true);
+                Session["authorizationlevel"] = user.AuthorizationLevel;
+                Session["username"] = user.UserName;
                 //Session[SessionKeys.Username] = user.Email;
                 // Session[SessionKeys.UserId] = user.Id;  --not sure what this does??
             }

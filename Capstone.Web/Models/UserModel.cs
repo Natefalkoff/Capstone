@@ -27,7 +27,7 @@ namespace Capstone.Web.Models
         [Compare("Password", ErrorMessage = "Does not match password")]
         public string ConfirmPassword { get; set; }
 
-        public int AuthorizationLevel = 1;
+        public int? AuthorizationLevel = 1;
         public List<RecipeModel> Recipes { get; set; }
         public List<RecipeModel> Plan { get; set; }
         

@@ -7,7 +7,7 @@ namespace Capstone.Web.DAL
 {
     public class Authorize
     {
-        public bool Admin (int authorizationlevel)
+        public bool Admin (int? authorizationlevel)
         {
             if (authorizationlevel == 3)
             {
@@ -17,7 +17,7 @@ namespace Capstone.Web.DAL
         }
 
         
-        public bool Registered (int authorizationlevel)
+        public bool Registered (int? authorizationlevel)
         {
             if (authorizationlevel == 2)
             {
@@ -26,12 +26,13 @@ namespace Capstone.Web.DAL
             return false;
         }
 
-        public bool Public (int authorizationlevel)
+        public bool Public (int? authorizationlevel)
         {
-            if (authorizationlevel == 1)
+            if (authorizationlevel == 1 || authorizationlevel == null)
             {
                 return true;
             }
+            return false;
         }
 
 

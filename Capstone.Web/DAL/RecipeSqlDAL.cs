@@ -20,6 +20,9 @@ namespace Capstone.Web.DAL
         private string getTagIdAfterInsert = @"INSERT INTO tags OUTPUT INSERTED.tag_id VALUES (@tag_name);";
         private string recipeDetails = @"SELECT * FROM recipe LEFT OUTER JOIN recipe_category ON recipe.recipe_id = recipe_category.recipe_id LEFT OUTER JOIN category.category_id = recipe_category.category_id LEFT OUTER JOIN  WHERE recipe_id = @recipe_id;";
 
+        //using for details , does not include tags / categories
+        private string recipeDetailSql = @"SELECT * FROM recipe WHERE recipe_id = @recipe_id";
+
         public RecipeSqlDAL(string connectionString)
         {
             this.connectionString = connectionString;
@@ -170,7 +173,8 @@ namespace Capstone.Web.DAL
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(getRecipes, conn);
+                    SqlCommand cmd = new SqlCommand(recipeDetailSql, conn);
+                    cmd.Parameters.AddWithValue("@recipe_id", id);
                     SqlDataReader results = cmd.ExecuteReader();
                     while (results.Read())
                     {

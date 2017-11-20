@@ -38,30 +38,47 @@ namespace Capstone.Web.Controllers
         [HttpPost]
         public ActionResult AddRecipe(RecipeModel recipe)
         {
-            
-            int recipeId = recipeDal.NewRecipe(recipe);
-            string[] tagArray = recipe.Tags.Split(' ');
-            List<int> exists = recipeDal.TagsExist(recipe.Tags);
-            for(int i = 0; i < tagArray.Length; i++)
+            Authorize auth = new Authorize();
+
+            // When a user logs in, Session[authorizationlevel] stores their auth level as 1, 2 ,3 or null.  From the Authorize class,
+            // runs the Admin method, taking in Session cast as a int?
+            // If the method returns true, only admins will be able to do this action, else returns redirect to another action.
+            if (auth.Admin((int?)Session["authorizationlevel"]) == true)
             {
-                if(exists[i] > 0)
+                int recipeId = recipeDal.NewRecipe(recipe);
+                string[] tagArray = recipe.Tags.Split(' ');
+                List<int> exists = recipeDal.TagsExist(recipe.Tags);
+                for (int i = 0; i < tagArray.Length; i++)
                 {
-                    int tagId = recipeDal.GetTagIdIfExists(tagArray[i]);
-                    recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
+                    if (exists[i] > 0)
+                    {
+                        int tagId = recipeDal.GetTagIdIfExists(tagArray[i]);
+                        recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
+                    }
+                    else
+                    {
+                        int tagId = recipeDal.GetTagIdAfterInsert(tagArray[i]);
+                        recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
+                    }
                 }
-                else
-                {
-                    int tagId = recipeDal.GetTagIdAfterInsert(tagArray[i]);
-                    recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
-                }
+                return RedirectToAction("RecipeConfirmation");
             }
 
-
-            return RedirectToAction("RecipeConfirmation");
+            else {
+                return RedirectToAction("Index");
+            }
         }
         public ActionResult RecipeConfirmation()
         {
             return View();
+        }
+
+
+        public ActionResult Details (int id)
+        {
+            RecipeModel details = recipeDal.RecipeDetail(id);
+            return View(details);
+            
         }
 
     }
