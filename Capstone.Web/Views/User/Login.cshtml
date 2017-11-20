@@ -1,0 +1,24 @@
+﻿@model Capstone.Web.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<div id="login">
+    <h2>Login</h2>
+    @using (Html.BeginForm("Login", "User", FormMethod.Post))
+    {
+        @Html.ValidationMessage("invalid-credentials")
+
+        <div>
+            @Html.TextBoxFor(m => m.UserName, new { placeholder = "User Name" })
+            @Html.ValidationMessageFor(m => m.UserName)
+        </div>
+        <div>
+            @Html.PasswordFor(m => m.Password, new { placeholder = "password" })
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+        <button>Login</button>
+    }
+</div>
+

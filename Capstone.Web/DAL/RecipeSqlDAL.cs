@@ -12,13 +12,16 @@ namespace Capstone.Web.DAL
     {
         //private int recipeId = 0;
         private readonly string connectionString;
-        private string insertRecipe = @"INSERT INTO recipe OUTPUT INSERTED.ID VALUES ( @recipe_name, @directions, @ingredients, @image_name);";
+        private string insertRecipe = @"INSERT INTO recipe(recipe_name, directions, ingredients, image_name, publics) VALUES ( @recipe_name, @directions, @ingredients, @image_name, @publics);SELECT CAST(scope_identity() AS int);";
         private string insertTagsId = @"INSERT INTO recipe_tags VALUES (@recipeId, @tagId);";
         private string getRecipes = @"SELECT * FROM recipe;";
-        private string tagExists = @"SELECT COUNT(*) FROM tags WHERE tag_name = @tag;";
-        private string getTagId = @"SELECT tag_id FROM tags WHERE tag_name = @tag;";
-        private string getTagIdAfterInsert = @"INSERT INTO tags OUTPUT INSERTED.ID VALUES (@tag_name);";
+        //private string tagExists = @"SELECT COUNT(*) FROM tags WHERE tag_name = @tagExists;";
+        private string getTagId = @"SELECT tag_id FROM tags WHERE tag_name = @tagIfExists;";
+        private string getTagIdAfterInsert = @"INSERT INTO tags OUTPUT INSERTED.tag_id VALUES (@tag_name);";
         private string recipeDetails = @"SELECT * FROM recipe LEFT OUTER JOIN recipe_category ON recipe.recipe_id = recipe_category.recipe_id LEFT OUTER JOIN category.category_id = recipe_category.category_id LEFT OUTER JOIN  WHERE recipe_id = @recipe_id;";
+
+        //using for details , does not include tags / categories
+        private string recipeDetailSql = @"SELECT * FROM recipe WHERE recipe_id = @recipe_id";
 
         public RecipeSqlDAL(string connectionString)
         {
@@ -52,7 +55,7 @@ namespace Capstone.Web.DAL
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(getTagIdAfterInsert, conn);
-                    cmd.Parameters.AddWithValue("@tag", tag);
+                    cmd.Parameters.AddWithValue("@tag_name", tag);
                     id = (int)cmd.ExecuteScalar();
                 }
             }
@@ -72,7 +75,7 @@ namespace Capstone.Web.DAL
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(getTagId, conn);
-                    cmd.Parameters.AddWithValue("@tag", tag);
+                    cmd.Parameters.AddWithValue("@tagIfExists", tag);
                     id = (int)cmd.ExecuteScalar();
                 }
             }
@@ -92,10 +95,12 @@ namespace Capstone.Web.DAL
                 using(SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(tagExists, conn);
-                    foreach( string s in splitTags)
+                    
+                    for(int i = 0; i < splitTags.Length; i++)
                     {
-                        cmd.Parameters.AddWithValue("@tag", s);
+                        string tagExists = string.Format(@"SELECT COUNT(*) FROM tags WHERE tag_name = @tagExists{0};", i);
+                        SqlCommand cmd = new SqlCommand(tagExists, conn);
+                        cmd.Parameters.AddWithValue(string.Format("@tagExists{0}", i), splitTags[i]);
                         int id = (int)cmd.ExecuteScalar();
                         exists.Add(id);
                     }
@@ -110,6 +115,7 @@ namespace Capstone.Web.DAL
 
         public int NewRecipe(RecipeModel recipe)
         {
+            int recipeId = 0;
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -120,14 +126,15 @@ namespace Capstone.Web.DAL
                     cmd.Parameters.AddWithValue("@directions", recipe.Directions);
                     cmd.Parameters.AddWithValue("@ingredients", recipe.Ingredients);
                     cmd.Parameters.AddWithValue("@image_name", recipe.ImageName);
-                    int recipeId = (int)cmd.ExecuteScalar();
-                    return recipeId;
+                    cmd.Parameters.AddWithValue("@publics", recipe.Publics);
+                    recipeId = (int)cmd.ExecuteScalar();
                 }
             }
             catch (SqlException ex)
             {
-                return 0;
+                throw;
             }
+            return recipeId;
         }
 
         public List<RecipeModel> GetRecipes()
@@ -166,7 +173,8 @@ namespace Capstone.Web.DAL
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(getRecipes, conn);
+                    SqlCommand cmd = new SqlCommand(recipeDetailSql, conn);
+                    cmd.Parameters.AddWithValue("@recipe_id", id);
                     SqlDataReader results = cmd.ExecuteReader();
                     while (results.Read())
                     {
