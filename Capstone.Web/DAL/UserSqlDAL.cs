@@ -63,6 +63,7 @@ namespace Capstone.Web.DAL
                     {
                         result.UserName = reader["user_name"].ToString();
                         result.Password = reader["password"].ToString();
+                        result.AuthorizationLevel = Int32.Parse(reader["authorization_level"].ToString());
                     }
 
                     return result;

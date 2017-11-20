@@ -34,7 +34,7 @@ namespace Capstone.Web.Controllers
         {
             return View();
         }
-
+        
         [HttpPost]
         public ActionResult AddRecipe(RecipeModel recipe)
         {

@@ -50,7 +50,7 @@ namespace Capstone.Web.Controllers
             }
             else
             {
-
+                model.AuthorizationLevel = 2;
                 userDal.RegisterUser(model);
 
                 FormsAuthentication.SetAuthCookie(user.Email, true);
