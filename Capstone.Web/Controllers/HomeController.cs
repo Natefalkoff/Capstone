@@ -26,10 +26,10 @@ namespace Capstone.Web.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            
+
             List<RecipeModel> recipes = new List<RecipeModel>();
             recipes = recipeDal.GetRecipes();
-            
+
 
             return View(recipes);
         }
@@ -39,7 +39,7 @@ namespace Capstone.Web.Controllers
             RecipeModel model = new RecipeModel();
             Dictionary<string, bool> choose = new Dictionary<string, bool>();
             List<string> cats = recipeDal.GetCategories();
-            foreach(string s in cats)
+            foreach (string s in cats)
             {
                 choose[s] = false;
             }
@@ -47,38 +47,33 @@ namespace Capstone.Web.Controllers
 
             return View(model);
         }
-        
+
         [HttpPost]
         public ActionResult AddRecipe(RecipeModel recipe, HttpPostedFileBase ImageName)
         {
-			            if (auth.Admin((int?)Session["authorizationlevel"]) == true)
-            {
-            string fileName = "";
-            try
-            {
-                if (ImageName.ContentLength > 0)
-                {
-                    fileName = Path.GetFileName(ImageName.FileName);
-                    string path = Path.Combine(Server.MapPath("~/App_Data/Img/"), fileName);
-                    ImageName.SaveAs(path);
-                }
-                ViewBag.Message = "File Uploaded Successfully!";
-            }
-            catch
-            {
-                ViewBag.Message = "File Upload Failed!";
-            }
-            recipe.ImageName = fileName;
-            int recipeId = recipeDal.NewRecipe(recipe);
-            string[] tagArray = recipe.Tags.Split(' ');
-            List<int> exists = recipeDal.TagsExist(recipe.Tags);
-            for(int i = 0; i < tagArray.Length; i++)
             Authorize auth = new Authorize();
 
             // When a user logs in, Session[authorizationlevel] stores their auth level as 1, 2 ,3 or null.  From the Authorize class,
             // runs the Admin method, taking in Session cast as a int?
             // If the method returns true, only admins will be able to do this action, else returns redirect to another action.
-
+            if (auth.Admin((int?)Session["authorizationlevel"]) == true)
+            {
+                string fileName = "";
+                try
+                {
+                    if (ImageName.ContentLength > 0)
+                    {
+                        fileName = Path.GetFileName(ImageName.FileName);
+                        string path = Path.Combine(Server.MapPath("~/App_Data/Img/"), fileName);
+                        ImageName.SaveAs(path);
+                    }
+                    ViewBag.Message = "File Uploaded Successfully!";
+                }
+                catch
+                {
+                    ViewBag.Message = "File Upload Failed!";
+                }
+                recipe.ImageName = fileName;
                 int recipeId = recipeDal.NewRecipe(recipe);
                 string[] tagArray = recipe.Tags.Split(' ');
                 List<int> exists = recipeDal.TagsExist(recipe.Tags);
@@ -95,20 +90,20 @@ namespace Capstone.Web.Controllers
                         recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
                     }
                 }
-                return RedirectToAction("RecipeConfirmation");
-            
-            foreach(KeyValuePair<string, bool> kvp in recipe.ChoseCategory)
-            {
-                if(kvp.Value == true)
+
+                foreach (KeyValuePair<string, bool> kvp in recipe.ChoseCategory)
                 {
-                    int catId = recipeDal.GetCategoryId(kvp.Key);
-                    recipeDal.InsertRecipeAndCategoryId(recipeId, catId);
+                    if (kvp.Value == true)
+                    {
+                        int catId = recipeDal.GetCategoryId(kvp.Key);
+                        recipeDal.InsertRecipeAndCategoryId(recipeId, catId);
+                    }
                 }
-            }    
-			
-            return RedirectToAction("RecipeConfirmation");
-}
-            else {
+
+                return RedirectToAction("RecipeConfirmation");
+            }
+            else
+            {
                 return RedirectToAction("Index");
             }
         }
@@ -118,11 +113,11 @@ namespace Capstone.Web.Controllers
         }
 
 
-        public ActionResult Details (int id)
+        public ActionResult Details(int id)
         {
             RecipeModel details = recipeDal.RecipeDetail(id);
             return View(details);
-            
+
         }
 
     }

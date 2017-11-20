@@ -20,7 +20,7 @@ namespace Capstone.Web.DAL
         private string getTagIdAfterInsert = @"INSERT INTO tags OUTPUT INSERTED.tag_id VALUES (@tag_name);";
         private string recipeDetails = @"SELECT * FROM recipe LEFT OUTER JOIN recipe_category ON recipe.recipe_id = recipe_category.recipe_id LEFT OUTER JOIN category.category_id = recipe_category.category_id LEFT OUTER JOIN  WHERE recipe_id = @recipe_id;";
         private string getAllCategories = @"SELECT category_name FROM category";
-        private string getCategoryId = @"SELECT category_id WHERE category_name = @getCategoryId;";
+        private string getCategoryId = @"SELECT category_id FROM category WHERE category_name = @getCategoryId;";
         private string insertCategoryIdAndRecipeId = @"INSERT INTO recipe_category(recipe_id, category_id) VALUES (@recipeCategoryId, @categoryRecipeId);";
 
         //using for details , does not include tags / categories
