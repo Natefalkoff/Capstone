@@ -16,5 +16,8 @@ namespace Capstone.Web.DAL
         int GetTagIdAfterInsert(string tag);
         int GetTagIdIfExists(string tag);
         List<int> TagsExist(string tags);
+        List<string> GetCategories();
+        int GetCategoryId(string cat);
+        bool InsertRecipeAndCategoryId(int recipeId, int categoryId);
     }
 }

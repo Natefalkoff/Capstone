@@ -21,7 +21,9 @@ namespace Capstone.Web.Models
         //HttpPostedFileBase ImageUpload { get; set; }
 
         public string Tags { get; set; }
-        public string Categories { get; set; }
+        public List<string> Categories { get; set; }
         public int Publics { get; set; }
+        public List<bool> Chosen { get; set; }
+        public Dictionary<string, bool> ChoseCategory { get; set; }
     }
 }

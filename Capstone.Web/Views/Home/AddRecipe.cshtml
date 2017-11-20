@@ -6,10 +6,10 @@
 
 <h2>AddRecipe</h2>
 
-@using (Html.BeginForm("AddRecipe", "Home", FormMethod.Post)) 
+@using (Html.BeginForm("AddRecipe", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>RecipeModel</h4>
         <hr />
@@ -50,9 +50,38 @@
             @Html.Label("Publics", "Is this recipe public?")
             @Html.TextBoxFor(m => m.Publics)
         </div>
+        @{
+            //Dictionary<string, bool> chosenCats = new Dictionary<string, bool>();
+            //List<string> cat = ViewBag.Categories as List<string>;
+            //foreach(string s in cat)
+            //{
+            //    chosenCats.Add(s, false);
+            //}
+            List<string> catString = new List<string>();
+            foreach (var kvp in Model.ChoseCategory)
+            {
+                @*<input class="checkbox" type="checkbox" name="@kvp.Key" />
+                <label class="categoryLabel" for=""*@
+
+                @Html.HiddenFor(Model => Model.ChoseCategory.Keys)
+                @Html.Label(kvp.Key)
+                @Html.CheckBoxFor(Model => Model.ChoseCategory[kvp.Key], false)
+
+            }
+            @*for(int i = 0; i < catString.Count; i++)
+            {
+                @Html.HiddenFor(m => m.ChoseCategory[catString[i]])
+                @Html.Label(catString[i])
+                @Html.CheckBoxFor(m =)
+            }*@
+
+        }
+
         <div>
-            @Html.Label("ImageName", "Name of image")
-            @Html.TextBoxFor(m => m.ImageName)
+            @Html.Label("ImageName", "Upload an Image")
+            @Html.TextBoxFor(m => m.ImageName, new { type = "file" })<br />
+            <input type="submit" value="Upload" />
+            @ViewBag.Message
         </div>
         <button>Submit</button>
 
@@ -62,7 +91,7 @@
             </div>
         </div>
     </div>
-}
+            }
 
 <div>
     @Html.ActionLink("Back to List", "Index")
