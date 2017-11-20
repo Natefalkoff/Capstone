@@ -4,14 +4,14 @@
     ViewBag.Title = "AddRecipe";
 }
 
-<h2>AddRecipe</h2>
+<h2 id="title" style="padding-top:60px">Add Recipe</h2>
 
 @using (Html.BeginForm("AddRecipe", "Home", FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>RecipeModel</h4>
+        @*<h4 class="addrecipe">RecipeModel</h4>*@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
