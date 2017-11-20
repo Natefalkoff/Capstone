@@ -11,7 +11,7 @@ namespace Capstone.Web.DAL
     public class RecipeSqlDAL : IRecipeSqlDAL
     {
         private readonly string connectionString;
-        private string insertRecipe = "@INSERT INTO recipe VALUES ( @recipe_name, @directions, @publics, @ingredients, @image_name)";
+        private string insertRecipe = "@INSERT INTO recipe VALUES ( @recipe_name, @directions, @ingredients, @image_name)";
         private string getRecipes = @"SELECT * FROM recipe";
         private string recipeDetails = @"SELECT * FROM recipe LEFT OUTER JOIN recipe_category ON recipe.recipe_id = recipe_category.recipe_id LEFT OUTER JOIN category.category_id = recipe_category.category_id LEFT OUTER JOIN  WHERE recipe_id = @recipe_id;";
 
@@ -30,7 +30,6 @@ namespace Capstone.Web.DAL
                     SqlCommand cmd = new SqlCommand(insertRecipe, conn);
                     cmd.Parameters.AddWithValue("@recipe_name", recipe.Name);
                     cmd.Parameters.AddWithValue("@directions", recipe.Directions);
-                    cmd.Parameters.AddWithValue("@publics", recipe.Publics);
                     cmd.Parameters.AddWithValue("@ingredients", recipe.Ingredients);
                     cmd.Parameters.AddWithValue("@image_name", recipe.ImageName);
                     int rowsAffected = cmd.ExecuteNonQuery();
