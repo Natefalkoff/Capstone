@@ -38,7 +38,24 @@ namespace Capstone.Web.Controllers
         [HttpPost]
         public ActionResult AddRecipe(RecipeModel recipe)
         {
-            recipeDal.NewRecipe(recipe);
+            
+            int recipeId = recipeDal.NewRecipe(recipe);
+            string[] tagArray = recipe.Tags.Split(' ');
+            List<int> exists = recipeDal.TagsExist(recipe.Tags);
+            for(int i = 0; i < tagArray.Length; i++)
+            {
+                if(exists[i] > 0)
+                {
+                    int tagId = recipeDal.GetTagIdIfExists(tagArray[i]);
+                    recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
+                }
+                else
+                {
+                    int tagId = recipeDal.GetTagIdAfterInsert(tagArray[i]);
+                    recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
+                }
+            }
+
 
             return RedirectToAction("RecipeConfirmation");
         }

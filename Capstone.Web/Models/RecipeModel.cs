@@ -14,14 +14,14 @@ namespace Capstone.Web.Models
         public int UserID { get; set; }
         public string Ingredients { get; set; }
 
-        [DataType(DataType.Upload)]
+        //[DataType(DataType.Upload)]
         public string ImageName { get; set; }
 
-        [DataType(DataType.Upload)]
-        HttpPostedFileBase ImageUpload { get; set; }
+        //[DataType(DataType.Upload)]
+        //HttpPostedFileBase ImageUpload { get; set; }
 
         public string Tags { get; set; }
         public string Categories { get; set; }
-        public bool Publics { get; set; }
+        public int Publics { get; set; }
     }
 }
