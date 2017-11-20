@@ -225,8 +225,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+    <Folder Include="App_Data\Img\" />
+</ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Capstone.UITests\Capstone.UITests.csproj">
       <Project>{510df254-1d72-487e-a577-6e7f4eedf9dc}</Project>
