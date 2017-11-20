@@ -9,7 +9,7 @@ namespace Capstone.Web.DAL
 {
     public interface IRecipeSqlDAL
     {
-       bool NewRecipe(RecipeModel recipe);
+       int NewRecipe(RecipeModel recipe);
        List<RecipeModel> GetRecipes();
        RecipeModel RecipeDetail(int id);
     }

@@ -42,7 +42,10 @@ namespace Capstone.Web.Controllers
 
             return RedirectToAction("RecipeConfirmation");
         }
+        public ActionResult RecipeConfirmation()
+        {
+            return View();
+        }
 
-       
     }
 }
