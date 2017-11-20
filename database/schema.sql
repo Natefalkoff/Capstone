@@ -26,8 +26,6 @@ ingredients varchar(max) not null,
 image_name varchar(max) not null,
 
 constraint pk_recipe_id primary key (recipe_id)
-
-
 );
 
 --TAGS
