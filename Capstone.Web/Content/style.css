@@ -4,16 +4,43 @@
     min-height: 100vh;
     flex-direction: column;
 }
+.image {
+    display: block;
+    margin: auto;
+    width: 40%;
+}
+#pre {
+    width:auto;
+    display: block;
+    padding:0;
+    margin:0px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: black;
+    word-break:break-all;
+    word-wrap: break-word;
+    background-color:white;
+    border: 0px;
+    border-radius: 0px;
+}
+.header{
+    text-align:center;
+    text-decoration:underline;
+    
+}
 .id {
 padding-right: 20px;
 display: inline-block;
 
 }
 .directions {
-    padding-right: 40px;
+    padding-left: 40px;
+    text-decoration:underline;
+    
 }
 .public{
-    padding-right: 20px;
+    text-align:center;
+    display:block;
 }
 .ingredients{
     padding-right: 20px;

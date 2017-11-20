@@ -3,34 +3,31 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
-
+<head>
+    <link rel="stylesheet" type="text/css" href="~/content/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css">
+</head>
+<div>
+<h2>
+    <img src="~/Img/Cancer-Support-Community.jpg" alt="Cancer Support Community Central Ohio" class="image"/>
+         </h2>
+    </div>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.RecipeID)
-        </th>
-        <th>
+    <tr  class="directions" style="font-size:20px">
+        <th class="directions">
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        <th>
+        <th class="directions">
             @Html.DisplayNameFor(model => model.Directions)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserID)
-        </th>
-        <th>
+        </th>  
+        <th class="directions">
             @Html.DisplayNameFor(model => model.Ingredients)
         </th>
-        <th>
+        <th class="directions">
             @Html.DisplayNameFor(model => model.ImageName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Publics)
         </th>
         <th></th>
     </tr>
@@ -38,25 +35,20 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.RecipeID)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Directions)
+            <pre id="pre">
+                @Html.DisplayFor(modelItem => item.Directions)
+            </pre>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UserID)
+            <pre id="pre">
+                @Html.DisplayFor(modelItem => item.Ingredients)
+            </pre>
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ingredients)
-        </td>
-        <td>
+        <td class="public">
             @Html.DisplayFor(modelItem => item.ImageName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Publics)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

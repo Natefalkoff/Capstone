@@ -144,9 +144,9 @@ namespace Capstone.Web.DAL
                     {
                         RecipeModel r = new RecipeModel();
                         r.Name = Convert.ToString(results["recipe_name"]);
-                        r.Directions = Convert.ToString(results["directions"]);
+                        r.Directions = Convert.ToString(results["directions"]).Replace("\\n", "\n");
                         r.ImageName = Convert.ToString(results["image_name"]);
-                        r.Ingredients = Convert.ToString(results["ingredients"]);
+                        r.Ingredients = Convert.ToString(results["ingredients"]).Replace("\\n", "\n");
                         r.RecipeID = Convert.ToInt32(results["recipe_id"]);
                         recipes.Add(r);
                     }

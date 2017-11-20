@@ -147,6 +147,7 @@
       <DependentUpon>ImageModel.edmx</DependentUpon>
       <LastGenOutput>ImageModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Img\Cancer-Support-Community.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.2.1-vsdoc.js" />
@@ -220,7 +221,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Img\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Capstone.UITests\Capstone.UITests.csproj">
