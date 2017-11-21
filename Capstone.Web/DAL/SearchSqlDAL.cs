@@ -11,7 +11,7 @@ namespace Capstone.Web.DAL
     public class SearchSqlDAL : ISearchSqlDAL
     {
         private readonly string connectionString;
-
+        SearchModel model = new SearchModel();
 
         public SearchSqlDAL(string connectionString)
         {
@@ -20,9 +20,12 @@ namespace Capstone.Web.DAL
 
         public HashSet<RecipeModel> GetSearchResults(SearchModel model)
         {
+            List<string> tagStrings = new List<string>();
             HashSet<RecipeModel> results = new HashSet<RecipeModel>();
-            
-            string[] splitTags = model.TagSearch.Split(' ');
+            if (model.TagSearch != null)
+            {
+                tagStrings = model.TagSearch.Split(' ').ToList<string>();
+            }
             List<string> list = new List<string>();
             foreach(KeyValuePair<string, bool> kvp in model.SearchCategories)
             {
@@ -35,12 +38,11 @@ namespace Capstone.Web.DAL
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    conn.Open();
-
                     if(list.Count > 0)
                     {
                         for(int i = 0; i < list.Count; i++)
                         {
+                            conn.Open();
                             RecipeModel r = new RecipeModel();
                             string categoryResults = string.Format(@"SELECT * FROM recipe JOIN recipe_category ON recipe.recipe_id = recipe_category.recipe_id JOIN category ON recipe_category.category_id = category.category_id WHERE category_name = @catName{0};", i);
                             SqlCommand cmd = new SqlCommand(categoryResults, conn);
@@ -55,28 +57,32 @@ namespace Capstone.Web.DAL
                                 r.RecipeID = Convert.ToInt32(read["recipe_id"]);
                                 results.Add(r);
                             }
+                            conn.Close();
                         }
                     }
-                    conn.Close();
-
-                    conn.Open();
-                    if(splitTags.Length > 0)
+                    
+                    if (model.TagSearch != null)
                     {
-                        for (int i = 0; i < list.Count; i++)
+                        if (tagStrings.Count > 0)
                         {
-                            RecipeModel r = new RecipeModel();
-                            string categoryResults = string.Format(@"SELECT * FROM recipe JOIN recipe_tags ON recipe.recipe_id = recipe_tags.tag_id JOIN tags ON recipe_tags.tag_id = tags.tag_id WHERE tag_name = @tagName{0};", i);
-                            SqlCommand cmd = new SqlCommand(categoryResults, conn);
-                            cmd.Parameters.AddWithValue(string.Format("@tagName{0}", i), list[i]);
-                            SqlDataReader read = cmd.ExecuteReader();
-                            while (read.Read())
+                            for (int i = 0; i < tagStrings.Count; i++)
                             {
-                                r.Name = Convert.ToString(read["recipe_name"]);
-                                r.Directions = Convert.ToString(read["directions"]);
-                                r.ImageName = Convert.ToString(read["image_name"]);
-                                r.Ingredients = Convert.ToString(read["ingredients"]);
-                                r.RecipeID = Convert.ToInt32(read["recipe_id"]);
-                                results.Add(r);
+                                conn.Open();
+                                RecipeModel r = new RecipeModel();
+                                string categoryResults = string.Format(@"SELECT * FROM recipe JOIN recipe_tags ON recipe.recipe_id = recipe_tags.tag_id JOIN tags ON recipe_tags.tag_id = tags.tag_id WHERE tag_name = @tagName{0};", i);
+                                SqlCommand cmd = new SqlCommand(categoryResults, conn);
+                                cmd.Parameters.AddWithValue(string.Format("@tagName{0}", i), tagStrings[i]);
+                                SqlDataReader read = cmd.ExecuteReader();
+                                while (read.Read())
+                                {
+                                    r.Name = Convert.ToString(read["recipe_name"]);
+                                    r.Directions = Convert.ToString(read["directions"]);
+                                    r.ImageName = Convert.ToString(read["image_name"]);
+                                    r.Ingredients = Convert.ToString(read["ingredients"]);
+                                    r.RecipeID = Convert.ToInt32(read["recipe_id"]);
+                                    results.Add(r);
+                                }
+                                conn.Close();
                             }
                         }
                     }
@@ -87,6 +93,7 @@ namespace Capstone.Web.DAL
                 throw;
             }
             return results;
+            
         }
     }
 }

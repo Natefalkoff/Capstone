@@ -44,7 +44,17 @@ namespace Capstone.Web.Controllers
         {
             model.RecipeHash = searchDal.GetSearchResults(model);
 
-            return RedirectToAction("SearchResults", model.RecipeHash);
+            List<string> cats = recipeDal.GetCategories();
+            Dictionary<string, bool> catsDictionary = new Dictionary<string, bool>();
+            foreach (string s in cats)
+            {
+                catsDictionary[s] = false;
+            }
+            model.SearchCategories = catsDictionary;
+
+            
+
+            return View(model);
         }
         public ActionResult SearchResults(HashSet<RecipeModel> recipes)
         {

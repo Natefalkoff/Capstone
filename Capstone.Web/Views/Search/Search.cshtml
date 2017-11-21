@@ -9,22 +9,22 @@
 @using (Html.BeginForm("Search", "Search", FormMethod.Post))
 {
     <div>
-    <h3>Check Categories For Which You Would Like To Search</h3>
-    @foreach (var kvp in Model.SearchCategories)
-    {
-        @*<input class="checkbox" type="checkbox" name="@kvp.Key" />
-            <label class="categoryLabel" for=""*@
+        <h3>Check Categories For Which You Would Like To Search</h3>
+        @foreach (var kvp in Model.SearchCategories)
+        {
+            @*<input class="checkbox" type="checkbox" name="@kvp.Key" />
+                <label class="categoryLabel" for=""*@
 
-        @Html.HiddenFor(Model => Model.SearchCategories.Keys)
-        @Html.Label(kvp.Key)
-        @Html.CheckBoxFor(Model => Model.SearchCategories[kvp.Key], false)
-    }
-        </div>
+            @Html.HiddenFor(Model => Model.SearchCategories.Keys)
+            @Html.Label(kvp.Key)
+            @Html.CheckBoxFor(Model => Model.SearchCategories[kvp.Key], false)
+        }
+    </div>
         <div>
             <h3>Enter Tags You Would Like To Seach For. If More Than 2 Words, Replace Space With Period (.)</h3>
-        @Html.Label("Tag Field: ")
-        @Html.TextAreaFor(Model => Model.TagSearch)
-            </div>
+            @Html.Label("Tag Field: ")
+            @Html.TextAreaFor(Model => Model.TagSearch)
+        </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Create" class="btn btn-default" />
@@ -32,3 +32,28 @@
             </div>
 
 }
+
+@{
+
+    if (Model.RecipeHash != null)
+    {
+        foreach (var item in Model.RecipeHash)
+        {
+        <div>
+            <div>
+                @item.Name
+            </div>
+            <div>
+                @item.Ingredients
+            </div>
+            <div>
+                @item.Directions
+            </div>
+            <div>
+                <img src="~/App_Data/Img/@item.ImageName" />
+            </div>
+        </div>
+
+            }
+        }
+    }
