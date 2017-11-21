@@ -152,7 +152,7 @@ namespace Capstone.Web.DAL
         public List<int> TagsExist(string tags)
         {
             List<int> exists = new List<int>();
-            string[] splitTags = tags.Split(' ');
+            string[] splitTags = tags.Split(';');
             try
             {
                 using(SqlConnection conn = new SqlConnection(connectionString))
@@ -163,7 +163,7 @@ namespace Capstone.Web.DAL
                     {
                         string tagExists = string.Format(@"SELECT COUNT(*) FROM tags WHERE tag_name = @tagExists{0};", i);
                         SqlCommand cmd = new SqlCommand(tagExists, conn);
-                        cmd.Parameters.AddWithValue(string.Format("@tagExists{0}", i), splitTags[i]);
+                        cmd.Parameters.AddWithValue(string.Format("@tagExists{0}", i), splitTags[i].TrimStart());
                         int id = (int)cmd.ExecuteScalar();
                         exists.Add(id);
                     }
@@ -216,7 +216,7 @@ namespace Capstone.Web.DAL
                         r.Name = Convert.ToString(results["recipe_name"]);
                         r.Directions = Convert.ToString(results["directions"]).Replace("\\n", "\n");
                         r.ImageName = Convert.ToString(results["image_name"]);
-                        r.Ingredients = Convert.ToString(results["ingredients"]).Replace("\\n", "\n");
+                        r.Ingredients = Convert.ToString(results["ingredients"]).Replace("\\ | ", "\n");
                         r.RecipeID = Convert.ToInt32(results["recipe_id"]);
                         recipes.Add(r);
                     }

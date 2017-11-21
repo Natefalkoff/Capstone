@@ -24,7 +24,11 @@ namespace Capstone.Web.DAL
             List<RecipeModel> results = new List<RecipeModel>();
             if (model.TagSearch != null)
             {
-                tagStrings = model.TagSearch.Split(' ').ToList<string>();
+                string[] array = model.TagSearch.Split(';');
+                foreach(string s in array)
+                {
+                    tagStrings.Add(s.TrimStart(' '));
+                }
             }
             List<string> list = new List<string>();
             foreach(KeyValuePair<string, bool> kvp in model.SearchCategories)
@@ -43,13 +47,14 @@ namespace Capstone.Web.DAL
                         for(int i = 0; i < list.Count; i++)
                         {
                             conn.Open();
-                            RecipeModel r = new RecipeModel();
+                            
                             string categoryResults = string.Format(@"SELECT * FROM recipe JOIN recipe_category ON recipe.recipe_id = recipe_category.recipe_id JOIN category ON recipe_category.category_id = category.category_id WHERE category_name = @catName{0};", i);
                             SqlCommand cmd = new SqlCommand(categoryResults, conn);
                             cmd.Parameters.AddWithValue(string.Format("@catName{0}", i), list[i]);
                             SqlDataReader read = cmd.ExecuteReader();
                             while (read.Read())
                             {
+                                RecipeModel r = new RecipeModel();
                                 r.Name = Convert.ToString(read["recipe_name"]);
                                 r.Directions = Convert.ToString(read["directions"]);
                                 r.ImageName = Convert.ToString(read["image_name"]);
@@ -68,13 +73,14 @@ namespace Capstone.Web.DAL
                             for (int i = 0; i < tagStrings.Count; i++)
                             {
                                 conn.Open();
-                                RecipeModel r = new RecipeModel();
-                                string categoryResults = string.Format(@"SELECT * FROM recipe JOIN recipe_tags ON recipe.recipe_id = recipe_tags.tag_id JOIN tags ON recipe_tags.tag_id = tags.tag_id WHERE tag_name = @tagName{0};", i);
-                                SqlCommand cmd = new SqlCommand(categoryResults, conn);
+                                
+                                string tagResults = string.Format(@"SELECT * FROM recipe JOIN recipe_tags ON recipe.recipe_id = recipe_tags.recipe_id JOIN tags ON recipe_tags.tag_id = tags.tag_id WHERE tag_name LIKE @tagName{0};", i);
+                                SqlCommand cmd = new SqlCommand(tagResults, conn);
                                 cmd.Parameters.AddWithValue(string.Format("@tagName{0}", i), tagStrings[i]);
                                 SqlDataReader read = cmd.ExecuteReader();
                                 while (read.Read())
                                 {
+                                    RecipeModel r = new RecipeModel();
                                     r.Name = Convert.ToString(read["recipe_name"]);
                                     r.Directions = Convert.ToString(read["directions"]);
                                     r.ImageName = Convert.ToString(read["image_name"]);
