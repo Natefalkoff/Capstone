@@ -10,15 +10,17 @@
     {
         @Html.ValidationMessage("invalid-credentials")
 
-        <div>
+        <div class="body">
             @Html.TextBoxFor(m => m.UserName, new { placeholder = "User Name" })
             @Html.ValidationMessageFor(m => m.UserName)
         </div>
-        <div>
+        <div class="body">
             @Html.PasswordFor(m => m.Password, new { placeholder = "password" })
             @Html.ValidationMessageFor(m => m.Password)
         </div>
+        <div class="body">
         <button>Login</button>
+            </div>
     }
 </div>
 

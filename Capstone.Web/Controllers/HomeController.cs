@@ -53,7 +53,6 @@ namespace Capstone.Web.Controllers
         public ActionResult AddRecipe(RecipeModel recipe, HttpPostedFileBase ImageName)
         {
 
-
             // When a user logs in, Session[authorizationlevel] stores their auth level as 1, 2 ,3 or null.  From the Authorize class,
             // runs the Admin method, taking in Session cast as a int?
             // If the method returns true, only admins will be able to do this action, else returns redirect to another action.

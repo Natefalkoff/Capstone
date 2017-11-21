@@ -31,5 +31,6 @@ namespace Capstone.Web.Models
         public string Day { get; set; }
         public RecipeModel Recipes { get; set; }
         public string PlanName { get; set; }
+
     }
 }
