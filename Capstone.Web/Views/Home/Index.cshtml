@@ -48,7 +48,7 @@
             </pre>
         </td>
         <td class="public">
-            @Html.DisplayFor(modelItem => item.ImageName)
+            <a href="@Url.Action("Details","Home", new { id = item.RecipeID })" ><img src="~/Img/@item.ImageName"/></a>@Html.DisplayFor(modelItem => item.ImageName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
