@@ -107,7 +107,7 @@ category_id int not null,
 recipe_id int not null, 
 days_of_week varchar(10) not null, 
 
-CONSTRAINT pk_plan_id_user_id PRIMARY KEY (plan_id)
+--CONSTRAINT pk_plan_id_user_id PRIMARY KEY (plan_id)
 --Constraint fk_plan_recipes_plan_id foreign key (plan_id) REFERENCES user_plan (plan_id) 
 );
 
