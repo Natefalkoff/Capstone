@@ -24,7 +24,11 @@ namespace Capstone.Web.DAL
             List<RecipeModel> results = new List<RecipeModel>();
             if (model.TagSearch != null)
             {
-                tagStrings = model.TagSearch.Split(' ').ToList<string>();
+                string[] array = model.TagSearch.Split(';');
+                foreach(string s in array)
+                {
+                    tagStrings.Add(s.TrimStart(' '));
+                }
             }
             List<string> list = new List<string>();
             foreach(KeyValuePair<string, bool> kvp in model.SearchCategories)
@@ -69,8 +73,8 @@ namespace Capstone.Web.DAL
                             {
                                 conn.Open();
                                 RecipeModel r = new RecipeModel();
-                                string categoryResults = string.Format(@"SELECT * FROM recipe JOIN recipe_tags ON recipe.recipe_id = recipe_tags.tag_id JOIN tags ON recipe_tags.tag_id = tags.tag_id WHERE tag_name = @tagName{0};", i);
-                                SqlCommand cmd = new SqlCommand(categoryResults, conn);
+                                string tagResults = string.Format(@"SELECT * FROM recipe JOIN recipe_tags ON recipe.recipe_id = recipe_tags.tag_id JOIN tags ON recipe_tags.tag_id = tags.tag_id WHERE tag_name = @tagName{0};", i);
+                                SqlCommand cmd = new SqlCommand(tagResults, conn);
                                 cmd.Parameters.AddWithValue(string.Format("@tagName{0}", i), tagStrings[i]);
                                 SqlDataReader read = cmd.ExecuteReader();
                                 while (read.Read())

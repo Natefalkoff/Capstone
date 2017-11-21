@@ -75,22 +75,24 @@ namespace Capstone.Web.Controllers
                 }
                 recipe.ImageName = fileName;
                 int recipeId = recipeDal.NewRecipe(recipe);
-                string[] tagArray = recipe.Tags.Split(' ');
+                string[] tagArray = recipe.Tags.Split(';');
                 List<int> exists = recipeDal.TagsExist(recipe.Tags);
-                for (int i = 0; i < tagArray.Length; i++)
+                if (tagArray.Length != 0)
                 {
-                    if (exists[i] > 0)
+                    for (int i = 0; i < tagArray.Length; i++)
                     {
-                        int tagId = recipeDal.GetTagIdIfExists(tagArray[i]);
-                        recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
-                    }
-                    else
-                    {
-                        int tagId = recipeDal.GetTagIdAfterInsert(tagArray[i]);
-                        recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
+                        if (exists[i] > 0)
+                        {
+                            int tagId = recipeDal.GetTagIdIfExists(tagArray[i].TrimStart(' '));
+                            recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
+                        }
+                        else
+                        {
+                            int tagId = recipeDal.GetTagIdAfterInsert(tagArray[i].TrimStart(' '));
+                            recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
+                        }
                     }
                 }
-
                 foreach (KeyValuePair<string, bool> kvp in recipe.ChoseCategory)
                 {
                     if (kvp.Value == true)
