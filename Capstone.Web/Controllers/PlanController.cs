@@ -38,9 +38,19 @@ namespace Capstone.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePlan ()
+        public ActionResult CreatePlan (PlanModel model)
         {
-            return View("index");
+            planDal.CreatePlan(model.PlanName);
+
+            return View("Index");
+        }
+
+
+        public ActionResult ViewPlan (int id)
+        {
+            List<PlanModel> model = planDal.GetPlan(id);
+
+            return View(model);
         }
     }
 }
