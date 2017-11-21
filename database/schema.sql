@@ -138,4 +138,10 @@ CREATE TABLE meal_plan
 plan_id int not null, 
 meal_id int not null, 
 );
+
+CREATE TABLE meal_recipe
+(
+meal_id int not null, 
+recipe_id int not null, 
+);
 COMMIT;

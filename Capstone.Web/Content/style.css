@@ -1,7 +1,8 @@
 ﻿.body {
-align-content: center;
 text-align: center;
-position:center;
+/*position:center;*/
+display: inline-block;
+
 }
 .nav {
     list-style: none;
@@ -25,12 +26,10 @@ position:center;
 }
 .image {
     display: block;
-    margin: auto;
-    width: 50%;
-    height:50%;
-    max-height:50%;
-    max-width: 50%;
-    position:center;
+    /*margin: 0 0;*/
+    width: auto;
+    text-align: center;
+    align-content:center;
 }
 #title{
     text-align:center;
