@@ -1,0 +1,34 @@
+﻿@model Capstone.Web.Models.SearchModel
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+@using (Html.BeginForm("Search", "Search", FormMethod.Post))
+{
+    <div>
+    <h3>Check Categories For Which You Would Like To Search</h3>
+    @foreach (var kvp in Model.SearchCategories)
+    {
+        @*<input class="checkbox" type="checkbox" name="@kvp.Key" />
+            <label class="categoryLabel" for=""*@
+
+        @Html.HiddenFor(Model => Model.SearchCategories.Keys)
+        @Html.Label(kvp.Key)
+        @Html.CheckBoxFor(Model => Model.SearchCategories[kvp.Key], false)
+    }
+        </div>
+        <div>
+            <h3>Enter Tags You Would Like To Seach For. If More Than 2 Words, Replace Space With Period (.)</h3>
+        @Html.Label("Tag Field: ")
+        @Html.TextAreaFor(Model => Model.TagSearch)
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+
+}

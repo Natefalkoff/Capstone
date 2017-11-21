@@ -170,13 +170,16 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\Authorize.cs" />
     <Compile Include="DAL\IPlanSqlDAL.cs" />
     <Compile Include="DAL\IRecipeSqlDAL.cs" />
+    <Compile Include="DAL\ISearchSqlDAL.cs" />
     <Compile Include="DAL\IUserSqlDAL.cs" />
     <Compile Include="DAL\PlanSqlDAL.cs" />
     <Compile Include="DAL\RecipeSqlDAL.cs" />
+    <Compile Include="DAL\SearchSqlDAL.cs" />
     <Compile Include="DAL\UserSqlDAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -199,6 +202,7 @@
     </Compile>
     <Compile Include="Models\PlanModel.cs" />
     <Compile Include="Models\RecipeModel.cs" />
+    <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="recipe.cs">
@@ -217,6 +221,8 @@
     <Content Include="Views\Home\RecipeConfirmation.cshtml" />
     <Content Include="Views\Home\AddRecipe.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\Search\SearchResults.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -226,7 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Img\" />
-</ItemGroup>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Capstone.UITests\Capstone.UITests.csproj">
       <Project>{510df254-1d72-487e-a577-6e7f4eedf9dc}</Project>
