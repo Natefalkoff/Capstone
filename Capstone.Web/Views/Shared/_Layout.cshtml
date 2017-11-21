@@ -6,10 +6,12 @@
 <!DOCTYPE html>
 
 <html>
+
 <h1>
     <a href="@Url.Action("Index","Home")"><img src="~/Img/Cancer-Support-Community.jpg" alt="Cancer Support Community Central Ohio" class="image"/></a>
 
 </h1>
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>_Layout</title>
@@ -24,9 +26,12 @@
 </head>
 
 <body>
-
-
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <header class="padding">    
+            <a href="@Url.Action("Index","Home")"><img src="~/Img/Cancer-Support-Community.jpg" alt="Cancer Support Community Central Ohio" class="image" /></a>
+        <br>
+        </header>
+    
+    <div> @*class="navbar navbar-inverse navbar-fixed-top"*@
         <div class="container, nav">
             <div>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
