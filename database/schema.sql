@@ -56,7 +56,7 @@ password varchar(max) not null,
 email varchar(48) not null,
 authorization_level int not null,
 
-constraint pk_user_id primary key (users_id)
+constraint pk_users_id primary key (users_id)
 );
 
 --USER RECIPES
