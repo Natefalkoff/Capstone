@@ -64,6 +64,7 @@ namespace Capstone.Web.App_Start
             kernel.Bind<IPlanSqlDAL>().To<PlanSqlDAL>().WithConstructorArgument("connectionString", ConfigurationManager.ConnectionStrings["recipeDB"].ConnectionString);
             kernel.Bind<IUserSqlDAL>().To<UserSqlDAL>().WithConstructorArgument("connectionString", ConfigurationManager.ConnectionStrings["recipeDB"].ConnectionString);
             kernel.Bind<IRecipeSqlDAL>().To<RecipeSqlDAL>().WithConstructorArgument("connectionString", ConfigurationManager.ConnectionStrings["recipeDB"].ConnectionString);
+            kernel.Bind<ISearchSqlDAL>().To<SearchSqlDAL>().WithConstructorArgument("connectionString", ConfigurationManager.ConnectionStrings["recipeDB"].ConnectionString);
         }        
     }
 }

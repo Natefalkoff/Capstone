@@ -19,6 +19,9 @@ namespace Capstone.Web.DAL
         private string getTagId = @"SELECT tag_id FROM tags WHERE tag_name = @tagIfExists;";
         private string getTagIdAfterInsert = @"INSERT INTO tags OUTPUT INSERTED.tag_id VALUES (@tag_name);";
         private string recipeDetails = @"SELECT * FROM recipe LEFT OUTER JOIN recipe_category ON recipe.recipe_id = recipe_category.recipe_id LEFT OUTER JOIN category.category_id = recipe_category.category_id LEFT OUTER JOIN  WHERE recipe_id = @recipe_id;";
+        private string getAllCategories = @"SELECT category_name FROM category";
+        private string getCategoryId = @"SELECT category_id FROM category WHERE category_name = @getCategoryId;";
+        private string insertCategoryIdAndRecipeId = @"INSERT INTO recipe_category(recipe_id, category_id) VALUES (@recipeCategoryId, @categoryRecipeId);";
 
         //using for details , does not include tags / categories
         private string recipeDetailSql = @"SELECT * FROM recipe WHERE recipe_id = @recipe_id";
@@ -26,6 +29,66 @@ namespace Capstone.Web.DAL
         public RecipeSqlDAL(string connectionString)
         {
             this.connectionString = connectionString;
+        }
+        public bool InsertRecipeAndCategoryId(int recipeId, int categoryId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(insertCategoryIdAndRecipeId, conn);
+                    cmd.Parameters.AddWithValue("@recipeCategoryId", recipeId);
+                    cmd.Parameters.AddWithValue("@categoryRecipeId", categoryId);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch(SqlException ex)
+            {
+                throw;
+            }
+        }
+        public int GetCategoryId(string cat)
+        {
+            int id = 0;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(getCategoryId, conn);
+                    cmd.Parameters.AddWithValue("@getCategoryId", cat);
+                    id = (int)cmd.ExecuteScalar();
+                }
+            }
+            catch(SqlException ex)
+            {
+                throw;
+            }
+            return id;
+        }
+        public List<string> GetCategories()
+        {
+            List<string> categories = new List<string>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(getAllCategories, conn);
+                    SqlDataReader results = cmd.ExecuteReader();
+                    while (results.Read())
+                    {
+                        categories.Add(Convert.ToString(results["category_name"]));
+                    }
+                }
+            }
+            catch(SqlException ex)
+            {
+                throw;
+            }
+            return categories;
         }
         public bool InsertRecipeIdAndTagId(int recipeId, int tagId)
         {
@@ -89,7 +152,7 @@ namespace Capstone.Web.DAL
         public List<int> TagsExist(string tags)
         {
             List<int> exists = new List<int>();
-            string[] splitTags = tags.Split(' ');
+            string[] splitTags = tags.Split(';');
             try
             {
                 using(SqlConnection conn = new SqlConnection(connectionString))
@@ -100,7 +163,7 @@ namespace Capstone.Web.DAL
                     {
                         string tagExists = string.Format(@"SELECT COUNT(*) FROM tags WHERE tag_name = @tagExists{0};", i);
                         SqlCommand cmd = new SqlCommand(tagExists, conn);
-                        cmd.Parameters.AddWithValue(string.Format("@tagExists{0}", i), splitTags[i]);
+                        cmd.Parameters.AddWithValue(string.Format("@tagExists{0}", i), splitTags[i].TrimStart());
                         int id = (int)cmd.ExecuteScalar();
                         exists.Add(id);
                     }
@@ -153,7 +216,7 @@ namespace Capstone.Web.DAL
                         r.Name = Convert.ToString(results["recipe_name"]);
                         r.Directions = Convert.ToString(results["directions"]).Replace("\\n", "\n");
                         r.ImageName = Convert.ToString(results["image_name"]);
-                        r.Ingredients = Convert.ToString(results["ingredients"]).Replace("\\n", "\n");
+                        r.Ingredients = Convert.ToString(results["ingredients"]).Replace("\\ | ", "\n");
                         r.RecipeID = Convert.ToInt32(results["recipe_id"]);
                         recipes.Add(r);
                     }

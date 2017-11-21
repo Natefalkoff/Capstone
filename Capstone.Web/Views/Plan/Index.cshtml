@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@model Capstone.Web.Models.PlanModel
+
+<br />
+<br />
+<br />
+
+<h2>Plan Page</h2>
+
+
+<div id="CreatePlan">
+  
+    @using (Html.BeginForm("CreatePlan", "Plan", FormMethod.Post))
+    {
+        @Html.ValidationMessage("invalid-credentials")
+
+        <div>
+            @Html.TextBoxFor(m => m.PlanName, new { placeholder = "Plan Name" })
+            @Html.ValidationMessageFor(m => m.PlanName)
+        </div>
+    
+        <button>CreatePlan</button>
+    }
+</div>
+
+
+<h2>View a plan </h2>
+
+<select>
+    <option value="volvo">Users Plan placeholder</option>
+    <option value="saab">Users Plan placeholder 2</option>
+    <option value="mercedes">placeholder 3</option>
+    <option value="audi">placeholder 4</option>
+</select>

@@ -7,13 +7,13 @@
     <link rel="stylesheet" type="text/css" href="~/content/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="~/Content/style.css">
 </head>
-<div>
+@*<div>
 <h2>
     <img src="~/Img/Cancer-Support-Community.jpg" alt="Cancer Support Community Central Ohio" class="image"/>
          </h2>
-    </div>
+    </div>*@
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "AddRecipe")
 </p>
 <table class="table">
     <tr  class="directions" style="font-size:20px">
@@ -48,7 +48,7 @@
             </pre>
         </td>
         <td class="public">
-            @Html.DisplayFor(modelItem => item.ImageName)
+            <a href="@Url.Action("Details","Home", new { id = item.RecipeID })" ><img src="~/Img/@item.ImageName"/></a>@Html.DisplayFor(modelItem => item.ImageName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

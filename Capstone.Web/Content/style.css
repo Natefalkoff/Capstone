@@ -4,10 +4,30 @@
     min-height: 100vh;
     flex-direction: column;
 }
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.item {
+    width: 120px;
+    height: 120px;
+    height: auto;
+    float: left;
+    margin: 3px;
+    padding: 3px;
+}
 .image {
     display: block;
     margin: auto;
-    width: 40%;
+    width: 50%;
+    height:50%;
+    max-height:50%;
+    max-width: 50%;
+    position:center;
+}
+#title{
+    text-align:center
 }
 #pre {
     width:auto;
@@ -27,6 +47,10 @@
     text-align:center;
     text-decoration:underline;
     
+}
+.addrecipe{
+    padding-top: 400px;
+    text-align:center;
 }
 .id {
 padding-right: 20px;

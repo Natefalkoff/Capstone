@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Capstone.Web.Models;
 using Capstone.Web.DAL;
+using System.IO;
 using System.Web.Security;
 
 namespace Capstone.Web.Controllers
@@ -25,46 +26,86 @@ namespace Capstone.Web.Controllers
         // GET: Home
         public ActionResult Index()
         {
+
             List<RecipeModel> recipes = new List<RecipeModel>();
             recipes = recipeDal.GetRecipes();
+
+
             return View(recipes);
         }
 
         public ActionResult AddRecipe()
         {
-            return View();
+            RecipeModel model = new RecipeModel();
+            Dictionary<string, bool> choose = new Dictionary<string, bool>();
+            List<string> cats = recipeDal.GetCategories();
+            foreach (string s in cats)
+            {
+                choose[s] = false;
+            }
+            model.ChoseCategory = choose;
+
+            return View(model);
         }
-        
+
         [HttpPost]
-        public ActionResult AddRecipe(RecipeModel recipe)
+        public ActionResult AddRecipe(RecipeModel recipe, HttpPostedFileBase ImageName)
         {
-            Authorize auth = new Authorize();
+          
 
             // When a user logs in, Session[authorizationlevel] stores their auth level as 1, 2 ,3 or null.  From the Authorize class,
             // runs the Admin method, taking in Session cast as a int?
             // If the method returns true, only admins will be able to do this action, else returns redirect to another action.
-            if (auth.Admin((int?)Session["authorizationlevel"]) == true)
+            if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
             {
-                int recipeId = recipeDal.NewRecipe(recipe);
-                string[] tagArray = recipe.Tags.Split(' ');
-                List<int> exists = recipeDal.TagsExist(recipe.Tags);
-                for (int i = 0; i < tagArray.Length; i++)
+                string fileName = "";
+                try
                 {
-                    if (exists[i] > 0)
+                    if (ImageName.ContentLength > 0)
                     {
-                        int tagId = recipeDal.GetTagIdIfExists(tagArray[i]);
-                        recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
+                        fileName = Path.GetFileName(ImageName.FileName);
+                        string path = Path.Combine(Server.MapPath("~/Img/"), fileName);
+                        ImageName.SaveAs(path);
                     }
-                    else
+                    ViewBag.Message = "File Uploaded Successfully!";
+                }
+                catch
+                {
+                    ViewBag.Message = "File Upload Failed!";
+                }
+                recipe.ImageName = fileName;
+                int recipeId = recipeDal.NewRecipe(recipe);
+                string[] tagArray = recipe.Tags.Split(';');
+                List<int> exists = recipeDal.TagsExist(recipe.Tags);
+                if (tagArray.Length != 0)
+                {
+                    for (int i = 0; i < tagArray.Length; i++)
                     {
-                        int tagId = recipeDal.GetTagIdAfterInsert(tagArray[i]);
-                        recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
+                        if (exists[i] > 0)
+                        {
+                            int tagId = recipeDal.GetTagIdIfExists(tagArray[i].TrimStart(' '));
+                            recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
+                        }
+                        else
+                        {
+                            int tagId = recipeDal.GetTagIdAfterInsert(tagArray[i].TrimStart(' '));
+                            recipeDal.InsertRecipeIdAndTagId(recipeId, tagId);
+                        }
                     }
                 }
+                foreach (KeyValuePair<string, bool> kvp in recipe.ChoseCategory)
+                {
+                    if (kvp.Value == true)
+                    {
+                        int catId = recipeDal.GetCategoryId(kvp.Key);
+                        recipeDal.InsertRecipeAndCategoryId(recipeId, catId);
+                    }
+                }
+
                 return RedirectToAction("RecipeConfirmation");
             }
-
-            else {
+            else
+            {
                 return RedirectToAction("Index");
             }
         }
@@ -74,11 +115,11 @@ namespace Capstone.Web.Controllers
         }
 
 
-        public ActionResult Details (int id)
+        public ActionResult Details(string id)
         {
-            RecipeModel details = recipeDal.RecipeDetail(id);
+            RecipeModel details = recipeDal.RecipeDetail(Convert.ToInt32(id));
             return View(details);
-            
+
         }
 
     }
