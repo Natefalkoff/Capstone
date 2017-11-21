@@ -56,7 +56,7 @@ namespace Capstone.Web.DAL
                 {   
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(loginUserSql, conn);
-                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@usersname", username);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
