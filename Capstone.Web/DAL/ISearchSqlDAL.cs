@@ -10,6 +10,6 @@ namespace Capstone.Web.DAL
 {
     public interface ISearchSqlDAL
     {
-        HashSet<RecipeModel> GetSearchResults(SearchModel model);
+        List<RecipeModel> GetSearchResults(SearchModel model);
     }
 }

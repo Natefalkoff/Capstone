@@ -11,7 +11,7 @@ namespace Capstone.Web.Models
         public List<RecipeModel> Recipes { get; set; }
         public string TagSearch { get; set; }
         public Dictionary<string, bool> SearchCategories { get; set; }
-        public HashSet<RecipeModel> RecipeHash { get; set; }
+        public List<RecipeModel> RecipeHash { get; set; }
 
     }
 }

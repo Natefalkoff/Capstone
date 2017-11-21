@@ -18,10 +18,10 @@ namespace Capstone.Web.DAL
             this.connectionString = connectionString;
         }
 
-        public HashSet<RecipeModel> GetSearchResults(SearchModel model)
+        public List<RecipeModel> GetSearchResults(SearchModel model)
         {
             List<string> tagStrings = new List<string>();
-            HashSet<RecipeModel> results = new HashSet<RecipeModel>();
+            List<RecipeModel> results = new List<RecipeModel>();
             if (model.TagSearch != null)
             {
                 tagStrings = model.TagSearch.Split(' ').ToList<string>();
@@ -92,7 +92,8 @@ namespace Capstone.Web.DAL
             {
                 throw;
             }
-            return results;
+            List<RecipeModel> distinctList = results.GroupBy(i => i.RecipeID).Select(g => g.First()).ToList();
+            return distinctList;
             
         }
     }

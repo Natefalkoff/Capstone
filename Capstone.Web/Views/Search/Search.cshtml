@@ -34,11 +34,12 @@
 }
 
 @{
-
+   
     if (Model.RecipeHash != null)
     {
         foreach (var item in Model.RecipeHash)
         {
+            string s = "~/App_Data/Img/" + item.ImageName.ToString();
         <div>
             <div>
                 @item.Name
@@ -50,7 +51,8 @@
                 @item.Directions
             </div>
             <div>
-                <img src="~/App_Data/Img/@item.ImageName" />
+                
+                <img src="@Url.Content("~/App_Data/Img/" + item.ImageName.ToString())" alt="Recipe Image" />
             </div>
         </div>
 
