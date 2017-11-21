@@ -10,6 +10,6 @@ namespace Capstone.Web.DAL
 {
     public interface IPlanSqlDAL
     {
-
+        int CreatePlan(string planName);
     }
 }
