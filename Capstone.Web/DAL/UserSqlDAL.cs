@@ -28,7 +28,7 @@ namespace Capstone.Web.DAL
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(registerUserSql, conn);
-                    cmd.Parameters.AddWithValue("@user_name", model.UserName);
+                    cmd.Parameters.AddWithValue("@users_name", model.UserName);
                     cmd.Parameters.AddWithValue("@password", model.Password);
                     cmd.Parameters.AddWithValue("@email", model.Email);
                     cmd.Parameters.AddWithValue("@authorization", model.AuthorizationLevel);
@@ -61,7 +61,7 @@ namespace Capstone.Web.DAL
 
                     while (reader.Read())
                     {
-                        result.UserName = reader["user_name"].ToString();
+                        result.UserName = reader["users_name"].ToString();
                         result.Password = reader["password"].ToString();
                         result.AuthorizationLevel = Int32.Parse(reader["authorization_level"].ToString());
                     }
