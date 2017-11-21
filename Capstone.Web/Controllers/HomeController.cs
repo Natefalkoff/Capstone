@@ -64,7 +64,7 @@ namespace Capstone.Web.Controllers
                     if (ImageName.ContentLength > 0)
                     {
                         fileName = Path.GetFileName(ImageName.FileName);
-                        string path = Path.Combine(Server.MapPath("~/App_Data/Img/"), fileName);
+                        string path = Path.Combine(Server.MapPath("~/Img/"), fileName);
                         ImageName.SaveAs(path);
                     }
                     ViewBag.Message = "File Uploaded Successfully!";
@@ -113,9 +113,9 @@ namespace Capstone.Web.Controllers
         }
 
 
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            RecipeModel details = recipeDal.RecipeDetail(id);
+            RecipeModel details = recipeDal.RecipeDetail(Convert.ToInt32(id));
             return View(details);
 
         }

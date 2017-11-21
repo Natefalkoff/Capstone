@@ -7,7 +7,7 @@
 
 <html>
 <h1 class="image">
-    <img  style="height:300px; width:700px; margin:auto;"  src="~/Img/Cancer-Support-Community.jpg" alt="Cancer Support Community Central Ohio" />
+    <a href="@Url.Action("Index","Home")"><img  style="height:300px; width:700px; margin:auto;"  src="~/Img/Cancer-Support-Community.jpg" alt="Cancer Support Community Central Ohio" /></a>
 </h1>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -37,6 +37,7 @@
                 @Html.ActionLink(" Register |", "Register", "User", new { area = "" }, new { @class = "navbar-brand" })
                 @Html.ActionLink(" Login |", "Login", "User", new { area = "" }, new { @class = "navbar-brand" })
                 @Html.ActionLink(" Add Recipe |", "AddRecipe", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink(" Search |", "Search", "Search", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav"></ul>
