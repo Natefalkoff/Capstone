@@ -6,16 +6,22 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Capstone.Web.Crypto;
+using System.Web.Routing;
+using log4net;
+
+
 
 namespace Capstone.Web.Controllers
 {
-    public class UserController : Controller
+    public class UserController : CapstoneController
     {
         private readonly IPlanSqlDAL planDal;
         private readonly IRecipeSqlDAL recipeDal;
         private readonly IUserSqlDAL userDal;
+        
 
-        public UserController (IPlanSqlDAL planDal, IRecipeSqlDAL recipeDal, IUserSqlDAL userDal)
+        public UserController (IPlanSqlDAL planDal, IRecipeSqlDAL recipeDal, IUserSqlDAL userDal) :base(userDal)
         {
             this.planDal = planDal;
             this.recipeDal = recipeDal;
@@ -36,6 +42,7 @@ namespace Capstone.Web.Controllers
         [HttpPost]
         public ActionResult Register(UserModel model)
         {
+            HashProvider hash = new HashProvider();
             if (!ModelState.IsValid)
             {
                 return View("Register", model);
@@ -50,6 +57,8 @@ namespace Capstone.Web.Controllers
             }
             else
             {
+                string password = hash.HashPasswordWithMD5(model.Password, 16, 10000);
+                model.Password = password;
                 model.AuthorizationLevel = 2;
                 userDal.RegisterUser(model);
 
@@ -74,6 +83,10 @@ namespace Capstone.Web.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel model)
         {
+            HashProvider hash = new HashProvider();
+            string password = hash.HashPasswordWithMD5(model.Password, 16, 10000);
+            model.Password = password;
+
             if (!ModelState.IsValid)
             {
                 return View("Login", model);
