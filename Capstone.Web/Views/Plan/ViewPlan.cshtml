@@ -1,0 +1,32 @@
+﻿@using Capstone.Web.Models;
+
+@model List<PlanModel>
+
+@{
+    ViewBag.Title = "ViewPlan";
+}
+
+
+<h2>ViewPlan</h2>
+
+<table>
+    @foreach (PlanModel z in Model)
+    {
+   
+        foreach (string s in z.Days)
+        {
+            <tr>
+                @foreach (string m in z.Meals)
+                {
+                    if (z.Day == s && z.Meal == z.Meal)
+                    {
+                        <td>
+                            @z.Recipes.Name
+                        </td>
+                    }
+                }
+            </tr>
+        }
+   
+    }
+</table>

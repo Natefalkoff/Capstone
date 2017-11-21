@@ -44,5 +44,13 @@ namespace Capstone.Web.Controllers
 
             return View("Index");
         }
+
+
+        public ActionResult ViewPlan (int id)
+        {
+            List<PlanModel> model = planDal.GetPlan(id);
+
+            return View(model);
+        }
     }
 }

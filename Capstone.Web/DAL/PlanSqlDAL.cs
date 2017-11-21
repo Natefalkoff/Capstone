@@ -12,7 +12,13 @@ namespace Capstone.Web.DAL
     {
         private readonly string connectionString;
         private string createPlanSql = @"INSERT INTO plan(plan_name) VALUES ( @plan_name);SELECT CAST(scope_identity() AS int);";
-        private string GetPlanSql = "";
+        private string GetPlanSql = @"select plans.plan_name, meal.meal_name, meal.day_of_week, meal_recipe.recipe_id 
+                                    FROM plans
+                                    JOIN user_plan ON plans.plan_id = user_plan.plan_id
+                                    JOIN meal_plan ON plans.plan_id = meal_plan.plan_id
+                                    JOIN meal ON meal.meal_id = meal_plan.meal_id
+                                    JOIN meal_recipe ON meal_recipe.meal_id = meal.meal_id
+                                    WHERE plans.plan_id = @plan_id";
 
         public PlanSqlDAL(string connectionString)
         {
@@ -47,7 +53,9 @@ namespace Capstone.Web.DAL
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
-                {  
+                {
+                    RecipeSqlDAL recipedal = new RecipeSqlDAL(connectionString);
+
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(GetPlanSql, conn);
                     cmd.Parameters.AddWithValue("@plan_id", id);
@@ -60,7 +68,9 @@ namespace Capstone.Web.DAL
                         p.Meal = Convert.ToString(results["meal_name"]);
                         p.Day = Convert.ToString(results["day_of_week"]);
                         p.RecipeId = Int32.Parse(results["recipe_id]"].ToString());
-                    
+
+                        p.Recipes = recipedal.RecipeDetail(p.RecipeId);
+                        result.Add(p);
                     }
                 }
             }
@@ -68,7 +78,7 @@ namespace Capstone.Web.DAL
             {
                 throw;
             }
-            return m;
+            return result;
         }
 
     }
