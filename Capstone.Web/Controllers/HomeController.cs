@@ -7,16 +7,17 @@ using Capstone.Web.Models;
 using Capstone.Web.DAL;
 using System.IO;
 using System.Web.Security;
+using Capstone.Web.Crypto;
 
 namespace Capstone.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : CapstoneController
     {
         private readonly IPlanSqlDAL planDal;
         private readonly IRecipeSqlDAL recipeDal;
         private readonly IUserSqlDAL userDal;
 
-        public HomeController(IPlanSqlDAL planDal, IRecipeSqlDAL recipeDal, IUserSqlDAL userDal)
+        public HomeController(IPlanSqlDAL planDal, IRecipeSqlDAL recipeDal, IUserSqlDAL userDal) : base(userDal)
         {
             this.planDal = planDal;
             this.recipeDal = recipeDal;
@@ -51,7 +52,6 @@ namespace Capstone.Web.Controllers
         [HttpPost]
         public ActionResult AddRecipe(RecipeModel recipe, HttpPostedFileBase ImageName)
         {
-          
 
             // When a user logs in, Session[authorizationlevel] stores their auth level as 1, 2 ,3 or null.  From the Authorize class,
             // runs the Admin method, taking in Session cast as a int?
@@ -122,5 +122,17 @@ namespace Capstone.Web.Controllers
 
         }
 
+        public ActionResult Admin()
+        {
+            if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+
+        }
     }
 }

@@ -10,6 +10,7 @@ drop table user_plan
 drop table recipe_tags
 drop table recipe_category
 drop table plan_recipes
+drop table plans
 
 BEGIN;
 
@@ -51,7 +52,7 @@ CREATE TABLE website_users
 (
 users_id int identity not null,
 users_name  varchar(24) not null,
-password varchar(48) not null, 
+password varchar(max) not null, 
 email varchar(48) not null,
 authorization_level int not null,
 
