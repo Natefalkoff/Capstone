@@ -12,8 +12,8 @@ namespace Capstone.Web.DAL
     public class UserSqlDAL : IUserSqlDAL
     {
         private string connectionString;
-        private const string registerUserSql = "INSERT into website_user VALUES (@user_name, @password, @email, @authorization)";
-        private const string loginUserSql = "SELECT* FROM website_user WHERE user_name = @username";
+        private const string registerUserSql = "INSERT into website_users VALUES (@users_name, @password, @email, @authorization)";
+        private const string loginUserSql = "SELECT* FROM website_users WHERE users_name = @usersname";
 
         public UserSqlDAL(string connectionString)
         {

@@ -5,7 +5,7 @@
 BEGIN;
 SELECT * FROM recipe
 SELECT * FROM tags
-SELECT * FROM website_user
+SELECT * FROM website_users
 SELECT * FROM category
 SELECT * FROM user_recipes
 
@@ -42,20 +42,20 @@ SELECT * FROM user_recipes
 	INSERT INTO category (category_name) VALUES ('Holidays & Occasions');
 
 	--WEBSITE USER
-	INSERT INTO website_user (user_name, password, email, authorization_level)VALUES ('CSpinks', 'cspinks', 'cspinks@techelevator.com', 1);
-	INSERT INTO website_user (user_name, password, email, authorization_level)VALUES('RRankin','rrankin', 'rrankin@techelevator.com', 1);
-	INSERT INTO website_user (user_name, password, email, authorization_level)VALUES ('NFalkoff', 'nfalkoff', 'nfalkoff@techelevator.com', 1);
-	INSERT INTO website_user (user_name, password, email, authorization_level)VALUES ('janga', 'janga', 'janga@gmail.com', 2);
-	INSERT INTO website_user (user_name, password, email, authorization_level)VALUES ('jango', 'jango','jango@gmail.com', 2);
-	INSERT INTO website_user (user_name, password, email, authorization_level)VALUES('hoboDan', 'hobodan', 'hobodan@gmail.com', 3);
-	INSERT INTO website_user (user_name, password, email, authorization_level)VALUES ('batman', 'batman', 'batman@gmail.com', 3);
+	INSERT INTO website_users (users_name, password, email, authorization_level)VALUES ('CSpinks', 'cspinks', 'cspinks@techelevator.com', 1);
+	INSERT INTO website_users (users_name, password, email, authorization_level)VALUES('RRankin','rrankin', 'rrankin@techelevator.com', 1);
+	INSERT INTO website_users (users_name, password, email, authorization_level)VALUES ('NFalkoff', 'nfalkoff', 'nfalkoff@techelevator.com', 1);
+	INSERT INTO website_users (users_name, password, email, authorization_level)VALUES ('janga', 'janga', 'janga@gmail.com', 2);
+	INSERT INTO website_users (users_name, password, email, authorization_level)VALUES ('jango', 'jango','jango@gmail.com', 2);
+	INSERT INTO website_users (users_name, password, email, authorization_level)VALUES('hoboDan', 'hobodan', 'hobodan@gmail.com', 3);
+	INSERT INTO website_users (users_name, password, email, authorization_level)VALUES ('batman', 'batman', 'batman@gmail.com', 3);
 
 --USER RECIPES
 
-iNSERT INTO user_recipes (user_id, user_name, recipe_id, recipe_name) VALUES (1,'Cspinks',1, 'Roasted Cauliflower Dressed Up');
+iNSERT INTO user_recipes (users_id, users_name, recipe_id, recipe_name) VALUES (1,'Cspinks',1, 'Roasted Cauliflower Dressed Up');
 
 --USER PLAN
-INSERT INTO user_plan (user_id) VALUES (user_id);
+INSERT INTO user_plan (users_id) VALUES (users_id);
 
 --RECIPE TAGS
 INSERT INTO recipe_tags (recipe_id, tag_id) VALUES (tag_id);
@@ -65,13 +65,13 @@ INSERT INTO recipe_category (recipe_id, category_id) VALUES (recipe_id, category
 
 --PLAN RECIPES
 
-INSERT INTO plan_recipes (plan_id, user_id, category_id, recipe_id, days_of_week) VALUES (plan_id, user_id, category_id, recipe_id, 'Sunday');
-INSERT INTO plan_recipes (plan_id, user_id, category_id, recipe_id, days_of_week) VALUES (plan_id, user_id, category_id, recipe_id, 'Monday');
-INSERT INTO plan_recipes (plan_id, user_id, category_id, recipe_id, days_of_week) VALUES (plan_id, user_id, category_id, recipe_id, 'Tuesday');
-INSERT INTO plan_recipes (plan_id, user_id, category_id, recipe_id, days_of_week) VALUES (plan_id, user_id, category_id, recipe_id, 'Wednesday');
-INSERT INTO plan_recipes (plan_id, user_id, category_id, recipe_id, days_of_week) VALUES (plan_id, user_id, category_id, recipe_id, 'Thursday');
-INSERT INTO plan_recipes (plan_id, user_id, category_id, recipe_id, days_of_week) VALUES (plan_id, user_id, category_id, recipe_id, 'Friday');
-INSERT INTO plan_recipes (plan_id, user_id, category_id, recipe_id, days_of_week) VALUES (plan_id, user_id, category_id, recipe_id, 'Saturday');
+INSERT INTO plan_recipes (plan_id, users_id, category_id, recipe_id, days_of_week) VALUES (plan_id, users_id, category_id, recipe_id, 'Sunday');
+INSERT INTO plan_recipes (plan_id, users_id, category_id, recipe_id, days_of_week) VALUES (plan_id, users_id, category_id, recipe_id, 'Monday');
+INSERT INTO plan_recipes (plan_id, users_id, category_id, recipe_id, days_of_week) VALUES (plan_id, users_id, category_id, recipe_id, 'Tuesday');
+INSERT INTO plan_recipes (plan_id, users_id, category_id, recipe_id, days_of_week) VALUES (plan_id, users_id, category_id, recipe_id, 'Wednesday');
+INSERT INTO plan_recipes (plan_id, users_id, category_id, recipe_id, days_of_week) VALUES (plan_id, users_id, category_id, recipe_id, 'Thursday');
+INSERT INTO plan_recipes (plan_id, users_id, category_id, recipe_id, days_of_week) VALUES (plan_id, users_id, category_id, recipe_id, 'Friday');
+INSERT INTO plan_recipes (plan_id, users_id, category_id, recipe_id, days_of_week) VALUES (plan_id, users_id, category_id, recipe_id, 'Saturday');
 --INSERT INTO plan_recipes (recipe_id, days_of_week) VALUES (DAYOFWEEK);
 
 

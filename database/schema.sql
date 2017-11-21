@@ -4,7 +4,7 @@
 DROP TABLE recipe
 DROP TABLE tags
 DROp Table category
-drop table website_user
+drop table website_users
 drop table user_recipes
 drop table user_plan
 drop table recipe_tags
@@ -47,38 +47,30 @@ constraint pk_category_id primary key (category_id)
 );
 
 --WEBSITE USER
-CREATE TABLE website_user
+CREATE TABLE website_users
 (
-user_id int identity not null,
-user_name  varchar(24) not null,
+users_id int identity not null,
+users_name  varchar(24) not null,
 password varchar(48) not null, 
 email varchar(48) not null,
 authorization_level int not null,
 
-constraint pk_user_id primary key (user_id)
+constraint pk_user_id primary key (users_id)
 );
 
 --USER RECIPES
 CREATE TABLE user_recipes
 (
-user_id int not null,
-user_name varchar(24) not null,
+users_id int not null,
+users_name varchar(24) not null,
 recipe_id int not null,
 recipe_name varchar(1000) not null, 
 
-constraint fk_user_recipes_user_id foreign key (user_id) REFERENCES website_user (user_id) 
+constraint fk_user_recipes_user_id foreign key (users_id) REFERENCES website_users (users_id) 
 --constraint fk_user_recipes_user_name foreign key (user_name) REFERENCES website_user (user_name)
 );
 
---USER PLAN
-CREATE TABLE user_plan
-(
-plan_id int identity not null,
-user_id int not null,
 
-constraint pk_plan_id_user_id primary key (plan_id)
-
-);
 
 --RECIPE TAGS
 CREATE TABLE recipe_tags
@@ -98,17 +90,52 @@ category_id int not null,
 Constraint pk_recipe_id_category_id primary key (recipe_id, category_id)
 );
 
+--PLAN
+CREATE TABLE plans
+(
+plan_id int identity not null, 
+plan_name varchar(max) not null, 
+
+CONSTRAINT pk_plan_id PRIMARY KEY (plan_id)
+);
+
 --PLAN RECIPES
 CREATE TABLE plan_recipes
 (
 plan_id int not null,
-user_id int not null, 
+users_id int not null, 
 category_id int not null, 
 recipe_id int not null, 
 days_of_week varchar(10) not null, 
 
---CONSTRAINT pk_plan_id_user_id PRIMARY KEY (plan_id)
+CONSTRAINT fk_plan_recipes_plan_id FOREIGN KEY (plan_id) REFERENCES plans (plan_id),
 --Constraint fk_plan_recipes_plan_id foreign key (plan_id) REFERENCES user_plan (plan_id) 
 );
 
+--USER PLAN
+CREATE TABLE user_plan
+(
+plan_id int not null,
+users_id int not null,
+
+constraint fk_user_plan_plan_id FOREIGN KEY (plan_id) REFERENCES plans (plan_id),
+constraint fk_user_plan_user_id FOREIGN KEY (users_id) REFERENCES website_users (users_id)
+);
+
+--MEAL
+CREATE TABLE meal
+(
+meal_id int identity not null, 
+day_of_week varchar(10) not null, 
+meal_name varchar(10) not null, 
+
+constraint pk_meal_id primary key (meal_id),
+--constraint fk
+);
+
+CREATE TABLE meal_plan
+(
+plan_id int not null, 
+meal_id int not null, 
+);
 COMMIT;
