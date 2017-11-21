@@ -5,9 +5,9 @@ using System.Web;
 
 namespace Capstone.Web.DAL
 {
-    public class Authorize
+    public static class Authorize
     {
-        public bool Admin (int? authorizationlevel)
+        public static bool Admin (int? authorizationlevel)
         {
             if (authorizationlevel == 3)
             {
@@ -17,7 +17,7 @@ namespace Capstone.Web.DAL
         }
 
         
-        public bool Registered (int? authorizationlevel)
+        public static bool Registered (int? authorizationlevel)
         {
             if (authorizationlevel == 2)
             {
@@ -26,7 +26,7 @@ namespace Capstone.Web.DAL
             return false;
         }
 
-        public bool Public (int? authorizationlevel)
+        public static bool Public (int? authorizationlevel)
         {
             if (authorizationlevel == 1 || authorizationlevel == null)
             {
