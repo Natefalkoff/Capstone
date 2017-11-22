@@ -46,10 +46,7 @@ namespace Capstone.Web.Controllers
         public ActionResult Register(UserModel model)
         {
 
-            if (!ModelState.IsValid)
-            {
-                return View("Register", model);
-            }
+
 
             UserModel user = userDal.GetUser(model.UserName);
 
@@ -76,6 +73,52 @@ namespace Capstone.Web.Controllers
         }
 
         public ActionResult RegisterSuccess()
+        {
+            return View();
+        }
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(UserModel model)
+        {
+            UserModel user = Session["user"] as UserModel;
+            HashProvider hash = new HashProvider();
+            string s = model.TempPassword;
+            s = hash.HashPassword(s);
+
+
+            //if (!ModelState.IsValid)
+            //{
+            //    return View("ChangePassword");
+            //}
+
+
+
+            if (hash.VerifyPasswordMatch(user.Password, model.TempPassword, user.Salt) == false)
+            {
+                return View("ChangePassword");
+            }
+
+            else
+            {
+                
+                string password = hash.HashPassword(model.Password);
+                model.Salt = hash.SaltValue;
+                model.Password = password;
+                model.AuthorizationLevel = 2;
+                userDal.ChangePassword(model.Password, model.Salt, user.UserName);
+
+                //FormsAuthentication.SetAuthCookie(user.Email, true);
+                // Session[SessionKeys.Username] = model.EmailAddress;
+                //Session[SessionKeys.UserId] = user.Id;  ??? whats session keys
+            }
+
+            return RedirectToAction("ChangeSuccess");
+        }
+
+        public ActionResult ChangeSuccess()
         {
             return View();
         }
@@ -125,25 +168,9 @@ namespace Capstone.Web.Controllers
 
             UserModel user = userDal.GetUser(model.UserName);
 
-
-
-            // user does not exist or password is wrong
-            //if (user == null || user.Password != model.Password)
-            //{
-            //    ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
-            //    return View("Login", model);
-            //}
-            //else
-            //{
-            //    FormsAuthentication.SetAuthCookie(user.UserName, true);
-            //    Session["authorizationlevel"] = user.AuthorizationLevel;
-            //    Session["username"] = user.UserName;
-            //    Session["user"] = user;
-            //    //Session[SessionKeys.Username] = user.Email;
-            //    // Session[SessionKeys.UserId] = user.Id;  --not sure what this does??
-            //}
-
             return RedirectToAction("Index", "Home");
         }
+
+
     }
 }

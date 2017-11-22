@@ -10,7 +10,9 @@ namespace Capstone.Web.DAL
 {
     public interface IUserSqlDAL
     {
-        bool RegisterUser(UserModel model);
+        
         UserModel GetUser(string username);
+        bool ChangePassword(string password, string salt, string username);
+        bool RegisterUser(UserModel model);
     }
 }
