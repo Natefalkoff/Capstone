@@ -14,15 +14,19 @@ namespace Capstone.Web.Crypto
         public string SaltValue { get; private set; }
 
 
-        public string HashPasswordWithMD5(string password, int saltSize, int workFactor)
+        public string HashPassword(string plainTextPassword)
         {
             //Create the hashing provider
-            Rfc2898DeriveBytes rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, saltSize, workFactor);
+            Rfc2898DeriveBytes rfc = new Rfc2898DeriveBytes(plainTextPassword, 8, WorkFactor);
 
-            byte[] hash = rfc2898DeriveBytes.GetBytes(20);      //gets the hashed password
-            byte[] salt = rfc2898DeriveBytes.Salt;              //gets the random salt
+            //Get the Hashed Password
+            byte[] hash = rfc.GetBytes(20);
 
-            return Convert.ToBase64String(salt) + "|" + Convert.ToBase64String(hash);
+            //Set the SaltValue 
+            SaltValue = Convert.ToBase64String(rfc.Salt);
+
+            //Return the Hashed Password
+            return Convert.ToBase64String(hash);
         }
 
         public bool VerifyPasswordMatch(string existingHashedPassword, string plainTextPassword, string salt)

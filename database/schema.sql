@@ -12,6 +12,14 @@ drop table recipe_tags
 drop table recipe_category
 drop table plan_recipes
 drop table plans
+drop table website_users;
+drop table app_user;
+drop table meal;
+drop table meal_plan;
+drop table meal_recipe;
+drop table message;
+drop table recipe;
+
 
 
 BEGIN;
@@ -27,6 +35,7 @@ directions varchar(max) not null,
 publics int not null, --0 private (false), 1 pbulic (true)
 ingredients varchar(max) not null, 
 image_name varchar(max) not null,
+approved int DEFAULT 0 not null, --0 not approved, 1 approved
 
 constraint pk_recipe_id primary key (recipe_id)
 );
@@ -57,6 +66,7 @@ users_name  varchar(24) not null,
 password varchar(max) not null, 
 email varchar(48) not null,
 authorization_level int not null,
+salt varchar(max),
 
 constraint pk_users_id primary key (users_id)
 );

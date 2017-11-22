@@ -12,6 +12,7 @@ namespace Capstone.Web.Models
         public string Name { get; set; }
         public string Directions { get; set; }
         public int UserID { get; set; }
+        public string UserName { get; set; }
         public string Ingredients { get; set; }
 
         //[DataType(DataType.Upload)]
@@ -25,5 +26,7 @@ namespace Capstone.Web.Models
         public int Publics { get; set; }
         public List<bool> Chosen { get; set; }
         public Dictionary<string, bool> ChoseCategory { get; set; }
+        public int Approved { get; set; }
+        public bool IsPublics { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace Capstone.Web.DAL
     public class UserSqlDAL : IUserSqlDAL
     {
         private string connectionString;
-        private const string registerUserSql = "INSERT into website_users VALUES (@users_name, @password, @email, @authorization)";
+        private const string registerUserSql = "INSERT into website_users VALUES (@users_name, @password, @email, @authorization, @salt)";
         private const string loginUserSql = "SELECT* FROM website_users WHERE users_name = @usersname";
 
         public UserSqlDAL(string connectionString)
@@ -32,7 +32,7 @@ namespace Capstone.Web.DAL
                     cmd.Parameters.AddWithValue("@password", model.Password);
                     cmd.Parameters.AddWithValue("@email", model.Email);
                     cmd.Parameters.AddWithValue("@authorization", model.AuthorizationLevel);
-
+                    cmd.Parameters.AddWithValue("@salt", model.Salt);
 
                     int rowsAffected = cmd.ExecuteNonQuery();
 
@@ -64,6 +64,7 @@ namespace Capstone.Web.DAL
                         result.UserName = reader["users_name"].ToString();
                         result.Password = reader["password"].ToString();
                         result.AuthorizationLevel = Int32.Parse(reader["authorization_level"].ToString());
+                        result.Salt = Convert.ToString(reader["salt"]);
                     }
 
                     return result;

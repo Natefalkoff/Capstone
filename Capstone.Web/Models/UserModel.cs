@@ -30,6 +30,7 @@ namespace Capstone.Web.Models
         public int? AuthorizationLevel = 1;
         public List<RecipeModel> Recipes { get; set; }
         public List<RecipeModel> Plan { get; set; }
+        public string Salt { get; set; }
         
     }
 }

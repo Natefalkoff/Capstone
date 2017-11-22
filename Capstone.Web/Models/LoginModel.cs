@@ -13,5 +13,7 @@ namespace Capstone.Web.Models
 
         [Required(ErrorMessage = "*")]
         public string Password { get; set; }
+
+        public string Salt { get; set; }
     }
 }

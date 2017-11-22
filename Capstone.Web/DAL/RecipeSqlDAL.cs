@@ -15,6 +15,8 @@ namespace Capstone.Web.DAL
         private string insertRecipe = @"INSERT INTO recipe(recipe_name, directions, ingredients, image_name, publics) VALUES ( @recipe_name, @directions, @ingredients, @image_name, @publics);SELECT CAST(scope_identity() AS int);";
         private string insertTagsId = @"INSERT INTO recipe_tags VALUES (@recipeId, @tagId);";
         private string getRecipes = @"SELECT * FROM recipe;";
+        private string getAllPublicRecipes = @"SELECT * FROM recipe JOIN user_recipes ON recipe.recipe_id = user_recipes.recipe_id JOIN website_users ON user_recipes.users_id = website_users.users_id WHERE approved = 1 AND publics = 1;";
+        private string getAllNonApprovedRecipes = @"SELECT * FROM recipe JOIN user_recipes ON recipe.recipe_id = user_recipes.recipe_id JOIN website_users ON user_recipes.users_id = website_users.users_id WHERE approved = 0 AND publics = 1;";
         //private string tagExists = @"SELECT COUNT(*) FROM tags WHERE tag_name = @tagExists;";
         private string getTagId = @"SELECT tag_id FROM tags WHERE tag_name = @tagIfExists;";
         private string getTagIdAfterInsert = @"INSERT INTO tags OUTPUT INSERTED.tag_id VALUES (@tag_name);";
@@ -44,10 +46,75 @@ namespace Capstone.Web.DAL
                     return rowsAffected > 0;
                 }
             }
+
             catch(SqlException ex)
             {
                 throw;
             }
+        }
+        public List<RecipeModel> GetPublicNonApprovedRecipes()
+        {
+            List<RecipeModel> recipes = new List<RecipeModel>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(getAllNonApprovedRecipes, conn);
+                    SqlDataReader results = cmd.ExecuteReader();
+                    while (results.Read())
+                    {
+                        RecipeModel r = new RecipeModel();
+                        r.Name = Convert.ToString(results["recipe_name"]);
+                        r.Directions = Convert.ToString(results["directions"]).Replace("\\n", "\n");
+                        r.ImageName = Convert.ToString(results["image_name"]);
+                        r.Ingredients = Convert.ToString(results["ingredients"]).Replace("\\n", "\n");
+                        r.RecipeID = Convert.ToInt32(results["recipe_id"]);
+                        r.UserID = Convert.ToInt32(results["users_id"]);
+                        r.UserName = Convert.ToString(results["users_name"]);
+                        r.Approved = Convert.ToInt32(results["approved"]);
+                        r.Publics = Convert.ToInt32(results["publics"]);
+                        recipes.Add(r);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return recipes;
+        }
+        public List<RecipeModel> GetPublicApprovedRecipes()
+        {
+            List<RecipeModel> recipes = new List<RecipeModel>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(getAllPublicRecipes, conn);
+                    SqlDataReader results = cmd.ExecuteReader();
+                    while (results.Read())
+                    {
+                        RecipeModel r = new RecipeModel();
+                        r.Name = Convert.ToString(results["recipe_name"]);
+                        r.Directions = Convert.ToString(results["directions"]).Replace("\\n", "\n");
+                        r.ImageName = Convert.ToString(results["image_name"]);
+                        r.Ingredients = Convert.ToString(results["ingredients"]).Replace("\\n", "\n");
+                        r.RecipeID = Convert.ToInt32(results["recipe_id"]);
+                        r.UserID = Convert.ToInt32(results["users_id"]);
+                        r.UserName = Convert.ToString(results["users_name"]);
+                        r.Approved = Convert.ToInt32(results["approved"]);
+                        r.Publics = Convert.ToInt32(results["publics"]);
+                        recipes.Add(r);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return recipes;
         }
         public int GetCategoryId(string cat)
         {
