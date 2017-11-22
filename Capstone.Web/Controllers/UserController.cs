@@ -19,9 +19,9 @@ namespace Capstone.Web.Controllers
         private readonly IPlanSqlDAL planDal;
         private readonly IRecipeSqlDAL recipeDal;
         private readonly IUserSqlDAL userDal;
-        
 
-        public UserController (IPlanSqlDAL planDal, IRecipeSqlDAL recipeDal, IUserSqlDAL userDal) :base(userDal)
+
+        public UserController(IPlanSqlDAL planDal, IRecipeSqlDAL recipeDal, IUserSqlDAL userDal) : base(userDal)
         {
             this.planDal = planDal;
             this.recipeDal = recipeDal;
@@ -33,16 +33,18 @@ namespace Capstone.Web.Controllers
         {
             return View();
         }
-
+        [HttpGet]
+        [Route("users/new")]
         public ActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
+        [Route("users/new")]
         public ActionResult Register(UserModel model)
         {
-            HashProvider hash = new HashProvider();
+
             if (!ModelState.IsValid)
             {
                 return View("Register", model);
@@ -57,7 +59,9 @@ namespace Capstone.Web.Controllers
             }
             else
             {
-                string password = hash.HashPasswordWithMD5(model.Password, 16, 10000);
+                HashProvider hash = new HashProvider();
+                string password = hash.HashPassword(model.Password);
+                model.Salt = hash.SaltValue;
                 model.Password = password;
                 model.AuthorizationLevel = 2;
                 userDal.RegisterUser(model);
@@ -83,13 +87,39 @@ namespace Capstone.Web.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel model)
         {
-            HashProvider hash = new HashProvider();
-            string password = hash.HashPasswordWithMD5(model.Password, 16, 10000);
-            model.Password = password;
+            //HashProvider hash = new HashProvider();
+            //string password = hash.HashPassword(model.Password);
+            //model.Password = model.Password;
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View("Login", model);
+                UserModel userLogin = userDal.GetUser(model.UserName);
+
+                if (userLogin != null)
+                {
+                    HashProvider hashProvider = new HashProvider();
+                    bool doesPasswordMatch = hashProvider.VerifyPasswordMatch(userLogin.Password, model.Password, userLogin.Salt);
+                    if (!doesPasswordMatch)
+                    {
+                        ModelState.AddModelError("invalid-login", "The username or password combination is not valid");
+                        return View("Login", model);
+                    }
+                    else
+                    {
+                        FormsAuthentication.SetAuthCookie(userLogin.UserName, true);
+                        Session["authorizationlevel"] = userLogin.AuthorizationLevel;
+                        Session["username"] = userLogin.UserName;
+                        Session["user"] = userLogin;
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("invalid-login", "The username or password combination is not valid");
+                    return View("Login", model);
+                }
+                //return View("Login", model);
             }
 
             UserModel user = userDal.GetUser(model.UserName);
@@ -97,20 +127,20 @@ namespace Capstone.Web.Controllers
 
 
             // user does not exist or password is wrong
-            if (user == null || user.Password != model.Password)
-            {
-                ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
-                return View("Login", model);
-            }
-            else
-            {
-                FormsAuthentication.SetAuthCookie(user.UserName, true);
-                Session["authorizationlevel"] = user.AuthorizationLevel;
-                Session["username"] = user.UserName;
-                Session["user"] = user;
-                //Session[SessionKeys.Username] = user.Email;
-                // Session[SessionKeys.UserId] = user.Id;  --not sure what this does??
-            }
+            //if (user == null || user.Password != model.Password)
+            //{
+            //    ModelState.AddModelError("invalid-credentials", "An invalid username or password was provided");
+            //    return View("Login", model);
+            //}
+            //else
+            //{
+            //    FormsAuthentication.SetAuthCookie(user.UserName, true);
+            //    Session["authorizationlevel"] = user.AuthorizationLevel;
+            //    Session["username"] = user.UserName;
+            //    Session["user"] = user;
+            //    //Session[SessionKeys.Username] = user.Email;
+            //    // Session[SessionKeys.UserId] = user.Id;  --not sure what this does??
+            //}
 
             return RedirectToAction("Index", "Home");
         }

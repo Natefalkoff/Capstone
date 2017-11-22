@@ -8,6 +8,7 @@ using Capstone.Web.DAL;
 using System.IO;
 using System.Web.Security;
 using Capstone.Web.Crypto;
+using System.Configuration;
 
 namespace Capstone.Web.Controllers
 {
@@ -16,18 +17,20 @@ namespace Capstone.Web.Controllers
         private readonly IPlanSqlDAL planDal;
         private readonly IRecipeSqlDAL recipeDal;
         private readonly IUserSqlDAL userDal;
+        //private UserModel user;
 
-        public HomeController(IPlanSqlDAL planDal, IRecipeSqlDAL recipeDal, IUserSqlDAL userDal) : base(userDal)
+        public HomeController(IPlanSqlDAL planDal, IRecipeSqlDAL recipeDal, IUserSqlDAL userDal, UserModel user) : base(userDal)
         {
             this.planDal = planDal;
             this.recipeDal = recipeDal;
             this.userDal = userDal;
+            //this.user = Session["user"] as UserModel;
         }
-
+        //user = Session["user"] as UserModel;
         // GET: Home
         public ActionResult Index()
         {
-
+            
             List<RecipeModel> recipes = new List<RecipeModel>();
             recipes = recipeDal.GetRecipes();
 

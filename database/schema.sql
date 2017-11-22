@@ -65,6 +65,7 @@ users_name  varchar(24) not null,
 password varchar(max) not null, 
 email varchar(48) not null,
 authorization_level int not null,
+salt varchar(max),
 
 constraint pk_users_id primary key (users_id)
 );
