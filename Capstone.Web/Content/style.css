@@ -9,16 +9,18 @@ text-align: center;
 
 }
 .rstext{
-    font-size: medium;
+    font-size: 18px;
 }
 .padding{
     padding-top:10px;
 }
 .nav {
+    background-color: #ab192d;
     list-style: none;
     display: flex;
     text-align: center;
 }
+
 .category {
     margin: 10px;
     padding: 5px;
@@ -42,11 +44,10 @@ text-align: center;
 }
 .image {
     display: block;
-    margin: auto;
+    
     width: 400px;
     height:200px;
     text-align: center;
-    padding-top: 30px;
 }
 #login{
     text-align:center;
