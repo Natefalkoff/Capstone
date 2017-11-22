@@ -19,5 +19,8 @@ namespace Capstone.Web.DAL
         List<string> GetCategories();
         int GetCategoryId(string cat);
         bool InsertRecipeAndCategoryId(int recipeId, int categoryId);
+        List<RecipeModel> GetPublicNonApprovedRecipes();
+        List<RecipeModel> GetPublicApprovedRecipes();
+        bool UpdateApproval(int recipeId);
     }
 }

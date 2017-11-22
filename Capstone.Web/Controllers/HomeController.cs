@@ -32,7 +32,7 @@ namespace Capstone.Web.Controllers
         {
             
             List<RecipeModel> recipes = new List<RecipeModel>();
-            recipes = recipeDal.GetRecipes();
+            recipes = recipeDal.GetPublicApprovedRecipes();
 
 
             return View(recipes);
@@ -130,13 +130,27 @@ namespace Capstone.Web.Controllers
         {
             if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
             {
-                return View();
+                List<RecipeModel> model = recipeDal.GetPublicNonApprovedRecipes();
+                return View(model);
             }
             else
             {
                 return RedirectToAction("Index");
             }
 
+        }
+        [HttpPost]
+        public ActionResult Admin(List<RecipeModel> model)
+        {
+            foreach(RecipeModel recipe in model)
+            {
+                if(recipe.IsPublics == true)
+                {
+                    bool x = recipeDal.UpdateApproval(recipe.RecipeID);
+                }
+            }
+
+            return View();
         }
     }
 }

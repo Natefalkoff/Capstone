@@ -73,12 +73,9 @@ constraint pk_users_id primary key (users_id)
 --USER RECIPES
 CREATE TABLE user_recipes
 (
-users_id int not null,
-users_name varchar(24) not null,
-recipe_id int not null,
-recipe_name varchar(1000) not null, 
-
-constraint fk_user_recipes_user_id foreign key (users_id) REFERENCES website_users (users_id) 
+  users_id int references website_users(users_id),
+  recipe_id int references recipe(recipe_id),
+PRIMARY KEY (users_id, recipe_id)
 --constraint fk_user_recipes_user_name foreign key (user_name) REFERENCES website_user (user_name)
 );
 

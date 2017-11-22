@@ -24,6 +24,8 @@ namespace Capstone.Web.DAL
         private string getAllCategories = @"SELECT category_name FROM category";
         private string getCategoryId = @"SELECT category_id FROM category WHERE category_name = @getCategoryId;";
         private string insertCategoryIdAndRecipeId = @"INSERT INTO recipe_category(recipe_id, category_id) VALUES (@recipeCategoryId, @categoryRecipeId);";
+        private string updateApproval = @"UPDATE recipe SET approved = 1 WHERE recipe_id = @recipeId;";
+        private string insertRecipeIdandUserId = @"INSERT INTO user_recipes VALUES ( @userId, @recipeId);";
 
         //using for details , does not include tags / categories
         private string recipeDetailSql = @"SELECT * FROM recipe WHERE recipe_id = @recipe_id";
@@ -31,6 +33,43 @@ namespace Capstone.Web.DAL
         public RecipeSqlDAL(string connectionString)
         {
             this.connectionString = connectionString;
+        }
+        public bool InsertRecipeIdAndUserId(int userId, int recipeId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(insertRecipeIdandUserId, conn);
+                    cmd.Parameters.AddWithValue("@recipeId", recipeId);
+                    cmd.Parameters.AddWithValue("@userId", userId);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+        public bool UpdateApproval(int recipeId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(updateApproval, conn);
+                    cmd.Parameters.AddWithValue("@recipeId", recipeId);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch(SqlException ex)
+            {
+                throw;
+            }
         }
         public bool InsertRecipeAndCategoryId(int recipeId, int categoryId)
         {
