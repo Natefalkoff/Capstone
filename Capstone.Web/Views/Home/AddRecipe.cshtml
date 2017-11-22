@@ -17,7 +17,7 @@
 
         <div class="form-group, body">
             @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10, body">
                 @Html.TextBoxFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @*@Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })*@
             </div>
@@ -25,7 +25,7 @@
 
         <div class="form-group, body">
             @Html.Label("Enter Directions Separated by Spaces and Vertical Bar ( | )", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10, body">
                 @Html.TextAreaFor(m => m.Directions, new { htmlAttributes = new { @class = "form-control" } })
                 @*@Html.ValidationMessageFor(model => model.Directions, "", new { @class = "text-danger" })*@
             </div>
@@ -33,7 +33,7 @@
 
         <div class="form-group, body">
             @Html.Label("Enter Ingredients Separated by Spaces and Vertical Bar ( | )", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10, body">
                 @Html.TextAreaFor(m => m.Ingredients, new { htmlAttributes = new { @class = "form-control" } })
                 @*@Html.ValidationMessageFor(model => model.Ingredients, "", new { @class = "text-danger" })*@
             </div>
@@ -42,7 +42,7 @@
         <div class="form-group, body">
             <h4>Enter Tags Separated by Semi-Colon (;)</h4>
             @Html.Label("Enter Tags Here", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10, body">
                 @Html.TextBoxFor(m => m.Tags, new { htmlAttributes = new { @class = "form-control" } })
                 @*@Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })*@
             </div>
@@ -51,8 +51,8 @@
         <div>
             <select id="@Model.Publics" name="@Model.Publics">
                 <h4>Would You Like This Recipe To Be Public Or Private</h4>
-                <option value= 0>Private</option>
-                <option value= 1>Public</option>
+                <option value="0">Private</option>
+                <option value="1">Public</option>
             </select>
         </div>
         @{
@@ -82,7 +82,7 @@
 
         }
 
-        <div>
+        <div class="body">
             @Html.Label("ImageName", "Upload an Image")
             @Html.TextBoxFor(m => m.ImageName, new { type = "file" })<br />
             
@@ -90,8 +90,8 @@
         </div>
         
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+        <div class="form-group, body">
+            <div id="ImageName"class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
