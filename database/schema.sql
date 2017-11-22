@@ -1,6 +1,7 @@
 -- *************************************************************************************************
 -- This script creates all of the database objects (tables, constraints, etc) for the database
 -- *************************************************************************************************
+
 DROP TABLE recipe
 DROP TABLE tags
 DROp Table category
@@ -11,6 +12,7 @@ drop table recipe_tags
 drop table recipe_category
 drop table plan_recipes
 drop table plans
+
 
 BEGIN;
 
