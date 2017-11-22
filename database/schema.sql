@@ -1,6 +1,7 @@
 -- *************************************************************************************************
 -- This script creates all of the database objects (tables, constraints, etc) for the database
 -- *************************************************************************************************
+
 DROP TABLE recipe
 DROP TABLE tags
 DROp Table category
@@ -11,6 +12,15 @@ drop table recipe_tags
 drop table recipe_category
 drop table plan_recipes
 drop table plans
+drop table website_users;
+drop table app_user;
+drop table meal;
+drop table meal_plan;
+drop table meal_recipe;
+drop table message;
+drop table recipe;
+
+
 
 BEGIN;
 
@@ -25,6 +35,7 @@ directions varchar(max) not null,
 publics int not null, --0 private (false), 1 pbulic (true)
 ingredients varchar(max) not null, 
 image_name varchar(max) not null,
+approved int DEFAULT 0 not null, --0 not approved, 1 approved
 
 constraint pk_recipe_id primary key (recipe_id)
 );
@@ -55,6 +66,7 @@ users_name  varchar(24) not null,
 password varchar(max) not null, 
 email varchar(48) not null,
 authorization_level int not null,
+salt varchar(max),
 
 constraint pk_users_id primary key (users_id)
 );
@@ -62,12 +74,9 @@ constraint pk_users_id primary key (users_id)
 --USER RECIPES
 CREATE TABLE user_recipes
 (
-users_id int not null,
-users_name varchar(24) not null,
-recipe_id int not null,
-recipe_name varchar(1000) not null, 
-
-constraint fk_user_recipes_user_id foreign key (users_id) REFERENCES website_users (users_id) 
+  users_id int references website_users(users_id),
+  recipe_id int references recipe(recipe_id),
+PRIMARY KEY (users_id, recipe_id)
 --constraint fk_user_recipes_user_name foreign key (user_name) REFERENCES website_user (user_name)
 );
 

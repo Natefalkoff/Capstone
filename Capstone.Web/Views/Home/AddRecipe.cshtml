@@ -47,9 +47,13 @@
                 @*@Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })*@
             </div>
         </div>
+        
         <div>
-            @Html.Label("Publics", "Is this recipe public?")
-            @Html.TextBoxFor(m => m.Publics)
+            <select id="@Model.Publics" name="@Model.Publics">
+                <h4>Would You Like This Recipe To Be Public Or Private</h4>
+                <option value= 0>Private</option>
+                <option value= 1>Public</option>
+            </select>
         </div>
         @{
             //Dictionary<string, bool> chosenCats = new Dictionary<string, bool>();
