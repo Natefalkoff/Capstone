@@ -36,13 +36,13 @@ namespace Capstone.Web.Crypto
                     });
                     filterContext.Result = new RedirectToRouteResult(routeValue);
                 }
-                else
-                {
-                    if (impliedUsername.ToLower() != actualUsername.ToLower()) //They're liars
-                    {
-                        filterContext.Result = new HttpStatusCodeResult(403);
-                    }
-                }
+                //else
+                //{
+                //    if (impliedUsername.ToLower() != actualUsername.ToLower()) //They're liars
+                //    {
+                //        filterContext.Result = new HttpStatusCodeResult(403);
+                //    }
+                //}
 
             }
 

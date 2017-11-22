@@ -47,14 +47,27 @@
                 @*@Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })*@
             </div>
         </div>
-        
-        <div>
+        @{ 
+            List<SelectListItem> listItems = new List<SelectListItem>();
+            listItems.Add(new SelectListItem
+            {
+                Text = "Private",
+                Value = "0"
+            });
+            listItems.Add(new SelectListItem
+            {
+                Text = "Public",
+                Value = "1"
+            });
+            @Html.DropDownListFor(Model => Model.PublicOrPrivate, listItems)
+        }
+        @*<div>
             <select id="@Model.Publics" name="@Model.Publics">
-                <h4>Would You Like This Recipe To Be Public Or Private</h4>
-                <option value= 0>Private</option>
-                <option value= 1>Public</option>
+                Would You Like This Recipe To Be Public Or Private
+                <option value= "0">Private</option>
+                <option value= "1">Public</option>
             </select>
-        </div>
+        </div>*@
         @{
             //Dictionary<string, bool> chosenCats = new Dictionary<string, bool>();
             //List<string> cat = ViewBag.Categories as List<string>;

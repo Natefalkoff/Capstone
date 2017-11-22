@@ -61,6 +61,8 @@ namespace Capstone.Web.DAL
 
                     while (reader.Read())
                     {
+                        result.UserID = Convert.ToInt32(reader["users_id"]);
+                        result.Email = Convert.ToString(reader["email"]);
                         result.UserName = reader["users_name"].ToString();
                         result.Password = reader["password"].ToString();
                         result.AuthorizationLevel = Int32.Parse(reader["authorization_level"].ToString());

@@ -17,20 +17,21 @@ namespace Capstone.Web.Controllers
         private readonly IPlanSqlDAL planDal;
         private readonly IRecipeSqlDAL recipeDal;
         private readonly IUserSqlDAL userDal;
+
         //private UserModel user;
 
-        public HomeController(IPlanSqlDAL planDal, IRecipeSqlDAL recipeDal, IUserSqlDAL userDal, UserModel user) : base(userDal)
+        public HomeController(IPlanSqlDAL planDal, IRecipeSqlDAL recipeDal, IUserSqlDAL userDal) : base(userDal)
         {
             this.planDal = planDal;
             this.recipeDal = recipeDal;
             this.userDal = userDal;
             //this.user = Session["user"] as UserModel;
         }
-        //user = Session["user"] as UserModel;
+        
         // GET: Home
         public ActionResult Index()
         {
-            
+            UserModel user = Session["user"] as UserModel;
             List<RecipeModel> recipes = new List<RecipeModel>();
             recipes = recipeDal.GetPublicApprovedRecipes();
 
@@ -55,7 +56,7 @@ namespace Capstone.Web.Controllers
         [HttpPost]
         public ActionResult AddRecipe(RecipeModel recipe, HttpPostedFileBase ImageName)
         {
-
+            UserModel user = Session["user"] as UserModel;
             // When a user logs in, Session[authorizationlevel] stores their auth level as 1, 2 ,3 or null.  From the Authorize class,
             // runs the Admin method, taking in Session cast as a int?
             // If the method returns true, only admins will be able to do this action, else returns redirect to another action.
@@ -78,7 +79,12 @@ namespace Capstone.Web.Controllers
                     ViewBag.Message = "File Upload Failed!";
                 }
                 recipe.ImageName = fileName;
+                if (recipe.PublicOrPrivate != null)
+                {
+                    recipe.Publics = Int32.Parse(recipe.PublicOrPrivate);
+                }
                 int recipeId = recipeDal.NewRecipe(recipe);
+                recipeDal.InsertRecipeIdAndUserId(user.UserID, recipeId);
                 string[] tagArray = recipe.Tags.Split(';');
                 List<int> exists = recipeDal.TagsExist(recipe.Tags);
                 if (tagArray.Length != 0)
@@ -121,8 +127,39 @@ namespace Capstone.Web.Controllers
 
         public ActionResult Details(string id)
         {
+            
             RecipeModel details = recipeDal.RecipeDetail(Convert.ToInt32(id));
+            details.TagsList = recipeDal.GetTagsFromId(Convert.ToInt32(id));
+            details.Categories = recipeDal.GetCatsFromId(Convert.ToInt32(id));
             return View(details);
+
+        }
+
+        [HttpPost]
+        public ActionResult Details(RecipeModel model)
+        {
+            UserModel user = Session["user"] as UserModel;
+            model.UserID = user.UserID;
+            string[] tagArray = model.Tags.Split(';');
+            List<int> exists = recipeDal.TagsExist(model.Tags);
+            if (tagArray.Length != 0)
+            {
+                for (int i = 0; i < tagArray.Length; i++)
+                {
+                    if (exists[i] > 0)
+                    {
+                        int tagId = recipeDal.GetTagIdIfExists(tagArray[i].TrimStart(' '));
+                        recipeDal.InsertRecipeIdAndTagId(model.RecipeID, tagId);
+                    }
+                    else
+                    {
+                        int tagId = recipeDal.GetTagIdAfterInsert(tagArray[i].TrimStart(' '));
+                        recipeDal.InsertRecipeIdAndTagId(model.RecipeID, tagId);
+                    }
+                }
+            }
+
+            return RedirectToAction("Index");
 
         }
 
@@ -146,11 +183,12 @@ namespace Capstone.Web.Controllers
             {
                 if(recipe.IsPublics == true)
                 {
-                    bool x = recipeDal.UpdateApproval(recipe.RecipeID);
+                    recipeDal.UpdateApproval(recipe.RecipeID);
                 }
+                
             }
 
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }

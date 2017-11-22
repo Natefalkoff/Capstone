@@ -8,14 +8,14 @@ using System.Web.Mvc;
 
 namespace Capstone.Web.Controllers
 {
-    public class PlanController : Controller
+    public class PlanController : CapstoneController
     {
         private readonly IPlanSqlDAL planDal;
         private readonly IRecipeSqlDAL recipeDal;
         private readonly IUserSqlDAL userDal;
         private readonly ISearchSqlDAL searchDal;
 
-        public PlanController(IPlanSqlDAL planDal, IRecipeSqlDAL recipeDal, IUserSqlDAL userDal, ISearchSqlDAL searchDal)
+        public PlanController(IPlanSqlDAL planDal, IRecipeSqlDAL recipeDal, IUserSqlDAL userDal, ISearchSqlDAL searchDal) :base(userDal)
         {
             this.planDal = planDal;
             this.recipeDal = recipeDal;

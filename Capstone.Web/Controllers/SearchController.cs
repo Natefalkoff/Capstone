@@ -10,14 +10,14 @@ using System.Web.Security;
 
 namespace Capstone.Web.Controllers
 {
-    public class SearchController : Controller
+    public class SearchController : CapstoneController
     {
         private readonly IPlanSqlDAL planDal;
         private readonly IRecipeSqlDAL recipeDal;
         private readonly IUserSqlDAL userDal;
         private readonly ISearchSqlDAL searchDal;
 
-        public SearchController(IPlanSqlDAL planDal, IRecipeSqlDAL recipeDal, IUserSqlDAL userDal, ISearchSqlDAL searchDal)
+        public SearchController(IPlanSqlDAL planDal, IRecipeSqlDAL recipeDal, IUserSqlDAL userDal, ISearchSqlDAL searchDal) : base(userDal)
         {
             this.planDal = planDal;
             this.recipeDal = recipeDal;

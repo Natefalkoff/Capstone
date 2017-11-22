@@ -22,5 +22,8 @@ namespace Capstone.Web.DAL
         List<RecipeModel> GetPublicNonApprovedRecipes();
         List<RecipeModel> GetPublicApprovedRecipes();
         bool UpdateApproval(int recipeId);
+        bool InsertRecipeIdAndUserId(int userId, int recipeId);
+        List<string> GetCatsFromId(int id);
+        List<string> GetTagsFromId(int id);
     }
 }

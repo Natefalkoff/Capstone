@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Capstone.Web.Models.RecipeModel>
+﻿@using Capstone.Web.Models
+@model List<RecipeModel>
 
 @{
     ViewBag.Title = "Admin";
@@ -6,76 +7,89 @@
 
 <h2>Admin</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.RecipeID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Directions)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ingredients)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tags)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsPublics)
-        </th>
-        <th></th>
-    </tr>
+<p></p>
+@using (Html.BeginForm("Admin", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.RecipeID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Directions)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ingredients)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tags)
-        </td>
-        <td>
-            @Html.CheckBoxFor(modelItem => item.IsPublics)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+    <table class="table">
+        <tr>
+            <th>
+                Recipe ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Directions
+            </th>
+            <th>
+                User ID
+            </th>
+            <th>
+                Username
+            </th>
+            <th>
+                Ingredients
+            </th>
+            <th>
+                ImageName
+            </th>
+            <th>
+                Tags
+            </th>
+            <th>
+                Is Public
+            </th>
+            <th></th>
+        </tr>
+        @for (int i = 0; i < Model.Count; i++) 
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].RecipeID)
+                    @Html.HiddenFor(modelItem => Model[i].RecipeID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].Name)
+                    @Html.HiddenFor(modelItem => Model[i].Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].Directions)
+                    @Html.HiddenFor(modelItem => Model[i].Directions)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].UserID)
+                    @Html.HiddenFor(modelItem => Model[i].UserID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].UserName)
+                    @Html.HiddenFor(modelItem => Model[i].UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].Ingredients)
+                    @Html.HiddenFor(modelItem => Model[i].Ingredients)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].ImageName)
+                    @Html.HiddenFor(modelItem => Model[i].ImageName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].Tags)
+                    @Html.HiddenFor(modelItem => Model[i].Tags)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => Model[i].IsPublics)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+
+        }
+    </table>
+        <button>Submit</button>
+
 }
 
-</table>

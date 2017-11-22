@@ -63,7 +63,7 @@
             </div>
             <div>
                 
-                <img src="@Url.Content("~/Img/" + item.ImageName.ToString())" alt="Recipe Image" />
+                <a href="@Url.Action("Details","Home", new { id = item.RecipeID })"><img src="~/Img/@item.ImageName" /></a>
             </div>
         </div>
 

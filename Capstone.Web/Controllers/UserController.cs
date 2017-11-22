@@ -28,6 +28,7 @@ namespace Capstone.Web.Controllers
             this.userDal = userDal;
         }
 
+
         // GET: User
         public ActionResult Index()
         {
