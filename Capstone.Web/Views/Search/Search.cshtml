@@ -27,18 +27,20 @@
     </div>
         <div class="body">
             <div class="body">
-            <h3> Please Eenter Tags You Would Like To Seach For.</h3> 
-            <h4>If More Than 2 Words, Replace Space With Period (.)</h4>
+            <h3> Please Enter the Tags You Would Like To Seach For.</h3> 
+            <h4>If More Than 2 Words, Please Replace the Space With a Period (.)</h4>
                 </div>
             <div class="padding">
                 
             <h5>@Html.Label("Tag Field: ")</h5>
-            @Html.TextAreaFor(Model => Model.TagSearch)
+                
+           <div id="TagSearch">@Html.TextAreaFor(Model => Model.TagSearch)
+                </div>
                 </div>
         </div>
-            <div class="textbox"> @*form-group*@
+            <div class="form-group,textbox"> 
                 </div>
-                <div class="body"> @*col-md-offset-2 col-md-10*@
+                <div class="body"> @*col-md-offset-2 col-md-10,*@ 
                     <input type="submit" value="Create" class="btn btn-default" />
             </div>
 
