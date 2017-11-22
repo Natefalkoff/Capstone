@@ -107,6 +107,7 @@ namespace Capstone.Web.Controllers
                 FormsAuthentication.SetAuthCookie(user.UserName, true);
                 Session["authorizationlevel"] = user.AuthorizationLevel;
                 Session["username"] = user.UserName;
+                Session["user"] = user;
                 //Session[SessionKeys.Username] = user.Email;
                 // Session[SessionKeys.UserId] = user.Id;  --not sure what this does??
             }
