@@ -5,20 +5,16 @@
 DROP TABLE recipe
 DROP TABLE tags
 DROp Table category
-drop table website_users
 drop table user_recipes
 drop table user_plan
+drop table website_users
 drop table recipe_tags
 drop table recipe_category
 drop table plan_recipes
 drop table plans
-drop table website_users;
-drop table app_user;
 drop table meal;
 drop table meal_plan;
 drop table meal_recipe;
-drop table message;
-drop table recipe;
 
 
 
@@ -75,9 +71,7 @@ constraint pk_users_id primary key (users_id)
 CREATE TABLE user_recipes
 (
 users_id int not null,
-users_name varchar(24) not null,
 recipe_id int not null,
-recipe_name varchar(1000) not null, 
 
 constraint fk_user_recipes_user_id foreign key (users_id) REFERENCES website_users (users_id) 
 --constraint fk_user_recipes_user_name foreign key (user_name) REFERENCES website_user (user_name)
@@ -150,11 +144,19 @@ CREATE TABLE meal_plan
 (
 plan_id int not null, 
 meal_id int not null, 
+
+constraint fk_meal_plan_plan_id FOREIGN KEY (plan_id) REFERENCES plans (plan_id),
+constraint fk_meal_plan_meal_id FOREIGN KEY (meal_id) REFERENCES meal (meal_id)
 );
 
 CREATE TABLE meal_recipe
 (
 meal_id int not null, 
 recipe_id int not null, 
+
+CONSTRAINT fk_meal_recipe_meal_id FOREIGN KEY (meal_id) REFERENCES meal (meal_id),
+CONSTRAINT fk_meal_recipe_recipe_id FOREIGN KEY (recipe_id) REFERENCES recipe (recipe_id)
 );
+
+
 COMMIT;

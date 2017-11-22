@@ -40,7 +40,7 @@ SELECT * FROM user_recipes
 	INSERT INTO category (category_name) VALUES ('Salads');
 	INSERT INTO category (category_name) VALUES ('Snacks');	
 	INSERT INTO category (category_name) VALUES ('Soups');
-
+	
 	--WEBSITE USER
 	INSERT INTO website_users (users_name, password, email, authorization_level, salt)VALUES ('rob', 'y+bjtdQQpBEu7dSYeSH4aEhPF/E=', 'rob@rob', 3, 'sdZUcw2JQTw=');
 	INSERT INTO website_users (users_name, password, email, authorization_level, salt)VALUES('cam', 'NQ6AdbvWgCEBChpx5IvUh531zfg=', 'cam@cam', 3, 'cQJa/1TRWAo=');
@@ -49,7 +49,7 @@ SELECT * FROM user_recipes
 
 --USER RECIPES
 
-iNSERT INTO user_recipes (users_id, users_name, recipe_id, recipe_name) VALUES (1,'Cspinks',1, 'Roasted Cauliflower Dressed Up');
+iNSERT INTO user_recipes (users_id, recipe_id,) VALUES (users_id, recipe_id);
 
 --USER PLAN
 INSERT INTO user_plan (users_id) VALUES (users_id);
