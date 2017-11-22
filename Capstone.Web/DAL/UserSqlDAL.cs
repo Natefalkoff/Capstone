@@ -14,11 +14,37 @@ namespace Capstone.Web.DAL
         private string connectionString;
         private const string registerUserSql = "INSERT into website_users VALUES (@users_name, @password, @email, @authorization, @salt)";
         private const string loginUserSql = "SELECT* FROM website_users WHERE users_name = @usersname";
+        private const string updatePassword = @"UPDATE website_users SET password = @password, salt = @salt WHERE users_name = @username;";
 
         public UserSqlDAL(string connectionString)
         {
             this.connectionString = connectionString;
         }
+
+        public bool ChangePassword(string password, string salt, string username)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(updatePassword, conn);
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.Parameters.AddWithValue("@salt", salt);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    return rowsAffected > 0;
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+            
 
         public bool RegisterUser(UserModel model)
         {
@@ -53,7 +79,7 @@ namespace Capstone.Web.DAL
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
-                {   
+                {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(loginUserSql, conn);
                     cmd.Parameters.AddWithValue("@usersname", username);
