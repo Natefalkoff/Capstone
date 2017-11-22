@@ -58,6 +58,7 @@ namespace Capstone.Web.Controllers
             // If the method returns true, only admins will be able to do this action, else returns redirect to another action.
             if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
             {
+                
                 string fileName = "";
                 try
                 {

@@ -52,7 +52,7 @@ namespace Capstone.Web.DAL
                 throw;
             }
         }
-        public List<RecipeModel> GetPublicApprovedRecipes()
+        public List<RecipeModel> GetPublicNonApprovedRecipes()
         {
             List<RecipeModel> recipes = new List<RecipeModel>();
             try
