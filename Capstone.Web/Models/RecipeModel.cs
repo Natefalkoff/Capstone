@@ -27,5 +27,6 @@ namespace Capstone.Web.Models
         public List<bool> Chosen { get; set; }
         public Dictionary<string, bool> ChoseCategory { get; set; }
         public int Approved { get; set; }
+        public bool IsPublics { get; set; }
     }
 }

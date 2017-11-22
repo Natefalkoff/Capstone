@@ -243,9 +243,9 @@
     <Content Include="Views\Home\AddRecipe.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
-    <Content Include="Views\Home\Admin.cshtml" />
     <Content Include="Views\Plan\Index.cshtml" />
     <Content Include="Views\Plan\ViewPlan.cshtml" />
+    <Content Include="Views\Home\Admin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
