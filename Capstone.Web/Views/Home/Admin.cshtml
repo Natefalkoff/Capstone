@@ -36,10 +36,7 @@
             @Html.DisplayNameFor(model => model.Tags)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Publics)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Approved)
+            @Html.DisplayNameFor(model => model.IsPublics)
         </th>
         <th></th>
     </tr>
@@ -71,10 +68,7 @@
             @Html.DisplayFor(modelItem => item.Tags)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Publics)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Approved)
+            @Html.CheckBoxFor(modelItem => item.IsPublics)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
