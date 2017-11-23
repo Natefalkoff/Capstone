@@ -29,6 +29,7 @@ namespace Capstone.Web.DAL
         private string updateApproval = @"UPDATE recipe SET approved = 1 WHERE recipe_id = @recipeId;";
         private string insertRecipeIdandUserId = @"INSERT INTO user_recipes VALUES ( @userId, @recipeId);";
         private string subscribedUsers = @"SELECT * FROM website_users WHERE signup = 1;";
+        private string userRecipes = @"SELECT * FROM website_users JOIN user_recipes ON website_users.users_id = user_recipes.users_id JOIN recipe ON user_recipes.recipe_id = recipe.recipe_id WHERE website_users.users_id = @userId;";
 
 
         //using for details , does not include tags / categories
@@ -39,6 +40,38 @@ namespace Capstone.Web.DAL
         {
             this.connectionString = connectionString;
         }
+
+        public List<RecipeModel> GetUserRecipes(int id)
+        {
+            List<RecipeModel> recipes = new List<RecipeModel>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(userRecipes, conn);
+                    cmd.Parameters.AddWithValue("@userId", id);
+                    SqlDataReader results = cmd.ExecuteReader();
+                    while (results.Read())
+                    {
+                        RecipeModel r = new RecipeModel();
+                        r.Directions = Convert.ToString(results["directions"]);
+                        r.ImageName = Convert.ToString(results["image_name"]);
+                        r.UserName = Convert.ToString(results["users_name"]);
+                        r.Ingredients = Convert.ToString(results["ingredients"]);
+                        r.Name = Convert.ToString(results["recipe_name"]);
+                        r.UserID = Convert.ToInt32(results["users_id"]);
+                        recipes.Add(r);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return recipes;
+        }
+
 
         public List<UserModel> SubscribedUsers()
         {
@@ -60,7 +93,7 @@ namespace Capstone.Web.DAL
                     }
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 throw;
             }
@@ -441,6 +474,8 @@ namespace Capstone.Web.DAL
             }
             return m;
         }
-
     }
 }
+
+
+

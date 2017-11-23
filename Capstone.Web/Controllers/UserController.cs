@@ -175,6 +175,14 @@ namespace Capstone.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult UserPage()
+        {
+            UserModel m = Session["user"] as UserModel;
+            int userId = Convert.ToInt32(m.UserID);
+            List<RecipeModel> model = recipeDal.GetUserRecipes(userId);
+            return View(model);
+        }
+
 
     }
 }

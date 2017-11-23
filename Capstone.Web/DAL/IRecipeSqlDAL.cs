@@ -26,5 +26,6 @@ namespace Capstone.Web.DAL
         List<string> GetCatsFromId(int id);
         List<string> GetTagsFromId(int id);
         List<UserModel> SubscribedUsers();
+        List<RecipeModel> GetUserRecipes(int id);
     }
 }
