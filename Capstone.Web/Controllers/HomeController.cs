@@ -168,6 +168,10 @@ namespace Capstone.Web.Controllers
             if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
             {
                 List<RecipeModel> model = recipeDal.GetPublicNonApprovedRecipes();
+                RecipeModel users = new RecipeModel();
+                Session["subscribers"] = recipeDal.SubscribedUsers();
+                model.Add(users);
+                ViewBag.Subsribers = recipeDal.SubscribedUsers();
                 return View(model);
             }
             else
@@ -179,7 +183,8 @@ namespace Capstone.Web.Controllers
         [HttpPost]
         public ActionResult Admin(List<RecipeModel> model)
         {
-            foreach(RecipeModel recipe in model)
+            Session["subscribers"] = recipeDal.SubscribedUsers();
+            foreach (RecipeModel recipe in model)
             {
                 if(recipe.IsPublics == true)
                 {

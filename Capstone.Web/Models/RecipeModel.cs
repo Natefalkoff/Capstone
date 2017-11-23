@@ -30,5 +30,6 @@ namespace Capstone.Web.Models
         public bool IsPublics { get; set; }
         public string PublicOrPrivate { get; set; }
         public string TempTags { get; set; }
+        public List<UserModel> SubscribedUsers { get; set; }
     }
 }

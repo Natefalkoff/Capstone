@@ -34,6 +34,9 @@ namespace Capstone.Web.Models
 
         [Required(ErrorMessage = "*")]
         public string TempPassword { get; set; }
+
+        public int Signup { get; set; }
+        public bool SignupBool { get; set; }
         
     }
 }

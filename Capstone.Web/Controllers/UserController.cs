@@ -62,6 +62,10 @@ namespace Capstone.Web.Controllers
                 model.Salt = hash.SaltValue;
                 model.Password = password;
                 model.AuthorizationLevel = 2;
+                if(model.SignupBool == true)
+                {
+                    model.Signup = 1;
+                }
                 userDal.RegisterUser(model);
 
                 FormsAuthentication.SetAuthCookie(user.Email, true);
