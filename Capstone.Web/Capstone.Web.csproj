@@ -166,6 +166,7 @@
     </Content>
     <Content Include="Img\cancer-foundation-cancer-ribbons.jpg" />
     <Content Include="Img\Cancer-Support-Community.jpg" />
+    <Content Include="Img\Fight-Cancer.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.2.1-vsdoc.js" />

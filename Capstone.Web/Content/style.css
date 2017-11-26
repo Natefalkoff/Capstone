@@ -8,11 +8,10 @@ position:center;
     height: 200px;
     text-align: right;
 }
-.textbox{
+.textbox {
     width: 6000px;
     height: 6000px;
-    text-align:center;
-
+    text-align: center;
 }
 .rstext{
     font-size: 18px;
@@ -106,8 +105,9 @@ display: inline-block;
 
 }
 .directions {
-    padding-left: 40px;
+    /*padding-left: 40px;*/
     text-decoration:underline;
+    text-align:center;
     
 }
 .public{
@@ -115,8 +115,9 @@ display: inline-block;
     display:block;
 }
 .ingredients {
-    padding-right: 20px;
-    display: inline-bloc;
+    /*padding-right: 20px;*/
+    display: inline-block;
+    text-align:center;
 }
 
 /*!
@@ -5003,6 +5004,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     padding-left: 0;
     margin-bottom: 0;
     list-style: none;
+    c
 }
 
     .nav > li {

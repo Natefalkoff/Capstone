@@ -10,29 +10,36 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal, body">
+    <div class="form-horizontal, col-lg-12">
         @*<h4 class="addrecipe">RecipeModel</h4>*@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group, body">
-            @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10, body">
-                @Html.TextBoxFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
+        <div class="form-group, body, col-lg-12">
+            @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label col-md-12" })
+            <br>
+            <div class="col-md-10, body, col-lg-12">
+                @Html.TextBoxFor(m => m.Name, new { htmlAttributes = new { @class = "form-control"  } }) 
                 @*@Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })*@
             </div>
         </div>
-
-        <div class="form-group, body">
-            @Html.Label("Enter Directions Separated by Spaces and Vertical Bar ( | )", htmlAttributes: new { @class = "control-label col-md-2" })
+        <br>
+        <div class="form-group, body, col-lg-12">
+            <br>
+            @Html.Label("Enter Ingredients Separated by Using The 'Enter' Key", htmlAttributes: new { @class = "control-label col-md-12" })
+           <br>
             <div class="col-md-10, body">
                 @Html.TextAreaFor(m => m.Directions, new { htmlAttributes = new { @class = "form-control" } })
                 @*@Html.ValidationMessageFor(model => model.Directions, "", new { @class = "text-danger" })*@
             </div>
+            <br>
         </div>
-
+        <br>
+        <br>
         <div class="form-group, body">
-            @Html.Label("Enter Ingredients Separated by Spaces and Vertical Bar ( | )", htmlAttributes: new { @class = "control-label col-md-2" })
+            <br>
+            @Html.Label("Enter Ingredients Separated by Using The 'Enter' Key", htmlAttributes: new { @class = "control-label col-md-12" })
+            <br>
             <div class="col-md-10, body">
                 @Html.TextAreaFor(m => m.Ingredients, new { htmlAttributes = new { @class = "form-control" } })
                 @*@Html.ValidationMessageFor(model => model.Ingredients, "", new { @class = "text-danger" })*@
@@ -41,12 +48,14 @@
 
         <div class="form-group, body">
             <h4>Enter Tags Separated by Semi-Colon (;)</h4>
-            @Html.Label("Enter Tags Here", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Enter Tags Here", htmlAttributes: new { @class = "control-label col-md-12" })
+            <br>
             <div class="col-md-10, body">
                 @Html.TextBoxFor(m => m.Tags, new { htmlAttributes = new { @class = "form-control" } })
                 @*@Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })*@
             </div>
         </div>
+        <br>
         @{ 
             List<SelectListItem> listItems = new List<SelectListItem>();
             listItems.Add(new SelectListItem
@@ -81,16 +90,17 @@
             //{
             //    chosenCats.Add(s, false);
             //}
+            <br>
             List<string> catString = new List<string>();
             foreach (var kvp in Model.ChoseCategory)
             {
                 @*<input class="checkbox" type="checkbox" name="@kvp.Key" />
                 <label class="categoryLabel" for=""*@
-
+                <div class="category">
                 @Html.HiddenFor(Model => Model.ChoseCategory.Keys)
                 @Html.Label(kvp.Key)
                 @Html.CheckBoxFor(Model => Model.ChoseCategory[kvp.Key], false)
-
+                    </div>
             }
             @*for(int i = 0; i < catString.Count; i++)
             {
@@ -101,17 +111,21 @@
 
         }
 
-        <div class="body">
-            @Html.Label("ImageName", "Upload an Image")
-            @Html.TextBoxFor(m => m.ImageName, new { type = "file" })<br />
-            
+        <div class="col-lg-12, body">
+            @Html.Label("ImageName", "Upload an Image", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-lg-12, body">
+            @Html.TextBoxFor(m => m.ImageName, new { type = "file" })
+                </div>
+            <br >
+            <div class="col-lg-12">
             @ViewBag.Message
+                </div>
         </div>
         
 
         <div class="form-group, body">
-            <div id="ImageName"class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div id="ImageName"class="col-md-1, body">
+                <input type="submit" value="Create" class="btn btn-default, col-lg-1, body" />
             </div>
         </div>
     </div>
