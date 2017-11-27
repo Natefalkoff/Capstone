@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Capstone.Web.DAL;
+using Capstone.Web.Models;
+using System.Collections.Generic;
 
 namespace Capstone.Web.Tests.PlanDalUnitTests
 {
@@ -28,6 +30,16 @@ namespace Capstone.Web.Tests.PlanDalUnitTests
             bool success = planDal.AddUserAndPlanID(1, 2);
 
             Assert.AreEqual(true, success);
+        }
+
+        [TestMethod]
+        public void GetPlanTest()
+        {
+            PlanSqlDAL planDal = new PlanSqlDAL(connectionString);
+
+            List<PlanModel> result = planDal.GetPlan(1);
+
+            Assert.AreEqual(result.Count, 2);
         }
     }
 }

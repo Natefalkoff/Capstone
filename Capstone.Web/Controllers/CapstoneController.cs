@@ -15,29 +15,41 @@ namespace Capstone.Web.Controllers
     {
         private const string UsernameKey = "UserName";
         private readonly IUserSqlDAL userDal;
+        private UserModel user;
 
         public CapstoneController(IUserSqlDAL userDal)
         {
             this.userDal = userDal;
+            UserModel emptyModel = new UserModel();
+            //Check to see if user cookie exists, if not create it
+            //if (Session["user"] == null)
+            //{
+            //    Session["user"] = emptyModel;
+            //    //user = (UserModel)Session["user"];
+            //    //Session["userModel"] = user;
+            //}
+            
+
+
         }
 
 
         /// <summary>
         /// Gets the value from the Session
         /// </summary>
-        public string CurrentUser
+        public UserModel CurrentUser
         {
             get
             {
-                string username = string.Empty;
+                UserModel user = new UserModel(); ;
 
                 //Check to see if user cookie exists, if not create it
-                if (Session[UsernameKey] != null)
+                if (Session["user"] != null)
                 {
-                    username = (string)Session[UsernameKey];
+                    user = (UserModel)Session["user"];
                 }
 
-                return username;
+                return user;
             }
         }
 
@@ -79,7 +91,7 @@ namespace Capstone.Web.Controllers
 
             if (IsAuthenticated)
             {
-                model = userDal.GetUser(CurrentUser);
+                //model = userDal.GetUser(CurrentUser);
             }
 
             return PartialView("_AuthenticationBar", model);

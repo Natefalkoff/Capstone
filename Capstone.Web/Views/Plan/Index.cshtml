@@ -1,9 +1,12 @@
-﻿
+﻿@model Capstone.Web.Models.DropDownPlans
+@using System.Collections.Generic
+@using Capstone.Web.Models
+
 @{
     ViewBag.Title = "Index";
 }
 
-@model Capstone.Web.Models.PlanModel
+
 
 <br />
 <br />
@@ -12,28 +15,29 @@
 <h2>Plan Page</h2>
 
 
-<div id="CreatePlan">
-  
-    @using (Html.BeginForm("CreatePlan", "Plan", FormMethod.Post))
+
+
+
+<div>
+    <h2>View A Plan</h2>
+    @using (Html.BeginForm("ViewPlanID", "Plan", FormMethod.Post))
     {
-        @Html.ValidationMessage("invalid-credentials")
 
-        <div>
-            @Html.TextBoxFor(m => m.PlanName, new { placeholder = "Plan Name" })
-            @Html.ValidationMessageFor(m => m.PlanName)
-        </div>
+        List<SelectListItem> listItems = new List<SelectListItem>();
+        foreach (PlanModel plan in Model.PlanModels)
+        {
+            listItems.Add(new SelectListItem
+            {
+                Text = plan.PlanName,
+                Value = plan.PlanId.ToString()
+            });
+        }
+        @Html.DropDownListFor(Model => Model.currentID, listItems)
 
-        <button>CreatePlan</button>
-
-    <h2>View a plan </h2>
-
-    <select>
-        <option value="volvo">Users Plan placeholder</option>
-        <option value="saab">Users Plan placeholder 2</option>
-        <option value="mercedes">placeholder 3</option>
-        <option value="audi">placeholder 4</option>
-    </select>
+        <button>View Plan</button>
     }
-</div>
 
+    @Html.ActionLink("| Create Plan |", "CreatePlan", "Plan")
+    @Html.ActionLink("| Add A Meal |", "AddMealToPlan", "Plan")
+</div>
 

@@ -7,6 +7,7 @@
 
 <div id="Register">
     <h2>Register Now</h2>
+    <br>
     <h4>Gain access to additional features!</h4>
     @*<h3>Create your own meal plan!</h3>*@
 
@@ -19,26 +20,33 @@
             @Html.ValidationMessageFor(m => m.UserName)
             @Html.ValidationMessage("username-exists")
         </div>
+        <br>
+
 
         <div class="body">
             @Html.TextBoxFor(m => m.Email, new { placeholder = "Email" })
             @Html.ValidationMessageFor(m => m.Email)
         </div>
+        <br>
 
         <div class="body">
             @Html.TextBoxFor(m => m.ConfirmEmail, new { placeholder = "Confirm Email" })
             @Html.ValidationMessageFor(m => m.ConfirmEmail)
         </div>
-
+        <br>
         <div class="body">
             @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })
             @Html.ValidationMessageFor(m => m.Password)
         </div>
+        <br>
+
 
         <div class="body">
             @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirm Password" })
             @Html.ValidationMessageFor(m => m.ConfirmPassword)
         </div>
+        <br>
+
         <div class="body">
             <button>Register</button>
         </div>

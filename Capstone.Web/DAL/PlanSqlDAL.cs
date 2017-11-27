@@ -21,7 +21,7 @@ namespace Capstone.Web.DAL
                                     WHERE plans.plan_id = @plan_id";
 
         private string addToUserPlanSql = "INSERT INTO user_plan (plan_id, users_id) VALUES (@planid, @userid)";
-        private string getAllUserUserPlansSql = "select * from website_users WHERE users_id = @userid";
+        private string getAllUserUserPlansSql = "select * from user_plan WHERE users_id = @userid";
 
         private string CreateMealSql = "INSERT INTO meal (day_of_week, meal_name) VALUES (@dayofweek, @mealname); SELECT CAST(scope_identity() AS int)";
         private string addMealAndPlanID= "INSERT INTO meal_plan (plan_id, meal_id) VALUES (@planid, @mealid)";
@@ -29,10 +29,38 @@ namespace Capstone.Web.DAL
 
         private string GetAllMealsInPlanSql = "select meal_id from meal_plan where plan_id = @planid";
         private string GetRecipeFromMealSql = "select recipe_id from meal_recipe where meal_id = @mealid";
+        private string GetMealSql = "select day_of_week, meal_name from meal where meal_id = @mealid";
+        private string GetPlanNameSql = "select plan_name from plans WHERE plan_id = @planid";
 
         public PlanSqlDAL(string connectionString)
         {
             this.connectionString = connectionString;
+        }
+
+        public string GetPlanName (int planID)
+        {
+            string result = "";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(GetPlanNameSql, conn);
+                    cmd.Parameters.AddWithValue("@planid", planID);
+                    SqlDataReader results = cmd.ExecuteReader();
+                    while (results.Read())
+                    {
+
+                       result = Convert.ToString(results["plan_name"]);
+                       
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return result;
         }
 
         public int CreatePlan (string planName)
@@ -85,8 +113,8 @@ namespace Capstone.Web.DAL
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(addToUserPlanSql, conn);
-                    cmd.Parameters.AddWithValue("@userID", userID);
+                    SqlCommand cmd = new SqlCommand(getAllUserUserPlansSql, conn);
+                    cmd.Parameters.AddWithValue("@userid", userID);
                     SqlDataReader results = cmd.ExecuteReader();
                     while (results.Read())
                     {
@@ -126,6 +154,36 @@ namespace Capstone.Web.DAL
 
         }
 
+        //done ??? code review
+        public PlanModel GetMeal (int mealID)
+        {
+            PlanModel p = new PlanModel();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(GetMealSql, conn);
+                    cmd.Parameters.AddWithValue("@mealid", mealID);
+                    SqlDataReader results = cmd.ExecuteReader();
+                    while (results.Read())
+                    {
+                      
+                        p.Meal = Convert.ToString(results["meal_name"]);
+                        p.Day = Convert.ToString(results["day_of_week"]);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+
+            return p;
+
+        }
+
         public bool AddMealAndPlanID (int mealID, int planID)
         {
             try
@@ -154,7 +212,7 @@ namespace Capstone.Web.DAL
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(addMealAndPlanID, conn);
+                    SqlCommand cmd = new SqlCommand(addMealAndRecipeIDSql, conn);
                     cmd.Parameters.AddWithValue("@mealid", mealID);
                     cmd.Parameters.AddWithValue("@recipeid", recipeID);
                     int rowsAffected = cmd.ExecuteNonQuery();
@@ -168,40 +226,40 @@ namespace Capstone.Web.DAL
             }
         }
 
-        public List<PlanModel> GetPlan(int planid)
-        {
-            List<PlanModel> result = new List<PlanModel>();
+        //public List<PlanModel> GetPlan(int planid)
+        //{
+        //    List<PlanModel> result = new List<PlanModel>();
 
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    RecipeSqlDAL recipedal = new RecipeSqlDAL(connectionString);
+        //    try
+        //    {
+        //        using (SqlConnection conn = new SqlConnection(connectionString))
+        //        {
+        //            RecipeSqlDAL recipedal = new RecipeSqlDAL(connectionString);
 
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand(GetPlanSql, conn);
-                    cmd.Parameters.AddWithValue("@plan_id", planid);
-                    SqlDataReader results = cmd.ExecuteReader();
-                    while (results.Read())
-                    {
-                        PlanModel p = new PlanModel();
-                        p.PlanName = Convert.ToString(results["plan_name"]);
-                        p.UserId = Int32.Parse((results["user_id"].ToString()));
-                        p.Meal = Convert.ToString(results["meal_name"]);
-                        p.Day = Convert.ToString(results["day_of_week"]);
-                        p.RecipeId = Int32.Parse(results["recipe_id]"].ToString());
+        //            conn.Open();
+        //            SqlCommand cmd = new SqlCommand(GetPlanSql, conn);
+        //            cmd.Parameters.AddWithValue("@plan_id", planid);
+        //            SqlDataReader results = cmd.ExecuteReader();
+        //            while (results.Read())
+        //            {
+        //                PlanModel p = new PlanModel();
+        //                p.PlanName = Convert.ToString(results["plan_name"]);
+        //                p.UserId = Int32.Parse((results["user_id"].ToString()));
+        //                p.Meal = Convert.ToString(results["meal_name"]);
+        //                p.Day = Convert.ToString(results["day_of_week"]);
+        //                p.RecipeId = Int32.Parse(results["recipe_id]"].ToString());
 
-                        p.Recipes = recipedal.RecipeDetail(p.RecipeId);
-                        result.Add(p);
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                throw;
-            }
-            return result;
-        }
+        //                p.Recipes = recipedal.RecipeDetail(p.RecipeId);
+        //                result.Add(p);
+        //            }
+        //        }
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        throw;
+        //    }
+        //    return result;
+        //}
 
         public List<int> GetAllMealsInPlan(int planid)
         {
@@ -256,6 +314,54 @@ namespace Capstone.Web.DAL
             return result;
         }
 
+        //this can get recipe data from a list of mealIDs
+        public List<RecipeModel> GetAllRecipesFromMeals (List<int> mealIDs)
+        {
+          
+            List<int> Recipes = new List<int>();
+            foreach (int mealID in mealIDs)
+            {
+                int rec;
+                rec = this.GetRecipeFromMeal(mealID);
+                Recipes.Add(rec);
+            }
+
+            List<RecipeModel> AllRecipes = new List<RecipeModel>();
+            foreach (int recipe in Recipes)
+            {
+                RecipeSqlDAL recipeDal = new RecipeSqlDAL(connectionString);
+                RecipeModel thisRec = new RecipeModel();
+                thisRec = recipeDal.RecipeDetail(recipe);
+                AllRecipes.Add(thisRec);
+            }
+
+            return AllRecipes;
+        }
+
+        public List<PlanModel> GetPlan (int planID)
+        {
+            List<int> allMeals = this.GetAllMealsInPlan(planID);
+            List<PlanModel> result = new List<PlanModel>();
+            string planName = this.GetPlanName(planID);
+            foreach (int mealid in allMeals)
+            {
+                PlanModel P = new PlanModel();
+                P = this.GetMeal(mealid);
+                P.PlanName = planName;
+                result.Add(P);
+            }
+
+            List<RecipeModel> allRecipes = this.GetAllRecipesFromMeals(allMeals);
+
+            for (int i = 0; i < allMeals.Count; i++)
+            {
+                result[i].Recipes = allRecipes[i];
+            }
+
+            return result;
+
+
+        }
 
     }
 }

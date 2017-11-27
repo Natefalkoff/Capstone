@@ -20,7 +20,7 @@ namespace Capstone.Web.Models
 
         //[DataType(DataType.Upload)]
         //HttpPostedFileBase ImageUpload { get; set; }
-
+        public List<string> TagsList { get; set; }
         public string Tags { get; set; }
         public List<string> Categories { get; set; }
         public int Publics { get; set; }
@@ -28,5 +28,7 @@ namespace Capstone.Web.Models
         public Dictionary<string, bool> ChoseCategory { get; set; }
         public int Approved { get; set; }
         public bool IsPublics { get; set; }
+        public string PublicOrPrivate { get; set; }
+        public string TempTags { get; set; }
     }
 }

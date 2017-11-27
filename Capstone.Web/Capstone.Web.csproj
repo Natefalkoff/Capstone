@@ -164,6 +164,7 @@
       <DependentUpon>ImageModel.edmx</DependentUpon>
       <LastGenOutput>ImageModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Img\cancer-foundation-cancer-ribbons.jpg" />
     <Content Include="Img\Cancer-Support-Community.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -205,6 +206,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DropDownPlans.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="ImageModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -243,9 +245,12 @@
     <Content Include="Views\Home\AddRecipe.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
-    <Content Include="Views\Plan\Index.cshtml" />
     <Content Include="Views\Plan\ViewPlan.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
+    <Content Include="Views\Plan\Index.cshtml" />
+    <Content Include="Views\Plan\AddMealToPlan.cshtml" />
+    <Content Include="Views\Plan\AddMealConfirmation.cshtml" />
+    <Content Include="Views\Plan\CreatePlan.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -15,15 +15,16 @@
     <script src="~/Scripts/jquery-3.1.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <link href="~/Content/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link href="~/Content/style.css" rel="stylesheet" />
 
 </head>
 
-<body>
+<body class="body">
     <header class="padding">    
             <a href="@Url.Action("Index","Home")"><img src="~/Img/Cancer-Support-Community.jpg" alt="Cancer Support Community Central Ohio" class="image" /></a>
+        @*<a href="@Url.Action("Index", "Home")"><img src="~/Img/cancer-foundation-cancer-ribbons.jpg" alt="Support All Those Affected By Cancer" class="rightImage"/></a>*@
         <br>
         </header>
     
@@ -39,6 +40,10 @@
                 @Html.ActionLink("| Register |", "Register", "User", new { area = "" }, new { @class = "navbar-brand" })
                 @Html.ActionLink("| Login |", "Login", "User", new { area = "" }, new { @class = "navbar-brand" })
                 @Html.ActionLink("| Search |", "Search", "Search", new { area = "" }, new { @class = "navbar-brand" })
+                @if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
+                {
+                @Html.ActionLink("| Plan |", "Index", "Plan", new { area = "" }, new { @class = "navbar-brand" })
+                }
                 @using Capstone.Web.DAL@if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
                 {
                 @Html.ActionLink("| Add Recipe |", "AddRecipe", "Home", new { area = "" }, new { @class = "navbar-brand" })

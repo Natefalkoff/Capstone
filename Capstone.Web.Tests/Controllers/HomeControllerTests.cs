@@ -12,7 +12,7 @@ namespace Capstone.Web.Controllers.Tests
     [TestClass()]
     public class HomeControllerTests
     {
-        [TestMethod()]
+
         public void HomeController_IndexAction_ReturnIndexView()
         {
             //Arrange
@@ -24,5 +24,6 @@ namespace Capstone.Web.Controllers.Tests
             ////Assert
             //Assert.AreEqual("Index", result.ViewName);
         }
+
     }
 }

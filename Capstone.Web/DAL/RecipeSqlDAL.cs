@@ -12,10 +12,12 @@ namespace Capstone.Web.DAL
     {
         //private int recipeId = 0;
         private readonly string connectionString;
+        private string getCatsFromId = @"SELECT * FROM recipe JOIN recipe_category ON recipe.recipe_id = recipe_category.recipe_id JOIN category ON recipe_category.category_id = category.category_id WHERE recipe.recipe_id = @id;";
+        private string getTagsFromId = @"SELECT * FROM recipe Join recipe_tags ON recipe.recipe_id = recipe_tags.recipe_id Join tags on tags.tag_id = recipe_tags.tag_id where recipe.recipe_id = @id;";
         private string insertRecipe = @"INSERT INTO recipe(recipe_name, directions, ingredients, image_name, publics) VALUES ( @recipe_name, @directions, @ingredients, @image_name, @publics);SELECT CAST(scope_identity() AS int);";
         private string insertTagsId = @"INSERT INTO recipe_tags VALUES (@recipeId, @tagId);";
         private string getRecipes = @"SELECT * FROM recipe;";
-        private string getAllPublicRecipes = @"SELECT * FROM recipe JOIN user_recipes ON recipe.recipe_id = user_recipes.recipe_id JOIN website_users ON user_recipes.users_id = website_users.users_id WHERE approved = 1 AND publics = 1;";
+        private string getAllPublicRecipes = @"SELECT * FROM recipe WHERE approved = 1 AND publics = 1;";
         private string getAllNonApprovedRecipes = @"SELECT * FROM recipe JOIN user_recipes ON recipe.recipe_id = user_recipes.recipe_id JOIN website_users ON user_recipes.users_id = website_users.users_id WHERE approved = 0 AND publics = 1;";
         //private string tagExists = @"SELECT COUNT(*) FROM tags WHERE tag_name = @tagExists;";
         private string getTagId = @"SELECT tag_id FROM tags WHERE tag_name = @tagIfExists;";
@@ -26,14 +28,65 @@ namespace Capstone.Web.DAL
         private string insertCategoryIdAndRecipeId = @"INSERT INTO recipe_category(recipe_id, category_id) VALUES (@recipeCategoryId, @categoryRecipeId);";
         private string updateApproval = @"UPDATE recipe SET approved = 1 WHERE recipe_id = @recipeId;";
         private string insertRecipeIdandUserId = @"INSERT INTO user_recipes VALUES ( @userId, @recipeId);";
+        
 
         //using for details , does not include tags / categories
         private string recipeDetailSql = @"SELECT * FROM recipe WHERE recipe_id = @recipe_id";
+        
 
         public RecipeSqlDAL(string connectionString)
         {
             this.connectionString = connectionString;
         }
+
+        public List<string> GetCatsFromId(int id)
+        {
+            List<string> list = new List<string>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(getCatsFromId, conn);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    SqlDataReader results = cmd.ExecuteReader();
+                    while (results.Read())
+                    {
+                        list.Add(Convert.ToString(results["category_name"]));
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return list;
+        }
+
+        public List<string> GetTagsFromId(int id)
+        {
+            List<string> list = new List<string>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(getTagsFromId, conn);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    SqlDataReader results = cmd.ExecuteReader();
+                    while (results.Read())
+                    {
+                        list.Add(Convert.ToString(results["tag_name"]));
+                    }
+                }
+            }
+            catch(SqlException ex)
+            {
+                throw;
+            }
+            return list;
+        }
+
         public bool InsertRecipeIdAndUserId(int userId, int recipeId)
         {
             try
@@ -141,8 +194,6 @@ namespace Capstone.Web.DAL
                         r.ImageName = Convert.ToString(results["image_name"]);
                         r.Ingredients = Convert.ToString(results["ingredients"]).Replace("\\n", "\n");
                         r.RecipeID = Convert.ToInt32(results["recipe_id"]);
-                        r.UserID = Convert.ToInt32(results["users_id"]);
-                        r.UserName = Convert.ToString(results["users_name"]);
                         r.Approved = Convert.ToInt32(results["approved"]);
                         r.Publics = Convert.ToInt32(results["publics"]);
                         recipes.Add(r);
