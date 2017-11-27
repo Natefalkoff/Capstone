@@ -1,15 +1,36 @@
 ﻿.header {
     background-image: url('../Img/color-of-cancer-awareness.jpg');
     background-size: 100%, 100%;
-/*}
-.containerss {
-padding-top:20px;
-padding-bottom: 20px;
-padding-left:20px;
-padding-right; 20px;
-border-color:red;
+}
+.element-style{
+    margin:auto;
+    height:500px;
+    width:500px;
+    font-size:medium;
+}
+section.centeredPanel {
+    clear: both;
+    display: block;
+    width: 90%;
+    vertical-align: top;
+    min-height: 50px;
+    background-color: #FFF;
+    border-radius: 10px;
+    border-width:thick;
+    border-color:red;
+    margin: 20px auto;
+}
 
-}*/
+    section.centeredPanel h2 {
+        color: #000000;
+        text-align: center;
+        padding-top: 15px;
+    }
+
+    section.centeredPanel p {
+        color: #000;
+        text-align: left;
+    }
 
 .image2{
     width:60%;
