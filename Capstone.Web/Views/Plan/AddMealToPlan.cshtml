@@ -1,0 +1,62 @@
+﻿@model Capstone.Web.Models.DropDownPlans
+@using Capstone.Web.Models
+
+@{
+    ViewBag.Title = "AddMealToPlan";
+}
+
+<h2>Add Meal To Plan</h2>
+
+@using (Html.BeginForm("AddMealToPlan", "Plan", FormMethod.Post))
+{
+
+    List<SelectListItem> plans = new List<SelectListItem>();
+    foreach (PlanModel plan in Model.PlanModels)
+    {
+        plans.Add(new SelectListItem
+        {
+            Text = plan.PlanName,
+            Value = plan.PlanId.ToString()
+        });
+    }
+    @Html.DropDownListFor(Model => Model.selectedPlan, plans)
+
+
+    List<SelectListItem> recipes = new List<SelectListItem>();
+    foreach (RecipeModel recipe in Model.Recipes)
+    {
+        recipes.Add(new SelectListItem
+        {
+            Text = recipe.Name,
+            Value = recipe.RecipeID.ToString()
+        });
+    }
+    @Html.DropDownListFor(Model => Model.selectedRecipe, recipes)
+
+
+    List<SelectListItem> days = new List<SelectListItem>();
+    foreach (string day in Model.Days)
+    {
+        days.Add(new SelectListItem
+        {
+            Text = day,
+            Value = day
+        });
+    }
+    @Html.DropDownListFor(Model => Model.selectedDay, days)
+
+    List<SelectListItem> meals = new List<SelectListItem>();
+    foreach (string meal in Model.Meals)
+    {
+        meals.Add(new SelectListItem
+        {
+            Text = meal,
+            Value = meal
+        });
+    }
+    @Html.DropDownListFor(Model => Model.selectedMeal, meals)
+
+
+
+    <button>Add Meal</button>
+}

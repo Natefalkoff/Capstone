@@ -7,10 +7,10 @@ DROP TABLE tags
 DROp Table category
 drop table user_recipes
 drop table user_plan
-drop table website_users
+drop table website_user
 drop table recipe_tags
 drop table recipe_category
-drop table plan_recipes
+drop table plan_receipes
 drop table plans
 drop table meal;
 drop table meal_plan;
@@ -63,7 +63,7 @@ password varchar(max) not null,
 email varchar(48) not null,
 authorization_level int not null,
 salt varchar(max),
-signup int DEFAULT 0, 
+signup int DEFAULT 0,
 
 constraint pk_users_id primary key (users_id)
 );

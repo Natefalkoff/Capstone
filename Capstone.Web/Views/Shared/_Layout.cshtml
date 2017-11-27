@@ -42,6 +42,10 @@
                 @Html.ActionLink("| Register |", "Register", "User", new { area = "" }, new { @class = "navbar-brand" })
                 @Html.ActionLink("| Login |", "Login", "User", new { area = "" }, new { @class = "navbar-brand" })
                 @Html.ActionLink("| Search |", "Search", "Search", new { area = "" }, new { @class = "navbar-brand" })
+                @if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
+                {
+                @Html.ActionLink("| Plan |", "Index", "Plan", new { area = "" }, new { @class = "navbar-brand" })
+                }
                 @using Capstone.Web.DAL@if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
                 {
                 @Html.ActionLink("| Add Recipe |", "AddRecipe", "Home", new { area = "" }, new { @class = "navbar-brand" })
