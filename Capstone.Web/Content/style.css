@@ -1,4 +1,43 @@
-﻿.body {
+﻿.header {
+    background-image: url('../Img/color-of-cancer-awareness.jpg');
+    background-size: 100%, 100%;
+}
+.element-style{
+    margin:auto;
+    height:500px;
+    width:500px;
+    font-size:medium;
+}
+section.centeredPanel {
+    clear: both;
+    display: block;
+    width: 90%;
+    vertical-align: top;
+    min-height: 50px;
+    background-color: #FFF;
+    border-radius: 10px;
+    border-width:thick;
+    border-color:red;
+    margin: 20px auto;
+}
+
+    section.centeredPanel h2 {
+        color: #000000;
+        text-align: center;
+        padding-top: 15px;
+    }
+
+    section.centeredPanel p {
+        color: #000;
+        text-align: left;
+    }
+
+.image2{
+    width:60%;
+    height:225px;
+    /*text-align:right;*/
+}
+.body {
 text-align: center;
 position:center;
 }
@@ -8,11 +47,10 @@ position:center;
     height: 200px;
     text-align: right;
 }
-.textbox{
+.textbox {
     width: 6000px;
     height: 6000px;
-    text-align:center;
-
+    text-align: center;
 }
 .rstext{
     font-size: 18px;
@@ -53,10 +91,13 @@ position:center;
     
     width: 400px;
     height:200px;
-    text-align: center;
+    text-align: left;
 }
 #ImageName{
+    position: center;
     text-align:center;
+    margin: auto;
+    /*padding-left: 800px;*/
 }
 /*#TagSearch{
     height:200px;
@@ -91,11 +132,11 @@ position:center;
     border: 0px;
     border-radius: 0px;
 }
-.header{
+/*.header{
     text-align:center;
     text-decoration:underline;
     
-}
+}*/
 .addrecipe{
     padding-top: 400px;
     text-align:center;
@@ -106,8 +147,9 @@ display: inline-block;
 
 }
 .directions {
-    padding-left: 40px;
+    /*padding-left: 40px;*/
     text-decoration:underline;
+    text-align:center;
     
 }
 .public{
@@ -115,8 +157,9 @@ display: inline-block;
     display:block;
 }
 .ingredients {
-    padding-right: 20px;
-    display: inline-bloc;
+    /*padding-right: 20px;*/
+    display: inline-block;
+    text-align:center;
 }
 
 /*!
@@ -5003,6 +5046,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     padding-left: 0;
     margin-bottom: 0;
     list-style: none;
+    c
 }
 
     .nav > li {

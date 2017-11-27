@@ -16,17 +16,19 @@
     @Html.ActionLink("Create New", "AddRecipe")
 </p>
 <table class="table">
-    <tr  class="directions" style="font-size:20px">
-        <th class="directions">
+
+    <tr  class="body" style="font-size:20px">
+        <th class="body">@*directions*@
+
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        <th class="directions">
+        <th class="body">
             @Html.DisplayNameFor(model => model.Directions)
         </th>  
-        <th class="directions">
+        <th class="body">
             @Html.DisplayNameFor(model => model.Ingredients)
         </th>
-        <th class="directions">
+        <th class="body">
             @Html.DisplayNameFor(model => model.ImageName)
         </th>
         <th></th>
@@ -34,7 +36,7 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        <td style="display:list-item">
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>

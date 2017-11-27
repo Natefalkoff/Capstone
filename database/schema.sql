@@ -63,6 +63,7 @@ password varchar(max) not null,
 email varchar(48) not null,
 authorization_level int not null,
 salt varchar(max),
+signup int DEFAULT 0,
 
 constraint pk_users_id primary key (users_id)
 );

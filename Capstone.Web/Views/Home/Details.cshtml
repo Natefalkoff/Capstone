@@ -9,17 +9,64 @@
 
 @using (Html.BeginForm("Details", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <div>
-        <h4>RecipeModel</h4>
+    <input type="button" name="btnprint" value="Print" onclick="PrintMe('printableArea')" />
+    <input type="button" name="btnprint5x7" value="Print 5x7" onclick="Print5x7('printableArea')" />
+    <div id="printableArea">
+
+        @*<script language="javascript">
+            @media print{
+            var css = '@page { size: landscape; }',
+            head = document.head || document.getElementsByTagName('head')[0],
+            style = document.createElement('style');
+
+            style.type = 'text/css';
+            style.media = 'print';
+
+            if (style.styleSheet){
+            style.styleSheet.cssText = css;
+            } else {
+            style.appendChild(document.createTextNode(css));
+            }
+
+            head.appendChild(style);
+
+            window.print();
+            }
+        </script>*@
+        <script language="javascript">
+            function PrintMe(DivID) {
+                var disp_setting = "toolbar=yes,location=no,";
+                disp_setting += "directories=yes,menubar=yes,";
+                disp_setting += "scrollbars=yes,width=650, height=600, left=100, top=25";
+                var content_vlue = document.getElementById(DivID).innerHTML;
+                var docprint = window.open("", "", disp_setting);
+                docprint.document.open();
+                docprint.document.write('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"');
+                docprint.document.write('"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">');
+                docprint.document.write('<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">');
+                docprint.document.write('<head><title>My Title</title>');
+                docprint.document.write('<style type="text/css">body{margin:0px;');
+                docprint.document.write('font-family:verdana,Arial;color:#000;');
+                docprint.document.write('font-family:Verdana, Geneva, sans-serif; font-size:12px;}');
+                docprint.document.write('a{color:#000;text-decoration:none;} </style>');
+                docprint.document.write('</head><body onLoad="self.print()"><center>');
+                docprint.document.write(content_vlue);
+                docprint.document.write('</center></body></html>');
+                docprint.document.close();
+                docprint.focus();
+            }
+        </script>
+
+        <h4>@Model.Name</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.Name)
+
                 @Html.HiddenFor(model => model.RecipeID)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Name)
+
                 @Html.HiddenFor(model => model.Name)
             </dd>
 
@@ -32,12 +79,8 @@
                 @Html.DisplayFor(model => model.Directions)
             </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.UserID)
-            </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.UserID)
                 @Html.HiddenFor(model => model.UserID)
             </dd>
 
@@ -49,10 +92,6 @@
             <dd>
                 @Html.DisplayFor(model => model.Ingredients)
             </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.ImageName)
-            </dt>
 
             <dd>
                 <img src="~/Img/@Model.ImageName" />
@@ -66,7 +105,7 @@
 
 
             @{
-               
+
                 foreach (string s in Model.TagsList)
                 {
                     <dd>
@@ -91,28 +130,26 @@
 
 
             <dt>
-                @Html.DisplayNameFor(model => model.Publics)
+
                 @Html.HiddenFor(model => model.Publics)
             </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Publics)
-            </dd>
-            </dl>
-        </div>
 
-            <div>
-                @using Capstone.Web.DAL @if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
+        </dl>
+    </div>
+
+    <div>
+        @using Capstone.Web.DAL @if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
                 {
 
-                    <p>If Admin Would Like To Add Tags separated by semicolon (;)</p>
-                    @Html.TextBoxFor(model => model.Tags)
-                    <button> Submit </button>
+            <p>If Admin Would Like To Add Tags separated by semicolon (;)</p>
+                @Html.TextBoxFor(model => model.Tags)
+                <button> Submit </button>
+        }
+    </div>
+        @*<p>
+                @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>*@
                 }
-            </div>
-            @*<p>
-                    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-                    @Html.ActionLink("Back to List", "Index")
-                </p>*@
- }
-            
+

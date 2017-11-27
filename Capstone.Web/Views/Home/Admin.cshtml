@@ -90,6 +90,33 @@
         }
     </table>
         <button>Submit</button>
+        <table>
+            <tr>
+                <td>
+                    Email
+                </td>
+                <td>
+                    UserName
+                </td>
+                <td>
+                    UserID
+                </td>
+            </tr>
+            @foreach(UserModel u in Session["subscribers"] as List<UserModel>)
+            {
+                <tr>
+                    @u.Email
+                </tr>
+                <tr>
+                    @u.UserName
+                </tr>
+                <tr>
+                    @u.UserID
+                </tr>
+            }
+            <tr>
 
+            </tr>
+        </table>
 }
 

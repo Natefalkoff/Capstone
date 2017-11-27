@@ -25,5 +25,7 @@ namespace Capstone.Web.DAL
         bool InsertRecipeIdAndUserId(int userId, int recipeId);
         List<string> GetCatsFromId(int id);
         List<string> GetTagsFromId(int id);
+        List<UserModel> SubscribedUsers();
+        List<RecipeModel> GetUserRecipes(int id);
     }
 }

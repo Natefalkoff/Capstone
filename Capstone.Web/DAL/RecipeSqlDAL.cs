@@ -28,15 +28,76 @@ namespace Capstone.Web.DAL
         private string insertCategoryIdAndRecipeId = @"INSERT INTO recipe_category(recipe_id, category_id) VALUES (@recipeCategoryId, @categoryRecipeId);";
         private string updateApproval = @"UPDATE recipe SET approved = 1 WHERE recipe_id = @recipeId;";
         private string insertRecipeIdandUserId = @"INSERT INTO user_recipes VALUES ( @userId, @recipeId);";
-        
+        private string subscribedUsers = @"SELECT * FROM website_users WHERE signup = 1;";
+        private string userRecipes = @"SELECT * FROM website_users JOIN user_recipes ON website_users.users_id = user_recipes.users_id JOIN recipe ON user_recipes.recipe_id = recipe.recipe_id WHERE website_users.users_id = @userId;";
+
 
         //using for details , does not include tags / categories
         private string recipeDetailSql = @"SELECT * FROM recipe WHERE recipe_id = @recipe_id";
-        
+
 
         public RecipeSqlDAL(string connectionString)
         {
             this.connectionString = connectionString;
+        }
+
+        public List<RecipeModel> GetUserRecipes(int id)
+        {
+            List<RecipeModel> recipes = new List<RecipeModel>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(userRecipes, conn);
+                    cmd.Parameters.AddWithValue("@userId", id);
+                    SqlDataReader results = cmd.ExecuteReader();
+                    while (results.Read())
+                    {
+                        RecipeModel r = new RecipeModel();
+                        r.Directions = Convert.ToString(results["directions"]);
+                        r.ImageName = Convert.ToString(results["image_name"]);
+                        r.UserName = Convert.ToString(results["users_name"]);
+                        r.Ingredients = Convert.ToString(results["ingredients"]);
+                        r.Name = Convert.ToString(results["recipe_name"]);
+                        r.UserID = Convert.ToInt32(results["users_id"]);
+                        recipes.Add(r);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return recipes;
+        }
+
+
+        public List<UserModel> SubscribedUsers()
+        {
+            List<UserModel> users = new List<UserModel>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(subscribedUsers, conn);
+                    SqlDataReader results = cmd.ExecuteReader();
+                    while (results.Read())
+                    {
+                        UserModel r = new UserModel();
+                        r.Email = Convert.ToString(results["email"]);
+                        r.UserID = Convert.ToInt32(results["users_id"]);
+                        r.UserName = Convert.ToString(results["users_name"]);
+                        users.Add(r);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return users;
         }
 
         public List<string> GetCatsFromId(int id)
@@ -80,7 +141,7 @@ namespace Capstone.Web.DAL
                     }
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 throw;
             }
@@ -119,7 +180,7 @@ namespace Capstone.Web.DAL
                     return rowsAffected > 0;
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 throw;
             }
@@ -139,7 +200,7 @@ namespace Capstone.Web.DAL
                 }
             }
 
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 throw;
             }
@@ -219,7 +280,7 @@ namespace Capstone.Web.DAL
                     id = (int)cmd.ExecuteScalar();
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 throw;
             }
@@ -241,7 +302,7 @@ namespace Capstone.Web.DAL
                     }
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 throw;
             }
@@ -261,7 +322,7 @@ namespace Capstone.Web.DAL
                     return rowsAffected > 0;
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 throw;
             }
@@ -279,7 +340,7 @@ namespace Capstone.Web.DAL
                     id = (int)cmd.ExecuteScalar();
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 throw;
             }
@@ -291,7 +352,7 @@ namespace Capstone.Web.DAL
             int id = 0;
             try
             {
-                using(SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(getTagId, conn);
@@ -299,7 +360,7 @@ namespace Capstone.Web.DAL
                     id = (int)cmd.ExecuteScalar();
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 throw;
             }
@@ -312,11 +373,11 @@ namespace Capstone.Web.DAL
             string[] splitTags = tags.Split(';');
             try
             {
-                using(SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    
-                    for(int i = 0; i < splitTags.Length; i++)
+
+                    for (int i = 0; i < splitTags.Length; i++)
                     {
                         string tagExists = string.Format(@"SELECT COUNT(*) FROM tags WHERE tag_name = @tagExists{0};", i);
                         SqlCommand cmd = new SqlCommand(tagExists, conn);
@@ -326,7 +387,7 @@ namespace Capstone.Web.DAL
                     }
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 throw;
             }
@@ -407,12 +468,14 @@ namespace Capstone.Web.DAL
                     }
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 throw;
             }
             return m;
         }
-
     }
 }
+
+
+

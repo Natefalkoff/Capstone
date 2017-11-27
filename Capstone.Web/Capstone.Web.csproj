@@ -74,6 +74,9 @@
       <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Select.Pdf, Version=17.3.0.0, Culture=neutral, PublicKeyToken=e0ae9f6e27a97018, processorArchitecture=MSIL">
+      <HintPath>..\packages\Select.Pdf.17.3.0\lib\net40\Select.Pdf.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -164,8 +167,11 @@
       <DependentUpon>ImageModel.edmx</DependentUpon>
       <LastGenOutput>ImageModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Img\cancer hope.jpg" />
     <Content Include="Img\cancer-foundation-cancer-ribbons.jpg" />
     <Content Include="Img\Cancer-Support-Community.jpg" />
+    <Content Include="Img\color-of-cancer-awareness.jpg" />
+    <Content Include="Img\Fight-Cancer.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.2.1-vsdoc.js" />
@@ -247,10 +253,16 @@
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Plan\ViewPlan.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Plan\Index.cshtml" />
     <Content Include="Views\Plan\AddMealToPlan.cshtml" />
     <Content Include="Views\Plan\AddMealConfirmation.cshtml" />
     <Content Include="Views\Plan\CreatePlan.cshtml" />
+=======
+    <Content Include="Views\User\ChangePassword.cshtml" />
+    <Content Include="Views\User\ChangeSuccess.cshtml" />
+    <Content Include="Views\User\UserPage.cshtml" />
+>>>>>>> 908f7c6b5b0ec5fb200db3a0f06c83d4ef5d771f
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

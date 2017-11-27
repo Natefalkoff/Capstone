@@ -139,26 +139,28 @@ namespace Capstone.Web.Controllers
         public ActionResult Details(RecipeModel model)
         {
             UserModel user = Session["user"] as UserModel;
-            model.UserID = user.UserID;
-            string[] tagArray = model.Tags.Split(';');
-            List<int> exists = recipeDal.TagsExist(model.Tags);
-            if (tagArray.Length != 0)
+            if (user != null)
             {
-                for (int i = 0; i < tagArray.Length; i++)
+                model.UserID = user.UserID;
+                string[] tagArray = model.Tags.Split(';');
+                List<int> exists = recipeDal.TagsExist(model.Tags);
+                if (tagArray.Length != 0)
                 {
-                    if (exists[i] > 0)
+                    for (int i = 0; i < tagArray.Length; i++)
                     {
-                        int tagId = recipeDal.GetTagIdIfExists(tagArray[i].TrimStart(' '));
-                        recipeDal.InsertRecipeIdAndTagId(model.RecipeID, tagId);
-                    }
-                    else
-                    {
-                        int tagId = recipeDal.GetTagIdAfterInsert(tagArray[i].TrimStart(' '));
-                        recipeDal.InsertRecipeIdAndTagId(model.RecipeID, tagId);
+                        if (exists[i] > 0)
+                        {
+                            int tagId = recipeDal.GetTagIdIfExists(tagArray[i].TrimStart(' '));
+                            recipeDal.InsertRecipeIdAndTagId(model.RecipeID, tagId);
+                        }
+                        else
+                        {
+                            int tagId = recipeDal.GetTagIdAfterInsert(tagArray[i].TrimStart(' '));
+                            recipeDal.InsertRecipeIdAndTagId(model.RecipeID, tagId);
+                        }
                     }
                 }
             }
-
             return RedirectToAction("Index");
 
         }
@@ -168,6 +170,10 @@ namespace Capstone.Web.Controllers
             if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
             {
                 List<RecipeModel> model = recipeDal.GetPublicNonApprovedRecipes();
+                RecipeModel users = new RecipeModel();
+                Session["subscribers"] = recipeDal.SubscribedUsers();
+                model.Add(users);
+                ViewBag.Subsribers = recipeDal.SubscribedUsers();
                 return View(model);
             }
             else
@@ -179,7 +185,8 @@ namespace Capstone.Web.Controllers
         [HttpPost]
         public ActionResult Admin(List<RecipeModel> model)
         {
-            foreach(RecipeModel recipe in model)
+            Session["subscribers"] = recipeDal.SubscribedUsers();
+            foreach (RecipeModel recipe in model)
             {
                 if(recipe.IsPublics == true)
                 {
