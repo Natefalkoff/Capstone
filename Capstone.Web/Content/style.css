@@ -1,4 +1,22 @@
-﻿.body {
+﻿.header {
+    background-image: url('../Img/color-of-cancer-awareness.jpg');
+    background-size: 100%, 100%;
+/*}
+.containerss {
+padding-top:20px;
+padding-bottom: 20px;
+padding-left:20px;
+padding-right; 20px;
+border-color:red;
+
+}*/
+
+.image2{
+    width:60%;
+    height:225px;
+    /*text-align:right;*/
+}
+.body {
 text-align: center;
 position:center;
 }
@@ -52,10 +70,13 @@ position:center;
     
     width: 400px;
     height:200px;
-    text-align: center;
+    text-align: left;
 }
 #ImageName{
+    position: center;
     text-align:center;
+    margin: auto;
+    /*padding-left: 800px;*/
 }
 /*#TagSearch{
     height:200px;
@@ -90,11 +111,11 @@ position:center;
     border: 0px;
     border-radius: 0px;
 }
-.header{
+/*.header{
     text-align:center;
     text-decoration:underline;
     
-}
+}*/
 .addrecipe{
     padding-top: 400px;
     text-align:center;

@@ -164,8 +164,10 @@
       <DependentUpon>ImageModel.edmx</DependentUpon>
       <LastGenOutput>ImageModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Img\cancer hope.jpg" />
     <Content Include="Img\cancer-foundation-cancer-ribbons.jpg" />
     <Content Include="Img\Cancer-Support-Community.jpg" />
+    <Content Include="Img\color-of-cancer-awareness.jpg" />
     <Content Include="Img\Fight-Cancer.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

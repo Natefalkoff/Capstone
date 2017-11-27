@@ -42,9 +42,9 @@ SELECT * FROM user_recipes
 	INSERT INTO category (category_name) VALUES ('Soups');
 	
 	--WEBSITE USER
-	INSERT INTO website_users (users_name, password, email, authorization_level, salt)VALUES ('rob', 'y+bjtdQQpBEu7dSYeSH4aEhPF/E=', 'rob@rob', 3, 'sdZUcw2JQTw=');
-	INSERT INTO website_users (users_name, password, email, authorization_level, salt)VALUES('cam', 'NQ6AdbvWgCEBChpx5IvUh531zfg=', 'cam@cam', 3, 'cQJa/1TRWAo=');
-	INSERT INTO website_users (users_name, password, email, authorization_level, salt)VALUES ('nate', '636Pu+UykDhsFckNyBIXrodpZ+o=', 'nate@nate', 3, '+TN6kD82RPw=');
+	INSERT INTO website_users (users_name, password, email, authorization_level, salt)VALUES ('rob', 'y+bjtdQQpBEu7dSYeSH4aEhPF/E=', 'rob@rob', 3, 'sdZUcw2JQTw=',1 );
+	INSERT INTO website_users (users_name, password, email, authorization_level, salt)VALUES('cam', 'NQ6AdbvWgCEBChpx5IvUh531zfg=', 'cam@cam', 3, 'cQJa/1TRWAo=', 1);
+	INSERT INTO website_users (users_name, password, email, authorization_level, salt)VALUES ('nate', '636Pu+UykDhsFckNyBIXrodpZ+o=', 'nate@nate', 3, '+TN6kD82RPw=', 1 );
 
 
 --USER RECIPES
