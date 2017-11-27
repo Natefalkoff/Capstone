@@ -253,16 +253,13 @@
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Plan\ViewPlan.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Plan\Index.cshtml" />
     <Content Include="Views\Plan\AddMealToPlan.cshtml" />
     <Content Include="Views\Plan\AddMealConfirmation.cshtml" />
     <Content Include="Views\Plan\CreatePlan.cshtml" />
-=======
     <Content Include="Views\User\ChangePassword.cshtml" />
     <Content Include="Views\User\ChangeSuccess.cshtml" />
     <Content Include="Views\User\UserPage.cshtml" />
->>>>>>> 908f7c6b5b0ec5fb200db3a0f06c83d4ef5d771f
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
