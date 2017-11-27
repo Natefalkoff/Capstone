@@ -139,26 +139,28 @@ namespace Capstone.Web.Controllers
         public ActionResult Details(RecipeModel model)
         {
             UserModel user = Session["user"] as UserModel;
-            model.UserID = user.UserID;
-            string[] tagArray = model.Tags.Split(';');
-            List<int> exists = recipeDal.TagsExist(model.Tags);
-            if (tagArray.Length != 0)
+            if (user != null)
             {
-                for (int i = 0; i < tagArray.Length; i++)
+                model.UserID = user.UserID;
+                string[] tagArray = model.Tags.Split(';');
+                List<int> exists = recipeDal.TagsExist(model.Tags);
+                if (tagArray.Length != 0)
                 {
-                    if (exists[i] > 0)
+                    for (int i = 0; i < tagArray.Length; i++)
                     {
-                        int tagId = recipeDal.GetTagIdIfExists(tagArray[i].TrimStart(' '));
-                        recipeDal.InsertRecipeIdAndTagId(model.RecipeID, tagId);
-                    }
-                    else
-                    {
-                        int tagId = recipeDal.GetTagIdAfterInsert(tagArray[i].TrimStart(' '));
-                        recipeDal.InsertRecipeIdAndTagId(model.RecipeID, tagId);
+                        if (exists[i] > 0)
+                        {
+                            int tagId = recipeDal.GetTagIdIfExists(tagArray[i].TrimStart(' '));
+                            recipeDal.InsertRecipeIdAndTagId(model.RecipeID, tagId);
+                        }
+                        else
+                        {
+                            int tagId = recipeDal.GetTagIdAfterInsert(tagArray[i].TrimStart(' '));
+                            recipeDal.InsertRecipeIdAndTagId(model.RecipeID, tagId);
+                        }
                     }
                 }
             }
-
             return RedirectToAction("Index");
 
         }

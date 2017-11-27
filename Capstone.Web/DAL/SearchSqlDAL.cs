@@ -65,7 +65,7 @@ namespace Capstone.Web.DAL
                             conn.Close();
                         }
                     }
-                    
+
                     if (tagStrings.Count > 0 && list.Count == 0)
                     {
                         if (tagStrings.Count > 0)
@@ -73,7 +73,7 @@ namespace Capstone.Web.DAL
                             for (int i = 0; i < tagStrings.Count; i++)
                             {
                                 conn.Open();
-                                
+
                                 string tagResults = string.Format(@"SELECT * FROM recipe JOIN recipe_tags ON recipe.recipe_id = recipe_tags.recipe_id JOIN tags ON recipe_tags.tag_id = tags.tag_id WHERE tag_name = @tagName{0} AND approved = 1 AND publics = 1;", i);
                                 SqlCommand cmd = new SqlCommand(tagResults, conn);
                                 cmd.Parameters.AddWithValue(string.Format("@tagName{0}", i), tagStrings[i]);
@@ -91,6 +91,7 @@ namespace Capstone.Web.DAL
                                 conn.Close();
                             }
                         }
+                    }
                         if(tagStrings.Count > 0 && list.Count > 0)
                         {
                             for (int i = 0; i < tagStrings.Count; i++)
@@ -99,7 +100,7 @@ namespace Capstone.Web.DAL
                                 {
                                     conn.Open();
 
-                                    string tagResults = string.Format(@"SELECT * FROM recipe JOIN recipe_tags ON recipe.recipe_id = recipe_tags.recipe_id JOIN tags ON recipe_tags.tag_id = tags.tag_id WHERE tag_name = @tagName{0} AND category_name = @catName{0} AND approved = 1 AND publics = 1;", i);
+                                    string tagResults = string.Format(@"SELECT * FROM recipe JOIN recipe_tags ON recipe.recipe_id = recipe_tags.recipe_id JOIN tags ON recipe_tags.tag_id = tags.tag_id JOIN recipe_category ON recipe_category.recipe_id = recipe.recipe_id JOIN category ON category.category_id = recipe_category.category_id WHERE tag_name = @tagName{0} AND category_name = @catName{0} AND approved = 1 AND publics = 1;", i);
                                     SqlCommand cmd = new SqlCommand(tagResults, conn);
                                     cmd.Parameters.AddWithValue(string.Format("@tagName{0}", i), tagStrings[i]);
                                     cmd.Parameters.AddWithValue(string.Format("@catName{0}", j), list[j]);
@@ -119,7 +120,7 @@ namespace Capstone.Web.DAL
                             }
                         }
                     }
-                }
+                
             }
             catch(SqlException ex)
             {
