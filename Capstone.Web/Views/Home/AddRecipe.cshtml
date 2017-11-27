@@ -9,7 +9,6 @@
 @using (Html.BeginForm("AddRecipe", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-
     <div class="form-horizontal, col-lg-12">
         @*<h4 class="addrecipe">RecipeModel</h4>*@
         <hr />
@@ -19,7 +18,7 @@
             @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label col-md-12" })
             <br>
             <div class="col-md-10, body, col-lg-12">
-                @Html.TextBoxFor(m => m.Name, new { htmlAttributes = new { @class = "form-control"  } }) 
+                @Html.TextBoxFor(m => m.Name, new { placeholder = "Rice"}) @*{ htmlAttributes = new { @class = "form-control"  } }*@
                 @*@Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })*@
             </div>
         </div>
@@ -29,7 +28,7 @@
             @Html.Label("Enter Ingredients Separated by Using The 'Enter' Key", htmlAttributes: new { @class = "control-label col-md-12" })
            <br>
             <div class="col-md-10, body">
-                @Html.TextAreaFor(m => m.Directions, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(m => m.Directions, new { placeholder = "Boil Water \nAdd Rice to boiling water \nSimmer for 15 minutes" }) @*{ htmlAttributes = new { @class = "form-control" }*@
                 @*@Html.ValidationMessageFor(model => model.Directions, "", new { @class = "text-danger" })*@
             </div>
             <br>
@@ -41,7 +40,7 @@
             @Html.Label("Enter Ingredients Separated by Using The 'Enter' Key", htmlAttributes: new { @class = "control-label col-md-12" })
             <br>
             <div class="col-md-10, body">
-                @Html.TextAreaFor(m => m.Ingredients, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(m => m.Ingredients, new { placeholder= "1 Cup of white rice \n2 Cups of water" }) @*{ htmlAttributes = new { @class = "form-control" }*@
                 @*@Html.ValidationMessageFor(model => model.Ingredients, "", new { @class = "text-danger" })*@
             </div>
         </div>
@@ -51,7 +50,7 @@
             @Html.Label("Enter Tags Here", htmlAttributes: new { @class = "control-label col-md-12" })
             <br>
             <div class="col-md-10, body">
-                @Html.TextBoxFor(m => m.Tags, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(m => m.Tags, new { placeholder ="Healthy; Grains;" }) @*{ htmlAttributes = new { @class = "form-control" }*@
                 @*@Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })*@
             </div>
         </div>
@@ -112,11 +111,14 @@
         }
 
         <div class="col-lg-12, body">
+            <br>
             @Html.Label("ImageName", "Upload an Image", htmlAttributes: new { @class = "control-label col-md-12" })
+            <br>
             <div class="col-lg-12, body">
+                <br>
             @Html.TextBoxFor(m => m.ImageName, new { type = "file" })
                 </div>
-            <br >
+            <br>
             <div class="col-lg-12">
             @ViewBag.Message
                 </div>
@@ -134,3 +136,4 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
