@@ -7,7 +7,7 @@ DROP TABLE tags
 DROp Table category
 drop table user_recipes
 drop table user_plan
-drop table website_user
+drop table website_users
 drop table recipe_tags
 drop table recipe_category
 drop table plan_receipes
