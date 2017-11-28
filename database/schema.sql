@@ -2,19 +2,19 @@
 -- This script creates all of the database objects (tables, constraints, etc) for the database
 -- *************************************************************************************************
 
-DROP TABLE recipe
+drop table meal_recipe;
+drop table user_recipes;
+drop table plan_recipes;
+drop table recipe_tags;
+drop table recipe_category;
+DROP TABLE recipe;
 DROP TABLE tags
 DROp Table category
-drop table user_recipes
 drop table user_plan
 drop table website_users
-drop table recipe_tags
-drop table recipe_category
-drop table plan_receipes
 drop table plans
 drop table meal;
 drop table meal_plan;
-drop table meal_recipe;
 
 
 
@@ -30,7 +30,7 @@ recipe_name varchar(1000) not null,
 directions varchar(max) not null,
 publics int not null, --0 private (false), 1 pbulic (true)
 ingredients varchar(max) not null, 
-image_name varchar(max) not null,
+image_name varchar(max),
 approved int DEFAULT 0 not null, --0 not approved, 1 approved
 
 constraint pk_recipe_id primary key (recipe_id)

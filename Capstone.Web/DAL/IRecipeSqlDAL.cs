@@ -27,5 +27,7 @@ namespace Capstone.Web.DAL
         List<string> GetTagsFromId(int id);
         List<UserModel> SubscribedUsers();
         List<RecipeModel> GetUserRecipes(int id);
+        bool AddImage(string imageName, int id);
+        bool DeleteRecipe(int id);
     }
 }
