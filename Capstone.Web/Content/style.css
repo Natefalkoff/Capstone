@@ -1,14 +1,16 @@
-﻿.header {
-    background-image: url('../Img/color-of-cancer-awareness.jpg');
-    background-size: 100%, 100%;
-}
-.element-style{
+﻿.element-style{
     margin:auto;
     height:500px;
     width:500px;
     font-size:medium;
+
 }
-section.centeredPanel {
+.dingleberry {
+    text-align:center;
+    width: 50%;
+    height: 50%;
+}
+/*section.centeredPanel {
     clear: both;
     display: block;
     width: 90%;
@@ -30,14 +32,10 @@ section.centeredPanel {
     section.centeredPanel p {
         color: #000;
         text-align: left;
-    }
+    }*/
 
-.image2{
-    width:60%;
-    height:225px;
-    /*text-align:right;*/
-}
-.body {
+
+.bodyByBod {
 text-align: center;
 position:center;
 }
@@ -87,24 +85,13 @@ position:center;
     margin: 3px;
     padding: 3px;
 }
-.image {
-    display: block;
-    
-    width: 400px;
-    height:200px;
-    text-align: left;
-}
-#ImageName{
-    position: center;
-    text-align:center;
-    margin: auto;
-    /*padding-left: 800px;*/
-}
-/*#TagSearch{
-    height:200px;
+
+
+.TagSearch{
+    height:100px;
     width:200px;
     margin:0;
-}*/
+}
 #login{
     text-align:center;
 }
@@ -117,7 +104,6 @@ position:center;
 }
 #id{
     text-align:center;
-    display:
 }
 #pre {
     width:auto;
@@ -164,4 +150,8 @@ display: inline-block;
 }
 .navbar-brand{
     color:white;
+}
+.textarea{
+    height:300px;
+    width:150px;
 }
