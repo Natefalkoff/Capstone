@@ -120,7 +120,8 @@ position:center;
     display:
 }
 #pre {
-    width:auto;
+    width:30%;
+    height:auto;
     display: block;
     padding:0;
     margin:0px;
