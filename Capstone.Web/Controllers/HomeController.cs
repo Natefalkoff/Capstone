@@ -62,7 +62,7 @@ namespace Capstone.Web.Controllers
             // If the method returns true, only admins will be able to do this action, else returns redirect to another action.
             if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
             {
-                
+                List<string> tagArray = new List<string>();
                 string fileName = "";
                 try
                 {
@@ -85,11 +85,15 @@ namespace Capstone.Web.Controllers
                 }
                 int recipeId = recipeDal.NewRecipe(recipe);
                 recipeDal.InsertRecipeIdAndUserId(user.UserID, recipeId);
-                string[] tagArray = recipe.Tags.Split(';');
-                List<int> exists = recipeDal.TagsExist(recipe.Tags);
-                if (tagArray.Length != 0)
+                if (recipe.Tags != null)
                 {
-                    for (int i = 0; i < tagArray.Length; i++)
+                    tagArray = recipe.Tags.Split(';').ToList<string>();
+                }
+
+                List<int> exists = recipeDal.TagsExist(recipe.Tags);
+                if (tagArray.Count != 0)
+                {
+                    for (int i = 0; i < tagArray.Count; i++)
                     {
                         if (exists[i] > 0)
                         {
@@ -183,7 +187,7 @@ namespace Capstone.Web.Controllers
 
         }
         [HttpPost]
-        public ActionResult Admin(List<RecipeModel> model)
+        public ActionResult Admin(List<RecipeModel> model, List<HttpPostedFileBase> ImageName)
         {
             Session["subscribers"] = recipeDal.SubscribedUsers();
             foreach (RecipeModel recipe in model)
@@ -192,8 +196,34 @@ namespace Capstone.Web.Controllers
                 {
                     recipeDal.UpdateApproval(recipe.RecipeID);
                 }
-                
+                if(recipe.DeleteRecipe == true)
+                {
+                    recipeDal.DeleteRecipe(recipe.RecipeID);
+                }
+                foreach (HttpPostedFileBase file in ImageName)
+                {
+                    string fileName = "";
+                    try
+                    {
+                        if (file.ContentLength > 0)
+                        {
+                            fileName = Path.GetFileName(file.FileName);
+                            string path = Path.Combine(Server.MapPath("~/Img/"), fileName);
+                            file.SaveAs(path);
+                            int recipeId = Convert.ToInt32(recipe.RecipeID);
+                            recipeDal.AddImage(fileName, recipeId);
+                        }
+                        ViewBag.Message = "File Uploaded Successfully!";
+                    }
+                    catch
+                    {
+                        ViewBag.Message = "File Upload Failed!";
+                    }
+                    
+                }
             }
+            
+
 
             return RedirectToAction("Index");
         }

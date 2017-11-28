@@ -40,7 +40,7 @@
             <th>
                 Is Public
             </th>
-            <th></th>
+            <th>Delete Recipe</th>
         </tr>
         @for (int i = 0; i < Model.Count; i++) 
         {
@@ -79,6 +79,22 @@
                 </td>
                 <td>
                     @Html.CheckBoxFor(modelItem => Model[i].IsPublics)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => Model[i].DeleteRecipe)
+                </td>
+                <td class="col-lg-12, body">
+                    <br>
+                    @Html.Label("ImageName", "Upload an Image", htmlAttributes: new { @class = "control-label col-md-12" })
+                    <br>
+                    <div class="col-lg-12, body">
+                        <br>
+                        @Html.TextBoxFor(modelItem => Model[i].ImageName, string.Format("ImageName[{0}]", i), new { type = "file" })
+                    </div>
+                    <br>
+                    <div class="col-lg-12">
+                        @ViewBag.Message
+                    </div>
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

@@ -14,7 +14,7 @@ namespace Capstone.Web.DAL
         private readonly string connectionString;
         private string getCatsFromId = @"SELECT * FROM recipe JOIN recipe_category ON recipe.recipe_id = recipe_category.recipe_id JOIN category ON recipe_category.category_id = category.category_id WHERE recipe.recipe_id = @id;";
         private string getTagsFromId = @"SELECT * FROM recipe Join recipe_tags ON recipe.recipe_id = recipe_tags.recipe_id Join tags on tags.tag_id = recipe_tags.tag_id where recipe.recipe_id = @id;";
-        private string insertRecipe = @"INSERT INTO recipe(recipe_name, directions, ingredients, image_name, publics) VALUES ( @recipe_name, @directions, @ingredients, @image_name, @publics);SELECT CAST(scope_identity() AS int);";
+        private string insertRecipe = @"INSERT INTO recipe(recipe_name, directions, ingredients, publics) VALUES ( @recipe_name, @directions, @ingredients, @publics);SELECT CAST(scope_identity() AS int);";
         private string insertTagsId = @"INSERT INTO recipe_tags VALUES (@recipeId, @tagId);";
         private string getRecipes = @"SELECT * FROM recipe;";
         private string getAllPublicRecipes = @"SELECT * FROM recipe WHERE approved = 1 AND publics = 1;";
@@ -30,15 +30,56 @@ namespace Capstone.Web.DAL
         private string insertRecipeIdandUserId = @"INSERT INTO user_recipes VALUES ( @userId, @recipeId);";
         private string subscribedUsers = @"SELECT * FROM website_users WHERE signup = 1;";
         private string userRecipes = @"SELECT * FROM website_users JOIN user_recipes ON website_users.users_id = user_recipes.users_id JOIN recipe ON user_recipes.recipe_id = recipe.recipe_id WHERE website_users.users_id = @userId;";
-
+        private string addImage = @"UPDATE recipe SET image_name = @imageName WHERE recipe_id = @recipeId;";
+        private string deleteRecipe = @"DELETE FROM meal_recipe WHERE recipe_id = @recipeId; DELETE FROM plan_recipes WHERE recipe_id = @recipeId; DELETE FROM recipe_category WHERE recipe_id = @recipeId; DELETE FROM recipe_tags WHERE recipe_id = @recipeId; DELETE FROM user_recipes WHERE recipe_id = @recipeId; DELETE FROM recipe WHERE recipe_id = @recipeId;";
 
         //using for details , does not include tags / categories
         private string recipeDetailSql = @"SELECT * FROM recipe WHERE recipe_id = @recipe_id";
 
 
+
         public RecipeSqlDAL(string connectionString)
         {
             this.connectionString = connectionString;
+        }
+
+        public bool DeleteRecipe(int id)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(deleteRecipe, conn);
+                    cmd.Parameters.AddWithValue("@recipeId", id);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
+        public bool AddImage(string imageName, int id)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(addImage, conn);
+                    cmd.Parameters.AddWithValue("@imageName", imageName);
+                    cmd.Parameters.AddWithValue("@recipeId", id);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
         }
 
         public List<RecipeModel> GetUserRecipes(int id)
@@ -370,28 +411,37 @@ namespace Capstone.Web.DAL
         public List<int> TagsExist(string tags)
         {
             List<int> exists = new List<int>();
-            string[] splitTags = tags.Split(';');
-            try
+            if (tags != null)
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                List<string> splitTags = new List<string>();
+                splitTags = tags.Split(';').ToList();
+                try
                 {
-                    conn.Open();
-
-                    for (int i = 0; i < splitTags.Length; i++)
+                    using (SqlConnection conn = new SqlConnection(connectionString))
                     {
-                        string tagExists = string.Format(@"SELECT COUNT(*) FROM tags WHERE tag_name = @tagExists{0};", i);
-                        SqlCommand cmd = new SqlCommand(tagExists, conn);
-                        cmd.Parameters.AddWithValue(string.Format("@tagExists{0}", i), splitTags[i].TrimStart());
-                        int id = (int)cmd.ExecuteScalar();
-                        exists.Add(id);
+                        conn.Open();
+
+                        for (int i = 0; i < splitTags.Count; i++)
+                        {
+                            string tagExists = string.Format(@"SELECT COUNT(*) FROM tags WHERE tag_name = @tagExists{0};", i);
+                            SqlCommand cmd = new SqlCommand(tagExists, conn);
+                            cmd.Parameters.AddWithValue(string.Format("@tagExists{0}", i), splitTags[i].TrimStart());
+                            int id = (int)cmd.ExecuteScalar();
+                            exists.Add(id);
+                        }
                     }
                 }
+                catch (SqlException ex)
+                {
+                    throw;
+                }
+                return exists;
             }
-            catch (SqlException ex)
+            else
             {
-                throw;
+                exists.Add(0);
+                return exists;
             }
-            return exists;
         }
 
         public int NewRecipe(RecipeModel recipe)
@@ -406,7 +456,6 @@ namespace Capstone.Web.DAL
                     cmd.Parameters.AddWithValue("@recipe_name", recipe.Name);
                     cmd.Parameters.AddWithValue("@directions", recipe.Directions);
                     cmd.Parameters.AddWithValue("@ingredients", recipe.Ingredients);
-                    cmd.Parameters.AddWithValue("@image_name", recipe.ImageName);
                     cmd.Parameters.AddWithValue("@publics", recipe.Publics);
                     recipeId = (int)cmd.ExecuteScalar();
                 }
