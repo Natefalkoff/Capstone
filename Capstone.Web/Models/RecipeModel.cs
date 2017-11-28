@@ -31,5 +31,6 @@ namespace Capstone.Web.Models
         public string PublicOrPrivate { get; set; }
         public string TempTags { get; set; }
         public List<UserModel> SubscribedUsers { get; set; }
+        public bool DeleteRecipe { get; set; }
     }
 }
