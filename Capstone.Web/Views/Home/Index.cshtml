@@ -15,46 +15,44 @@
 <p>
     @Html.ActionLink("Create New", "AddRecipe")
 </p>
-<table class="table">
+@*<table class="table">
 
     <tr  class="body" style="font-size:20px">
         <th class="body">@*directions*@
 
-            @Html.DisplayNameFor(model => model.Name)
+            @*@Html.DisplayNameFor(model => model.Name)*@
         </th>
         <th class="body">
-            @Html.DisplayNameFor(model => model.Directions)
+            @*@Html.DisplayNameFor(model => model.Directions)*@
         </th>  
         <th class="body">
-            @Html.DisplayNameFor(model => model.Ingredients)
-        </th>
+            @*@Html.DisplayNameFor(model => model.Ingredients)*@
+        @*</th>
         <th class="body">
             Image
         </th>
         <th></th>
     </tr>
-</table>
+</table>*@
+            <div class="container">
 <div class="row">
     @foreach (var item in Model)
     {
-        <div class="col-md-4 clearfix" >
+        <div class="col-md-3" style="background-color:gainsboro">
 
-        <dl>
-            <dd>
-            @Html.DisplayFor(modelItem => item.Name)
-            </dd>
-            <dd>
+        <div>@Html.DisplayFor(modelItem => item.Name)</div>
+            
+        <div>
             <a href="@Url.Action("Details","Home", new { id = item.RecipeID })"><img style="width:100%; height:auto" src="~/Img/@item.ImageName" /></a>
-            </dd>
-            <dd>
+            </div>
+            <div>
             @Html.ActionLink("Details", "Details", new { id = item.RecipeID })
-            </dd>
-            </dl>
+           </div>
 
             </div>
 
     }
 </div>
-
+</div>
 
 

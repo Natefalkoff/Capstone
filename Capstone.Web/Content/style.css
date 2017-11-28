@@ -1,4 +1,17 @@
-﻿.daybox {
+﻿.row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+    .row > [class*='col-'] {
+        display: flex;
+        flex-direction: column;
+    }
+
+.daybox {
     width: 200px;
     height: 500px;
     background-color: maroon
@@ -29,7 +42,7 @@
 }
 section.centeredPanel {
     clear: both;
-    display: block;
+    /*display: block;*/
     width: 90%;
     vertical-align: top;
     min-height: 50px;
@@ -113,12 +126,13 @@ position:center;
     height:200px;
     text-align: left;
 }
-#ImageName{
+#ImageName {
     position: center;
-    text-align:center;
+    text-align: center;
     margin: auto;
-    /*padding-left: 800px;*/
 }
+    /*padding-left: 800px;*/
+
 /*#TagSearch{
     height:200px;
     width:200px;
@@ -136,7 +150,7 @@ position:center;
 }
 #id{
     text-align:center;
-    display:
+    
 }
 #pre {
     width:30%;

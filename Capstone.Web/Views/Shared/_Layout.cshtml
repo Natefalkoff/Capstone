@@ -62,6 +62,10 @@
                 {
                     @Html.ActionLink("| User Page |", "UserPage", "User", new { area = "" }, new { @class = "navbar-brand" })
                 }
+                @if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
+                {
+                    @Html.ActionLink("| Logout |", "Logout", "User", new { area = "" }, new { @class = "navbar-brand" })
+                }
 
             </div>
             <div class="navbar-collapse collapse">
