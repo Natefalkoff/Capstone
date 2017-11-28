@@ -36,6 +36,7 @@ namespace Capstone.Web.Models
         public int UserId { get; set; }
         public int PlanId { get; set; }
         public int RecipeId { get; set; }
+        public int MealId { get; set; }
         public string Meal { get; set; }
         public string Day { get; set; }
         public RecipeModel Recipes { get; set; }

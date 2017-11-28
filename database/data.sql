@@ -8,6 +8,10 @@ SELECT * FROM tags
 SELECT * FROM website_users
 SELECT * FROM category
 SELECT * FROM user_recipes
+SELECT * FROM meal
+SELECT * FROM meal_plan
+
+DELETE FROM meal_plan WHERE meal_id = '5'
 
 --RECIPE
 	INSERT INTO recipe (recipe_name, directions, publics, ingredients, image_name, approved) VALUES ('Roasted Cauliflower Dressed Up','1. 1 head of cauliflower cut into small florets\n2. 1/3 cup olive oil\n3. Salt & pepper to taste\n4. 1 shallot, cut crosswise into thin rings\n5. 1 tbsp. white wine\n6. 1 tbsp. capers, rinsed and roughly chopped\n7. Grated zest of lemon\n8. Handful of flat leaf parsley roughly chopped', 1,'3 cups of cooked and cooled spinach, finely chopped\n3 cups of bread crumbs\n1 cup of grated parmesan\n4 eggs lightly beaten\n1/2 cup softened butter\nItalian parsley\nsalt and pepper', '51143020_parmesan-roasted-cauliflower_1x1.jpg', 1);

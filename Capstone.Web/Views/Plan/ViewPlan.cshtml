@@ -9,7 +9,7 @@
 
 
 <div class="container">
-    <div class= "row" style="background-color: peachpuff">
+    <div class= "row match-my-cols">
         <div class ="col-md-4" style="background-color: lightcoral">
             <h2 style="background-color: lightcoral">Sunday</h2>
             @foreach (PlanModel plan in Model)
@@ -18,13 +18,14 @@
                 {
                     <h4>@plan.Meal</h4>
                     <p>@plan.Recipes.Name</p>
-                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable." /> </a>
+                   <button id="@plan.MealId delete">delete</button>
                 }
 
             }
         </div>
 
-        <div class="col-md-4" style="background-color: lightsalmon">
+        <div class="col-md-4" style="background-color: lightsalmon" id="height100">
             <h2>Monday</h2>
             @foreach (PlanModel plan in Model)
             {
@@ -32,12 +33,12 @@
                 {
                     <h4>@plan.Meal</h4>
                     <p>@plan.Recipes.Name</p>
-                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable."/> </a>
                 }
             }
         </div>
 
-        <div class="col-md-4" style="background-color: lightgoldenrodyellow">
+        <div class="col-md-4" style="background-color: lightgoldenrodyellow" id="height100">
             <h2>Tuesday</h2>
             @foreach (PlanModel plan in Model)
             {
@@ -45,13 +46,13 @@
                 {
                     <h4>@plan.Meal</h4>
                     <p>@plan.Recipes.Name</p>
-                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable."  /> </a>
                 }
             }
         </div>
     </div>
 
-    <div class="row" style="background-color: peachpuff">
+    <div class="row match-my-cols">
         <div class="col-md-3" style="background-color: lightseagreen">
             <h2>Wednesday</h2>
             @foreach (PlanModel plan in Model)
@@ -60,7 +61,7 @@
                 {
                     <h4>@plan.Meal</h4>
                     <p>@plan.Recipes.Name</p>
-                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable."  /> </a>
                 }
             }
         </div>
@@ -73,7 +74,7 @@
                 {
                     <h4>@plan.Meal</h4>
                     <p>@plan.Recipes.Name</p>
-                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable."  /> </a>
                 }
             }
         </div>
@@ -86,7 +87,7 @@
                 {
                     <h4>@plan.Meal</h4>
                     <p>@plan.Recipes.Name</p>
-                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable." /> </a>
                 }
             }
         </div>
@@ -99,7 +100,7 @@
                 {
                     <h4>@plan.Meal</h4>
                     <p>@plan.Recipes.Name</p>
-                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable."  /> </a>
                 }
             }
         </div>

@@ -9,6 +9,19 @@
     height: auto;
 }
 
+#height100 {
+    height: 100%;
+}
+
+.row.match-my-cols {
+    overflow: hidden;
+}
+
+.row.match-my-cols [class*="col-"] {
+        margin-bottom: -99999px;
+        padding-bottom: 99999px;
+    }
+
 #pink {
     background-color: lightsalmon;
 }

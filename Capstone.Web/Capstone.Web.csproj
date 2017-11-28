@@ -186,6 +186,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\ViewPlanScript.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

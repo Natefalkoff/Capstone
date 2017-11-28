@@ -32,6 +32,11 @@ namespace Capstone.Web.DAL
         private string GetMealSql = "select day_of_week, meal_name from meal where meal_id = @mealid";
         private string GetPlanNameSql = "select plan_name from plans WHERE plan_id = @planid";
 
+
+        private string DeleteMealPlanSql = "DELETE FROM meal_plan WHERE meal_id = @mealid";
+        private string DeleteMealRecipeSql = "DELETE FROM meal_recipe WHERE meal_id = @mealid";
+        private string DeleteMealSql = "Delete FROM meal WHERE meal_id = @mealid";
+
         public PlanSqlDAL(string connectionString)
         {
             this.connectionString = connectionString;
@@ -313,6 +318,7 @@ namespace Capstone.Web.DAL
                 PlanModel P = new PlanModel();
                 P = this.GetMeal(mealid);
                 P.PlanName = planName;
+                P.MealId = mealid;
                 result.Add(P);
             }
 
@@ -328,9 +334,24 @@ namespace Capstone.Web.DAL
 
         }
 
-        public bool DeleteMeal (int planID, int mealID)
+        public bool DeleteMeal(int planID, int mealID)
         {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(DeleteMealPlanSql, conn);
+                SqlCommand cmd1 = new SqlCommand(DeleteMealRecipeSql, conn);
+                SqlCommand cmd2 = new SqlCommand(DeleteMealSql, conn);
+                cmd.Parameters.AddWithValue("@mealid", mealID);
+                cmd1.Parameters.AddWithValue("@mealid", mealID);
+                cmd2.Parameters.AddWithValue("@mealid", mealID);
+                cmd.ExecuteNonQuery();
+                cmd1.ExecuteNonQuery();
+                int rows = cmd2.ExecuteNonQuery();
 
+
+                return rows > 0;
+            }
         }
     }
 }
