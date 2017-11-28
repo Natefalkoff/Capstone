@@ -330,7 +330,7 @@ namespace Capstone.Web.DAL
 
         public bool DeleteMeal (int planID, int mealID)
         {
-
+            return true;
         }
     }
 }

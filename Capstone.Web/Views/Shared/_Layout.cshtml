@@ -39,28 +39,28 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("| Home |", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                @Html.ActionLink("| Register |", "Register", "User", new { area = "" }, new { @class = "navbar-brand" })
-                @Html.ActionLink("| Login |", "Login", "User", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("| Register |", "Register", "User", new { area = "" }, new { @class = "navbar-brands" })
+                @Html.ActionLink("| Login |", "Login", "User", new { area = "" }, new { @class = "navbar-brands" })
                 @Html.ActionLink("| Search |", "Search", "Search", new { area = "" }, new { @class = "navbar-brand" })
                 @if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
                 {
-                @Html.ActionLink("| Plan |", "Index", "Plan", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("| Plan |", "Index", "Plan", new { area = "" }, new { @class = "navbar-brands" })
                 }
                 @using Capstone.Web.DAL@if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
                 {
-                @Html.ActionLink("| Add Recipe |", "AddRecipe", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("| Add Recipe |", "AddRecipe", "Home", new { area = "" }, new { @class = "navbar-brands" })
                 }
                 @if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
                 {
-                    @Html.ActionLink("| Change Password |", "ChangePassword", "User", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("| Change Password |", "ChangePassword", "User", new { area = "" }, new { @class = "navbar-brands" })
                 }
                 @if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
                 {
-                @Html.ActionLink("| Admin |", "Admin", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("| Admin |", "Admin", "Home", new { area = "" }, new { @class = "navbar-brands" })
                 }
                 @if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
                 {
-                    @Html.ActionLink("| User Page |", "UserPage", "User", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("| User Page |", "UserPage", "User", new { area = "" }, new { @class = "navbar-brands" })
                 }
 
             </div>
