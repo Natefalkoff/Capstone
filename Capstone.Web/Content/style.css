@@ -1,4 +1,29 @@
-﻿.element-style{
+﻿
+﻿.daybox {
+    width: 200px;
+    height: 500px;
+    background-color: maroon
+}
+
+#picbox {
+    width: 200px;
+    height: auto;
+}
+
+#pink {
+    background-color: lightsalmon;
+}
+
+#gold {
+    background-color: lightgoldenrodyellow
+}
+
+.header {
+    background-image: url('../Img/color-of-cancer-awareness.jpg');
+    background-size: 100%, 100%;
+}
+.element-style{
+
     margin:auto;
     height:500px;
     width:500px;
@@ -106,7 +131,8 @@ position:center;
     text-align:center;
 }
 #pre {
-    width:auto;
+    width:30%;
+    height:auto;
     display: block;
     padding:0;
     margin:0px;

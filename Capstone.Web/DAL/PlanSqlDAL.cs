@@ -226,41 +226,6 @@ namespace Capstone.Web.DAL
             }
         }
 
-        //public List<PlanModel> GetPlan(int planid)
-        //{
-        //    List<PlanModel> result = new List<PlanModel>();
-
-        //    try
-        //    {
-        //        using (SqlConnection conn = new SqlConnection(connectionString))
-        //        {
-        //            RecipeSqlDAL recipedal = new RecipeSqlDAL(connectionString);
-
-        //            conn.Open();
-        //            SqlCommand cmd = new SqlCommand(GetPlanSql, conn);
-        //            cmd.Parameters.AddWithValue("@plan_id", planid);
-        //            SqlDataReader results = cmd.ExecuteReader();
-        //            while (results.Read())
-        //            {
-        //                PlanModel p = new PlanModel();
-        //                p.PlanName = Convert.ToString(results["plan_name"]);
-        //                p.UserId = Int32.Parse((results["user_id"].ToString()));
-        //                p.Meal = Convert.ToString(results["meal_name"]);
-        //                p.Day = Convert.ToString(results["day_of_week"]);
-        //                p.RecipeId = Int32.Parse(results["recipe_id]"].ToString());
-
-        //                p.Recipes = recipedal.RecipeDetail(p.RecipeId);
-        //                result.Add(p);
-        //            }
-        //        }
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        throw;
-        //    }
-        //    return result;
-        //}
-
         public List<int> GetAllMealsInPlan(int planid)
         {
             List<int> result = new List<int>();
@@ -363,5 +328,9 @@ namespace Capstone.Web.DAL
 
         }
 
+        public bool DeleteMeal (int planID, int mealID)
+        {
+
+        }
     }
 }

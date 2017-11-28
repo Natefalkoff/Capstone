@@ -69,26 +69,8 @@
             });
             @Html.DropDownListFor(Model => Model.PublicOrPrivate, listItems)
         }
-        @*<div>
-            <select id="@Model.Publics" name="@Model.Publics">
 
-                Would You Like This Recipe To Be Public Or Private
-                <option value= "0">Private</option>
-                <option value= "1">Public</option>
-
-                <h4>Would You Like This Recipe To Be Public Or Private</h4>
-                <option value="0">Private</option>
-                <option value="1">Public</option>
-
-            </select>
-        </div>*@
         @{
-            //Dictionary<string, bool> chosenCats = new Dictionary<string, bool>();
-            //List<string> cat = ViewBag.Categories as List<string>;
-            //foreach(string s in cat)
-            //{
-            //    chosenCats.Add(s, false);
-            //}
             <br>
             List<string> catString = new List<string>();
             foreach (var kvp in Model.ChoseCategory)
@@ -108,22 +90,9 @@
                 @Html.CheckBoxFor(m =)
             }*@
 
-        }
 
-        <div class="col-lg-12, bodyByBod">
-            <br>
-            @Html.Label("ImageName", "Upload an Image", htmlAttributes: new { @class = "control-label col-md-12" })
-            <br>
-            <div class="col-lg-12, bodyByBod">
-                <br>
-            @Html.TextBoxFor(m => m.ImageName, new { type = "file" })
-                </div>
-            <br>
-            <div class="col-lg-12">
-            @ViewBag.Message
-                </div>
-        </div>
-        
+        }        
+
 
         <div class="form-group, bodyByBod">
             <div id="ImageName"class="col-md-1, bodyByBod">

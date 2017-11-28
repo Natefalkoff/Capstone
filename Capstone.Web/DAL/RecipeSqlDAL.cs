@@ -413,8 +413,12 @@ namespace Capstone.Web.DAL
             List<int> exists = new List<int>();
             if (tags != null)
             {
+                string[] tagsPostSplit = tags.Split(';');
                 List<string> splitTags = new List<string>();
-                splitTags = tags.Split(';').ToList();
+                foreach(string s in tagsPostSplit)
+                {
+                    splitTags.Add(s.ToLower());
+                }
                 try
                 {
                     using (SqlConnection conn = new SqlConnection(connectionString))

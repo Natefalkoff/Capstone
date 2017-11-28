@@ -41,16 +41,23 @@ namespace Capstone.Web.Controllers
 
         public ActionResult AddRecipe()
         {
-            RecipeModel model = new RecipeModel();
-            Dictionary<string, bool> choose = new Dictionary<string, bool>();
-            List<string> cats = recipeDal.GetCategories();
-            foreach (string s in cats)
+            if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
             {
-                choose[s] = false;
-            }
-            model.ChoseCategory = choose;
+                RecipeModel model = new RecipeModel();
+                Dictionary<string, bool> choose = new Dictionary<string, bool>();
+                List<string> cats = recipeDal.GetCategories();
+                foreach (string s in cats)
+                {
+                    choose[s] = false;
+                }
+                model.ChoseCategory = choose;
 
-            return View(model);
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]
@@ -60,7 +67,7 @@ namespace Capstone.Web.Controllers
             // When a user logs in, Session[authorizationlevel] stores their auth level as 1, 2 ,3 or null.  From the Authorize class,
             // runs the Admin method, taking in Session cast as a int?
             // If the method returns true, only admins will be able to do this action, else returns redirect to another action.
-            if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
+            if (Authorize.Registered((int?)Session["authorizationlevel"]) == true)
             {
                 List<string> tagArray = new List<string>();
                 string fileName = "";
@@ -88,6 +95,10 @@ namespace Capstone.Web.Controllers
                 if (recipe.Tags != null)
                 {
                     tagArray = recipe.Tags.Split(';').ToList<string>();
+                    for(int i = 0; i < tagArray.Count; i++)
+                    {
+                        tagArray[i] = tagArray[i].ToLower();
+                    }
                 }
 
                 List<int> exists = recipeDal.TagsExist(recipe.Tags);
@@ -173,6 +184,7 @@ namespace Capstone.Web.Controllers
         {
             if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
             {
+                ViewBag.Model = new RecipeModel();
                 List<RecipeModel> model = recipeDal.GetPublicNonApprovedRecipes();
                 RecipeModel users = new RecipeModel();
                 Session["subscribers"] = recipeDal.SubscribedUsers();
@@ -186,9 +198,48 @@ namespace Capstone.Web.Controllers
             }
 
         }
+
         [HttpPost]
-        public ActionResult Admin(List<RecipeModel> model, List<HttpPostedFileBase> ImageName)
+        public ActionResult Upload(int recipeId, HttpPostedFileBase file)
         {
+            
+            string fileName = "";
+            // Verify that the user selected a file
+            if (file != null && file.ContentLength > 0)
+            {
+                // extract only the filename
+                fileName = Path.GetFileName(file.FileName);
+                // store the file inside ~/App_Data/uploads folder
+                var path = Path.Combine(Server.MapPath("~/Img/"), fileName);
+                file.SaveAs(path);
+                recipeDal.AddImage(fileName, recipeId);
+            }
+            // redirect back to the index action to show the form once again
+            return RedirectToAction("Admin");
+
+
+
+        }
+        [HttpPost]
+        public ActionResult Admin(List<RecipeModel> model)
+        {
+            //List<string> tagArray = new List<string>();
+            //string fileName = "";
+            //try
+            //{
+            //    if (ImageName.ContentLength > 0)
+            //    {
+            //        fileName = Path.GetFileName(ImageName.FileName);
+            //        string path = Path.Combine(Server.MapPath("~/Img/"), fileName);
+            //        ImageName.SaveAs(path);
+            //    }
+            //    ViewBag.Message = "File Uploaded Successfully!";
+            //}
+            //catch
+            //{
+            //    ViewBag.Message = "File Upload Failed!";
+            //}
+            //recipe.ImageName = fileName;
             Session["subscribers"] = recipeDal.SubscribedUsers();
             foreach (RecipeModel recipe in model)
             {
@@ -200,27 +251,17 @@ namespace Capstone.Web.Controllers
                 {
                     recipeDal.DeleteRecipe(recipe.RecipeID);
                 }
-                foreach (HttpPostedFileBase file in ImageName)
-                {
-                    string fileName = "";
-                    try
-                    {
-                        if (file.ContentLength > 0)
-                        {
-                            fileName = Path.GetFileName(file.FileName);
-                            string path = Path.Combine(Server.MapPath("~/Img/"), fileName);
-                            file.SaveAs(path);
-                            int recipeId = Convert.ToInt32(recipe.RecipeID);
-                            recipeDal.AddImage(fileName, recipeId);
-                        }
-                        ViewBag.Message = "File Uploaded Successfully!";
-                    }
-                    catch
-                    {
-                        ViewBag.Message = "File Upload Failed!";
-                    }
-                    
-                }
+                //for (int i = 0; i < Request.Files.Count; i++)
+                //{
+                //    var file = Request.Files[i];
+
+                //    var fileName = Path.GetFileName(file.FileName);
+
+                //    var path = Path.Combine(Server.MapPath("~/Img/"), fileName);
+                //    file.SaveAs(path);
+                //    recipeDal.AddImage(fileName, recipe.RecipeID);
+                //}
+                
             }
             
 
