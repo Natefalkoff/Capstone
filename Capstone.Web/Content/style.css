@@ -1,3 +1,18 @@
+
+﻿.row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+    .row > [class*='col-'] {
+        display: flex;
+        flex-direction: column;
+    }
+
+﻿
 ﻿.daybox {
     width: 200px;
     height: 500px;
@@ -35,14 +50,22 @@
     background-size: 100%, 100%;
 }
 .element-style{
+
     margin:auto;
     height:500px;
     width:500px;
     font-size:medium;
+
 }
-section.centeredPanel {
+.dingleberry {
+    text-align:center;
+    width: 50%;
+    height: 50%;
+}
+
+/*section.centeredPanel {
     clear: both;
-    display: block;
+    /*display: block;*/
     width: 90%;
     vertical-align: top;
     min-height: 50px;
@@ -62,14 +85,10 @@ section.centeredPanel {
     section.centeredPanel p {
         color: #000;
         text-align: left;
-    }
+    }*/
 
-.image2{
-    width:60%;
-    height:225px;
-    /*text-align:right;*/
-}
-.body {
+
+.bodyByBod {
 text-align: center;
 position:center;
 }
@@ -89,13 +108,6 @@ position:center;
 }
 .padding{
     padding-top:10px;
-}
-.nav {
-    background-color: #ab192d;
-    list-style: none;
-    display: flex;
-    text-align: center;
-    color:white;
 }
 
 .category {
@@ -119,6 +131,7 @@ position:center;
     margin: 3px;
     padding: 3px;
 }
+
 .image {
     display: block;
     
@@ -126,17 +139,24 @@ position:center;
     height:200px;
     text-align: left;
 }
-#ImageName{
+#ImageName {
     position: center;
-    text-align:center;
+    text-align: center;
     margin: auto;
-    /*padding-left: 800px;*/
 }
+    /*padding-left: 800px;*/
+
 /*#TagSearch{
     height:200px;
+=======
+
+
+.TagSearch{
+    height:100px;
+>>>>>>> e4c931b39c1646202072c22b4bbca9cde12858f4
     width:200px;
     margin:0;
-}*/
+}
 #login{
     text-align:center;
 }
@@ -149,10 +169,14 @@ position:center;
 }
 #id{
     text-align:center;
-    display:
+<<<<<<< HEAD
+    
+=======
+>>>>>>> e4c931b39c1646202072c22b4bbca9cde12858f4
 }
 #pre {
-    width:auto;
+    width:30%;
+    height:auto;
     display: block;
     padding:0;
     margin:0px;
@@ -194,6 +218,27 @@ display: inline-block;
     display: inline-block;
     text-align:center;
 }
+.nav {
+    background-color: #ab192d;
+    list-style: none;
+    /*display: flex;*/
+    /*text-align: center;*/
+    color: white;
+}
+
+.navbar-brands {
+    float: right;
+    color: white;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
 .navbar-brand{
+    float:left;
     color:white;
+}
+.textarea{
+    height:300px;
+    width:150px;
 }

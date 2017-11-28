@@ -3,10 +3,7 @@
 @{
     ViewBag.Title = "Index";
 }
-<head>
-    <link rel="stylesheet" type="text/css" href="~/content/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="~/Content/style.css">
-</head>
+
 @*<div>
 <h2>
     <img src="~/Img/Cancer-Support-Community.jpg" alt="Cancer Support Community Central Ohio" class="image"/>
@@ -15,47 +12,45 @@
 <p>
     @Html.ActionLink("Create New", "AddRecipe")
 </p>
-<table class="table">
+@*<table class="table">
 
-    <tr  class="body" style="font-size:20px">
-        <th class="body">@*directions*@
+    <tr  class="bodyByBod" style="font-size:20px">
+        <th class="bodyByBod">@*directions*@
 
-            @Html.DisplayNameFor(model => model.Name)
+            @*@Html.DisplayNameFor(model => model.Name)*@
         </th>
-        <th class="body">
+        <th class="bodyByBod">
             @Html.DisplayNameFor(model => model.Directions)
         </th>  
-        <th class="body">
+        <th class="bodyByBod">
             @Html.DisplayNameFor(model => model.Ingredients)
         </th>
         <th class="body">
-            @Html.DisplayNameFor(model => model.ImageName)
+            Image
+
         </th>
         <th></th>
     </tr>
+</table>*@
+            <div class="container">
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3" style="background-color:gainsboro">
 
-@foreach (var item in Model) {
-    <tr>
-        <td style="display:list-item">
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            <pre id="pre">@Html.DisplayFor(modelItem => item.Directions)
-            </pre>
-        </td>
-        <td>
-            <pre id="pre">@Html.DisplayFor(modelItem => item.Ingredients)
-            </pre>
-        </td>
-        <td class="public">
-            <a href="@Url.Action("Details","Home", new { id = item.RecipeID })" ><img src="~/Img/@item.ImageName"/></a>@Html.DisplayFor(modelItem => item.ImageName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RecipeID }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+        <div>@Html.DisplayFor(modelItem => item.Name)</div>
+            
+        <div>
+            <a href="@Url.Action("Details","Home", new { id = item.RecipeID })"><img style="width:100%; height:auto" src="~/Img/@item.ImageName" /></a>
+            </div>
+            <div>
+            @Html.ActionLink("Details", "Details", new { id = item.RecipeID })
+           </div>
 
-</table>
+            </div>
+
+    }
+</div>
+</div>
+
+

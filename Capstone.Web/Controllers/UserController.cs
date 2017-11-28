@@ -28,6 +28,14 @@ namespace Capstone.Web.Controllers
             this.userDal = userDal;
         }
 
+        public ActionResult LogOut()
+        {
+            Session["authorizationlevel"] = null;
+            Session["username"] = null;
+            Session["user"] = null;
+            return RedirectToAction("Index", "Home");
+        }
+
 
         // GET: User
         public ActionResult Index()
