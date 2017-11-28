@@ -7,6 +7,9 @@
 
 <h2>Admin</h2>
 
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script src="~/Scripts/jquery-3.1.1.intellisense.js"></script>
+
 <p></p>
 @using (Html.BeginForm("Admin", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -42,7 +45,7 @@
             </th>
             <th>Delete Recipe</th>
         </tr>
-        @for (int i = 0; i < Model.Count; i++) 
+        @for (int i = 0; i < Model.Count; i++)
         {
             <tr>
                 <td>
@@ -83,18 +86,51 @@
                 <td>
                     @Html.CheckBoxFor(modelItem => Model[i].DeleteRecipe)
                 </td>
-                <td class="col-lg-12, body">
-                    <br>
-                    @Html.Label("ImageName", "Upload an Image", htmlAttributes: new { @class = "control-label col-md-12" })
-                    <br>
-                    <div class="col-lg-12, body">
-                        <br>
-                        @Html.TextBoxFor(modelItem => Model[i].ImageName, string.Format("ImageName[{0}]", i), new { type = "file" })
-                    </div>
-                    <br>
-                    <div class="col-lg-12">
-                        @ViewBag.Message
-                    </div>
+            </tr>
+
+        }
+    </table>
+    <div class="form-group, body">
+        <div id="ImageName" class="col-md-1, body">
+            <input type="submit" value="Create" class="btn btn-default, col-lg-1, body" />
+        </div>
+    </div>
+}
+
+
+    <table>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].Name)
+                    @Html.HiddenFor(modelItem => Model[i].Name)
+                    @*@Html.HiddenFor(modelItem => Model[i].RecipeID)*@
+                    <input name="recipeId" type="hidden" value="@Model[i].RecipeID"/>
+                </td>
+                <td>
+                    <input type="file" name="file" />
+                    <input type="submit" value="OK" />
+                </td>
+                @(ViewBag.Model = Model[i])
+            </tr>
+        }
+
+
+    }
+</table>
+
+
+
+                
+               @*<td class="col-lg-12, body">
+                   <input type="file" id="FileUpload" />
+                   <input type="button" id="Upload" value="Upload" />*@
+
+
+            
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
@@ -103,7 +139,7 @@
                 </td>
             </tr>
 
-        }
+
     </table>
         <button>Submit</button>
         <table>
@@ -118,21 +154,23 @@
                     UserID
                 </td>
             </tr>
-            @foreach(UserModel u in Session["subscribers"] as List<UserModel>)
+            @foreach (UserModel u in Session["subscribers"] as List<UserModel>)
             {
                 <tr>
+                    <td>
                     @u.Email
-                </tr>
-                <tr>
+                        </td>
+               <td>
                     @u.UserName
-                </tr>
-                <tr>
+                </td>
+                    <td>
                     @u.UserID
+                        </td>
                 </tr>
             }
             <tr>
 
             </tr>
         </table>
-}
+
 
