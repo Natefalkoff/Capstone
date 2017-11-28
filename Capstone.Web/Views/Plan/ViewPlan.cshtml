@@ -7,12 +7,105 @@
     ViewBag.Title = "ViewPlan";
 }
 
-@foreach (PlanModel plan in Model)
-{
-    <p>@plan.Day</p>
-    <p>@plan.Meal</p>
-    <p>@plan.Recipes.ImageName</p>
-}
+
+<div class="container">
+    <div class= "row" style="background-color: peachpuff">
+        <div class ="col-md-4" style="background-color: lightcoral">
+            <h2 style="background-color: lightcoral">Sunday</h2>
+            @foreach (PlanModel plan in Model)
+            {
+                if (plan.Day == "Sunday")
+                {
+                    <h4>@plan.Meal</h4>
+                    <p>@plan.Recipes.Name</p>
+                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                }
+
+            }
+        </div>
+
+        <div class="col-md-4" style="background-color: lightsalmon">
+            <h2>Monday</h2>
+            @foreach (PlanModel plan in Model)
+            {
+                if (plan.Day == "Monday")
+                {
+                    <h4>@plan.Meal</h4>
+                    <p>@plan.Recipes.Name</p>
+                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                }
+            }
+        </div>
+
+        <div class="col-md-4" style="background-color: lightgoldenrodyellow">
+            <h2>Tuesday</h2>
+            @foreach (PlanModel plan in Model)
+            {
+                if (plan.Day == "Tuesday")
+                {
+                    <h4>@plan.Meal</h4>
+                    <p>@plan.Recipes.Name</p>
+                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="row" style="background-color: peachpuff">
+        <div class="col-md-3" style="background-color: lightseagreen">
+            <h2>Wednesday</h2>
+            @foreach (PlanModel plan in Model)
+            {
+                if (plan.Day == "Wednesday")
+                {
+                    <h4>@plan.Meal</h4>
+                    <p>@plan.Recipes.Name</p>
+                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                }
+            }
+        </div>
+
+        <div class="col-md-3" style="background-color: lightskyblue">
+            <h2>Thursday</h2>
+            @foreach (PlanModel plan in Model)
+            {
+                if (plan.Day == "Thursday")
+                {
+                    <h4>@plan.Meal</h4>
+                    <p>@plan.Recipes.Name</p>
+                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                }
+            }
+        </div>
+
+        <div class="col-md-3" style="background-color: mediumpurple">
+            <h2>Friday</h2>
+            @foreach (PlanModel plan in Model)
+            {
+                if (plan.Day == "Friday")
+                {
+                    <h4>@plan.Meal</h4>
+                    <p>@plan.Recipes.Name</p>
+                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                }
+            }
+        </div>
+
+        <div class="col-md-3" style="background-color: mediumorchid">
+            <h2>Saturday</h2>
+            @foreach (PlanModel plan in Model)
+            {
+                if (plan.Day == "Saturday")
+                {
+                    <h4>@plan.Meal</h4>
+                    <p>@plan.Recipes.Name</p>
+                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                }
+            }
+        </div>
+    </div>
+
+</div>
 
 
 
