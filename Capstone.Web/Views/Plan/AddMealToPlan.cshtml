@@ -5,24 +5,40 @@
     ViewBag.Title = "AddMealToPlan";
 }
 
-<h2>Add Meal To Plan</h2>
+<h2>Add A Meal</h2>
 
 @using (Html.BeginForm("AddMealToPlan", "Plan", FormMethod.Post))
 {
 
     List<SelectListItem> plans = new List<SelectListItem>();
+
+
     foreach (PlanModel plan in Model.PlanModels)
     {
+
         plans.Add(new SelectListItem
         {
             Text = plan.PlanName,
             Value = plan.PlanId.ToString()
         });
     }
-    @Html.DropDownListFor(Model => Model.selectedPlan, plans)
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1">
+                @Html.LabelFor(Model => Model.selectedPlan, "Select A Plan")
+            </div>
 
+            <div class="col-md-3">
+                @Html.DropDownListFor(Model => Model.selectedPlan, plans, new { @class = "btn btn-default dropdown-toggle" })
+            </div>
+        </div>
+    </div>
 
-    List<SelectListItem> recipes = new List<SelectListItem>();
+    <br />
+
+    List<SelectListItem>
+        recipes = new List<SelectListItem>
+            ();
     foreach (RecipeModel recipe in Model.Recipes)
     {
         recipes.Add(new SelectListItem
@@ -31,10 +47,25 @@
             Value = recipe.RecipeID.ToString()
         });
     }
-    @Html.DropDownListFor(Model => Model.selectedRecipe, recipes)
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1">
+              @Html.LabelFor(Model => Model.selectedRecipe, "Select A Recipe")
+            </div>
 
+            <div class="col-md-3">
+                @Html.DropDownListFor(Model => Model.selectedRecipe, recipes, new { @class = "btn btn-default dropdown-toggle" })
+            </div>
+        </div>
+    </div>
 
-    List<SelectListItem> days = new List<SelectListItem>();
+   
+
+    <br />
+
+    List<SelectListItem>
+        days = new List<SelectListItem>
+            ();
     foreach (string day in Model.Days)
     {
         days.Add(new SelectListItem
@@ -43,9 +74,25 @@
             Value = day
         });
     }
-    @Html.DropDownListFor(Model => Model.selectedDay, days)
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1">
+                @Html.LabelFor(Model => Model.selectedDay, "Select A Day")
+            </div>
 
-    List<SelectListItem> meals = new List<SelectListItem>();
+            <div class="col-md-3">
+                @Html.DropDownListFor(Model => Model.selectedDay, days, new { @class = "btn btn-default dropdown-toggle" })
+            </div>
+        </div>
+    </div>
+
+  
+
+    <br />
+
+    List<SelectListItem>
+        meals = new List<SelectListItem>
+            ();
     foreach (string meal in Model.Meals)
     {
         meals.Add(new SelectListItem
@@ -54,9 +101,21 @@
             Value = meal
         });
     }
-    @Html.DropDownListFor(Model => Model.selectedMeal, meals)
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1">
+                @Html.LabelFor(Model => Model.selectedMeal, "Select A Meal")
+            </div>
 
+            <div class="col-md-3">
+                @Html.DropDownListFor(Model => Model.selectedMeal, meals, new { @class = "btn btn-default dropdown-toggle" })
+            </div>
+        </div>
+    </div>
 
+  
 
-    <button>Add Meal</button>
+    <br />
+
+    <button class="buttonbox">Add Meal</button>
 }

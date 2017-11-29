@@ -23,9 +23,9 @@
                 Value = plan.PlanId.ToString()
             });
         }
-        @Html.DropDownListFor(Model => Model.currentID, listItems)
+        @Html.DropDownListFor(Model => Model.currentID, listItems, new { @class = "btn btn-default dropdown-toggle" })
 
-        <button>View Plan</button>
+        <button class="buttonbox">View Plan</button>
     }
 
     @Html.ActionLink("| Create Plan |", "CreatePlan", "Plan")
