@@ -1,18 +1,6 @@
 
-﻿.row {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    flex-wrap: wrap;
-}
+.element-style{
 
-    .row > [class*='col-'] {
-        display: flex;
-        flex-direction: column;
-    }
-
-﻿
 ﻿.daybox {
     width: 200px;
     height: 500px;
@@ -23,19 +11,6 @@
     width: 200px;
     height: auto;
 }
-
-#height100 {
-    height: 100%;
-}
-
-.row.match-my-cols {
-    overflow: hidden;
-}
-
-.row.match-my-cols [class*="col-"] {
-        margin-bottom: -99999px;
-        padding-bottom: 99999px;
-    }
 
 #pink {
     background-color: lightsalmon;
@@ -62,10 +37,9 @@
     width: 50%;
     height: 50%;
 }
-
 /*section.centeredPanel {
     clear: both;
-    /*display: block;*/
+    display: block;
     width: 90%;
     vertical-align: top;
     min-height: 50px;
@@ -109,6 +83,13 @@ position:center;
 .padding{
     padding-top:10px;
 }
+.nav {
+    background-color: #ab192d;
+    list-style: none;
+    display: flex;
+    text-align: center;
+    color:white;
+}
 
 .category {
     margin: 10px;
@@ -132,28 +113,9 @@ position:center;
     padding: 3px;
 }
 
-.image {
-    display: block;
-    
-    width: 400px;
-    height:200px;
-    text-align: left;
-}
-#ImageName {
-    position: center;
-    text-align: center;
-    margin: auto;
-}
-    /*padding-left: 800px;*/
-
-/*#TagSearch{
-    height:200px;
-=======
-
 
 .TagSearch{
     height:100px;
->>>>>>> e4c931b39c1646202072c22b4bbca9cde12858f4
     width:200px;
     margin:0;
 }
@@ -169,10 +131,6 @@ position:center;
 }
 #id{
     text-align:center;
-<<<<<<< HEAD
-    
-=======
->>>>>>> e4c931b39c1646202072c22b4bbca9cde12858f4
 }
 #pre {
     width:30%;
@@ -218,24 +176,7 @@ display: inline-block;
     display: inline-block;
     text-align:center;
 }
-.nav {
-    background-color: #ab192d;
-    list-style: none;
-    /*display: flex;*/
-    /*text-align: center;*/
-    color: white;
-}
-
-.navbar-brands {
-    float: right;
-    color: white;
-    height: 50px;
-    padding: 15px 15px;
-    font-size: 18px;
-    line-height: 20px;
-}
 .navbar-brand{
-    float:left;
     color:white;
 }
 .textarea{
