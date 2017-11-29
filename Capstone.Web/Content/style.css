@@ -1,6 +1,4 @@
 
-.element-style{
-
 ﻿.daybox {
     width: 200px;
     height: 500px;
@@ -62,7 +60,7 @@
     }*/
 
 
-.bodyByBod {
+.body{
 text-align: center;
 position:center;
 }
@@ -176,7 +174,16 @@ display: inline-block;
     display: inline-block;
     text-align:center;
 }
+.navbar-brands {
+    float: right;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+    color: white;
+}
 .navbar-brand{
+    float:left;
     color:white;
 }
 .textarea{
