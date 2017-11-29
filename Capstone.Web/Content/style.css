@@ -1,5 +1,10 @@
 
 
+#sharedimg {
+    width: 50%;
+    height: auto;
+}
+
 .dropdown {
    position: relative;
    display: inline-block;
@@ -79,8 +84,8 @@ button {
 }
 .dingleberry {
     text-align:center;
-    width: 50%;
-    height: 50%;
+    width: 33%;
+    height: 33%;
 }
 /*section.centeredPanel {
     clear: both;
