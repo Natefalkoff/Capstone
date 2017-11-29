@@ -3,53 +3,54 @@
 @{
     ViewBag.Title = "Search";
 }
+<br>
+<section class="container" style="background-color:gainsboro"> 
+    <h1 class="body" style="font-size:48px">Search for a Recipe</h1>
 
-<h2 class="body">Search for a Recipe</h2>
-
-@using (Html.BeginForm("Search", "Search", FormMethod.Post))
-{
-    <div class="body">
-        <div class="body">
-        <h3 class="body">Check Categories For Which You Would Like To Search</h3>
-            </div>
-        <div class="body">
-        @foreach (var kvp in Model.SearchCategories)
-        {
-            @*<input class="checkbox" type="checkbox" name="@kvp.Key" />
-                <label class="categoryLabel" for=""*@
-            <div class="category">
-            @Html.HiddenFor(Model => Model.SearchCategories.Keys)
-            @Html.Label(kvp.Key)
-            @Html.CheckBoxFor(Model => Model.SearchCategories[kvp.Key], false)
-                </div>
-        }
-            </div>
-    </div>
+    @using (Html.BeginForm("Search", "Search", FormMethod.Post))
+    {
         <div class="body">
             <div class="body">
-            <h3> Please Enter the Tags You Would Like To Seach For.</h3> 
-            <h4>If More Than 2 Words, Please Replace the Space With a Semicolon(;)</h4>
-                </div>
+                <h3 class="body" style="font-style:italic">Check Categories For Which You Would Like To Search</h3>
+            </div>
+            <div class="body">
+                @foreach (var kvp in Model.SearchCategories)
+                {
+                    @*<input class="checkbox" type="checkbox" name="@kvp.Key" />
+                        <label class="categoryLabel" for=""*@
+                    <div class="category">
+                        @Html.HiddenFor(Model => Model.SearchCategories.Keys)
+                        @Html.Label(kvp.Key)
+                        @Html.CheckBoxFor(Model => Model.SearchCategories[kvp.Key], false)
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="body">
+            <div class="body">
+                <h3> Please Enter the Tags You Would Like To Seach For.</h3>
+                <h4 style="font-style:italic">If More Than 2 Words, Please Replace the Space With a Semicolon(;)</h4>
+            </div>
             <div class="padding">
-                
-            <h5>@Html.Label("Tag Field: ")</h5>
-                
-                
+
+                <h5>@Html.Label("Tag Field: ")</h5>
+
+
                 <div class="col-lg-3"></div> <div class="col-lg-6">   @Html.TextAreaFor(Model => Model.TagSearch)  </div> <div class="col-lg-3"></div>
 
-                
-                </div>
+
+            </div>
         </div>
         <br>
-    <br>
-    <br>
-            <div class="form-group textbox body"> 
-                </div>
-                <div class="col-md-5"></div> <div class="col-md-2"><input type="submit" value="Create" class="btn btn-default" /></div> <div class="col-md-5"></div> 
-            
+        <br>
+        <br>
+        <div class="form-group body">
+        </div>
+                <div class="col-md-5"></div> <div class="col-md-2"><input type="submit" value="Create" class="btn btn-default" /></div> <div class="col-md-5"></div>
 
-}
-
+          
+    }
+    </section>
 @{
    
     if (Model.RecipeHash != null)
@@ -70,6 +71,7 @@
             <div>
                 
                 <a href="@Url.Action("Details","Home", new { id = item.RecipeID })"><img src="~/Img/@item.ImageName" /></a>
+
             </div>
         </div>
 
