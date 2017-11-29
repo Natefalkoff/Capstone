@@ -12,12 +12,12 @@
 <p>
     @Html.ActionLink("Create New", "AddRecipe")
 </p>
-@*<table class="table">
+<table class="table">
 
     <tr  class="bodyByBod" style="font-size:20px">
-        <th class="bodyByBod">@*directions*@
+        <th class="bodyByBod">directions
 
-            @*@Html.DisplayNameFor(model => model.Name)*@
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th class="bodyByBod">
             @Html.DisplayNameFor(model => model.Directions)
@@ -31,7 +31,7 @@
         </th>
         <th></th>
     </tr>
-</table>*@
+</table>
             <div class="container">
 <div class="row">
     @foreach (var item in Model)
