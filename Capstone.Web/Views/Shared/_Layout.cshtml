@@ -25,9 +25,9 @@
 
 </head>
 
-<body class="bodyByBod">
-    <header> 
-            <a href="@Url.Action("Index","Home")"><img src="~/Img/Cancer-Support-Community.jpg" alt="Cancer Support Community Central Ohio" class="bodyByBod dingleberry"/></a>
+<body class="body">
+    <header class="body"> 
+            <a href="@Url.Action("Index","Home")"><img src="~/Img/Cancer-Support-Community.jpg" alt="Cancer Support Community Central Ohio" class="body, dingleberry"/></a>
         @*<a href="@Url.Action("Index", "Home")"><img src="~/Img/cancer-foundation-cancer-ribbons.jpg" alt="Support All Those Affected By Cancer" class="rightImage"/></a>*@
 
 
@@ -52,7 +52,7 @@
                 }
                 @using Capstone.Web.DAL@if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
                 {
-                @Html.ActionLink("| Add Recipe |", "AddRecipe", "Home", new { area = "" }, new { @class = "navbar-brands" })
+                @Html.ActionLink("| Add Recipe |", "AddRecipe", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 }
                 @if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
                 {

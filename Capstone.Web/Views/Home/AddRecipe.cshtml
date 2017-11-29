@@ -14,42 +14,45 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group, bodyByBod, col-lg-12">
+        <div class="form-group, body, col-lg-12">
             @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label col-md-12" })
             <br>
-            <div class="col-md-10, bodyByBod, col-lg-12">
+            <div class="body, col-lg-12">
                 @Html.TextBoxFor(m => m.Name, new { placeholder = "Rice"}) @*{ htmlAttributes = new { @class = "form-control"  } }*@
                 @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
             </div>
         </div>
         <br>
-        <div class="form-group, bodyByBod, col-lg-12">
+        <div class="form-group, col-lg-12">
             <br>
             @Html.Label("Enter Directions Separated by Using The 'Enter' Key", htmlAttributes: new { @class = "control-label col-md-12" })
            <br>
-            <div class="col-md-10, bodyByBod">
-                @Html.TextAreaFor(m => m.Directions, new { placeholder = "Boil Water \nAdd Rice to boiling water \nSimmer for 15 minutes" }) @*{ htmlAttributes = new { @class = "form-control" }*@
-                @Html.ValidationMessageFor(model => model.Directions, "", new { @class = "text-danger" })
+
+            <div class="col-md-10, body">
+                @Html.TextAreaFor(m => m.Directions, new { placeholder = "Boil Water \nAdd Rice to boiling water \nSimmer for 15 minutes", rows = "10", cols = "75" }) @*{ htmlAttributes = new { @class = "form-control" }*@
+                @*@Html.ValidationMessageFor(model => model.Directions, "", new { @class = "text-danger" })*@
+
             </div>
             <br>
         </div>
         <br>
         <br>
-        <div class="form-group, bodyByBod">
+        <div class="form-group, body">
             <br>
             @Html.Label("Enter Ingredients Separated by Using The 'Enter' Key", htmlAttributes: new { @class = "control-label col-md-12" })
             <br>
-            <div class="col-md-10, bodyByBod">
-                @Html.TextAreaFor(m => m.Ingredients, new { placeholder= "1 Cup of white rice \n2 Cups of water" }) @*{ htmlAttributes = new { @class = "form-control" }*@
-                @Html.ValidationMessageFor(model => model.Ingredients, "", new { @class = "text-danger" })
+            <div class="col-md-10, body">
+                @Html.TextAreaFor(m => m.Ingredients, new { placeholder= "1 Cup of white rice \n2 Cups of water", rows = "10", cols = "75" }) @*{ htmlAttributes = new { @class = "form-control" }*@
+                @*@Html.ValidationMessageFor(model => model.Ingredients, "", new { @class = "text-danger" })*@
+
             </div>
         </div>
 
-        <div class="form-group, bodyByBod">
+        <div class="form-group, body">
             <h4>Enter Tags Separated by Semi-Colon (;)</h4>
             @Html.Label("Enter Tags Here", htmlAttributes: new { @class = "control-label col-md-12" })
             <br>
-            <div class="col-md-10, bodyByBod">
+            <div class="col-md-10, body">
                 @Html.TextBoxFor(m => m.Tags, new { placeholder ="Healthy; Grains;" }) @*{ htmlAttributes = new { @class = "form-control" }*@
                 @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
             </div>
@@ -97,8 +100,8 @@
         }        
 
 
-        <div class="form-group, bodyByBod">
-            <div id="ImageName"class="col-md-1, bodyByBod">
+        <div class="form-group, body">
+            <div id="ImageName"class="col-md-1, body">
                 <input type="submit" value="Create" class="btn btn-default, col-lg-1, bodyByBod" />
             </div>
         </div>
