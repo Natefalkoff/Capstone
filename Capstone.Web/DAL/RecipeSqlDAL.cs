@@ -489,6 +489,8 @@ namespace Capstone.Web.DAL
                         r.ImageName = Convert.ToString(results["image_name"]);
                         r.Ingredients = Convert.ToString(results["ingredients"]).Replace("\\n", "\n");
                         r.RecipeID = Convert.ToInt32(results["recipe_id"]);
+                        r.Publics = Convert.ToInt32(results["publics"]);
+                        r.Approved = Convert.ToInt32(results["approved"]);
                         recipes.Add(r);
                     }
                 }
@@ -514,9 +516,9 @@ namespace Capstone.Web.DAL
                     {
                         RecipeModel r = new RecipeModel();
                         m.Name = Convert.ToString(results["recipe_name"]);
-                        m.Directions = Convert.ToString(results["directions"]);
+                        m.Directions = Convert.ToString(results["directions"]).Replace("\\n", "\n");
                         m.ImageName = Convert.ToString(results["image_name"]);
-                        m.Ingredients = Convert.ToString(results["ingredients"]);
+                        m.Ingredients = Convert.ToString(results["ingredients"]).Replace("\\n", "\n");
                         m.RecipeID = Convert.ToInt32(results["recipe_id"]);
                     }
                 }

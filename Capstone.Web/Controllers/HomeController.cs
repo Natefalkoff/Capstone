@@ -184,11 +184,11 @@ namespace Capstone.Web.Controllers
         {
             if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
             {
-                ViewBag.Model = new RecipeModel();
-                List<RecipeModel> model = recipeDal.GetPublicNonApprovedRecipes();
+                //ViewBag.Model = new RecipeModel();
+                List<RecipeModel> model = recipeDal.GetRecipes();
                 RecipeModel users = new RecipeModel();
                 Session["subscribers"] = recipeDal.SubscribedUsers();
-                model.Add(users);
+                //model.Add(users);
                 ViewBag.Subsribers = recipeDal.SubscribedUsers();
                 return View(model);
             }
@@ -223,23 +223,7 @@ namespace Capstone.Web.Controllers
         [HttpPost]
         public ActionResult Admin(List<RecipeModel> model)
         {
-            //List<string> tagArray = new List<string>();
-            //string fileName = "";
-            //try
-            //{
-            //    if (ImageName.ContentLength > 0)
-            //    {
-            //        fileName = Path.GetFileName(ImageName.FileName);
-            //        string path = Path.Combine(Server.MapPath("~/Img/"), fileName);
-            //        ImageName.SaveAs(path);
-            //    }
-            //    ViewBag.Message = "File Uploaded Successfully!";
-            //}
-            //catch
-            //{
-            //    ViewBag.Message = "File Upload Failed!";
-            //}
-            //recipe.ImageName = fileName;
+
             Session["subscribers"] = recipeDal.SubscribedUsers();
             foreach (RecipeModel recipe in model)
             {
@@ -251,16 +235,6 @@ namespace Capstone.Web.Controllers
                 {
                     recipeDal.DeleteRecipe(recipe.RecipeID);
                 }
-                //for (int i = 0; i < Request.Files.Count; i++)
-                //{
-                //    var file = Request.Files[i];
-
-                //    var fileName = Path.GetFileName(file.FileName);
-
-                //    var path = Path.Combine(Server.MapPath("~/Img/"), fileName);
-                //    file.SaveAs(path);
-                //    recipeDal.AddImage(fileName, recipe.RecipeID);
-                //}
                 
             }
             
