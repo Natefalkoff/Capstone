@@ -4,7 +4,7 @@
     ViewBag.Title = "Login";
 }
 
-<div id="login">
+<div id="login" class="container" style="background-color:gainsboro">
     <h2>Login</h2>
     <section class="centeredPanel">
     <br>
@@ -12,7 +12,7 @@
     {
         @Html.ValidationMessage("invalid-credentials")
 
-        <div class="body">
+        <div class="body panel-body">
             @Html.TextBoxFor(m => m.UserName, new { placeholder = "User Name" })
             @Html.ValidationMessageFor(m => m.UserName)
         </div>
