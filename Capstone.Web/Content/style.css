@@ -5,7 +5,7 @@
 }
 
 
-.row {
+#home {
     -moz-column-width: 25em;
     -webkit-column-width: 25em;
     -moz-column-gap: .5em;
