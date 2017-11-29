@@ -3,54 +3,37 @@
 @{
     ViewBag.Title = "Index";
 }
+@*<script src="~/Content/masonry.pkgd.min.js"></script>*@
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 
-@*<div>
-<h2>
-    <img src="~/Img/Cancer-Support-Community.jpg" alt="Cancer Support Community Central Ohio" class="image"/>
-         </h2>
-    </div>*@
-<p>
-    @Html.ActionLink("Create New", "AddRecipe")
-</p>
-<table class="table">
+<script type="text/javascript" src="~/Content/masonry.pkgd.min.js"></script>
+<script type="text/javascript" src="~/Content/masonry-docs.min.js"></script>
+<script type="text/javascript" src="~/Content/jquery.js"></script>
 
-    <tr  class="body" style="font-size:20px">
-        <th class="body">directions
 
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th class="body">
-            @Html.DisplayNameFor(model => model.Directions)
-        </th>  
-        <th class="body">
-            @Html.DisplayNameFor(model => model.Ingredients)
-        </th>
-        <th class="body">
-            Image
-
-        </th>
-        <th></th>
-    </tr>
-</table>
-            <div class="container">
-<div class="row">
+<div class="container" style="background-color:gainsboro">
+    <div class="row">
     @foreach (var item in Model)
     {
-        <div class="col-md-3" style="background-color:gainsboro">
-
-        <div>@Html.DisplayFor(modelItem => item.Name)</div>
-            
-        <div>
-            <a href="@Url.Action("Details","Home", new { id = item.RecipeID })"><img style="width:100%; height:auto" src="~/Img/@item.ImageName" /></a>
+        @*<div class="row">*@
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                     @Html.DisplayFor(modelItem => item.Name)
+                </div>
+                <div class="panel-body">
+                    <a href="@Url.Action("Details","Home", new { id = item.RecipeID })"><img style="width:100%; height:auto" src="~/Img/@item.ImageName" /></a>
+                    @Html.ActionLink("Details", "Details", new { id = item.RecipeID })
+                </div>
             </div>
-            <div>
-            @Html.ActionLink("Details", "Details", new { id = item.RecipeID })
-           </div>
-
-            </div>
-
+        @*</div>*@
     }
+    </div>
 </div>
-</div>
+
+
+
+
+
+
 
 

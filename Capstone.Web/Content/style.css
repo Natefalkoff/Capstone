@@ -1,8 +1,32 @@
 
 
-#sharedimg {
-    width: 50%;
-    height: auto;
+
+*, *:before, *:after {
+    box-sizing: border-box !important;
+}
+
+
+.row {
+    -moz-column-width: 25em;
+    -webkit-column-width: 25em;
+    -moz-column-gap: .5em;
+    -webkit-column-gap: .5em;
+}
+
+.panel {
+    display: inline-block;
+    margin: .5em;
+    padding: 0;
+    width: 98%;
+}
+
+.grid-sizer,
+.grid-item {
+    width: 20%;
+}
+/* 2 columns */
+.grid-item--width2 {
+    width: 40%;
 }
 
 .dropdown {
@@ -43,6 +67,7 @@ button {
     display: -ms-flexbox;
     display: flex;
     flex-wrap: wrap;
+
 }
 
     .row > [class*='col-'] {

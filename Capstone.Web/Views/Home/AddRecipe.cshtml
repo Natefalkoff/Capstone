@@ -19,7 +19,7 @@
             <br>
             <div class="body, col-lg-12">
                 @Html.TextBoxFor(m => m.Name, new { placeholder = "Rice"}) @*{ htmlAttributes = new { @class = "form-control"  } }*@
-                @*@Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })*@
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
             </div>
         </div>
         <br>
@@ -27,9 +27,11 @@
             <br>
             @Html.Label("Enter Directions Separated by Using The 'Enter' Key", htmlAttributes: new { @class = "control-label col-md-12" })
            <br>
+
             <div class="col-md-10, body">
                 @Html.TextAreaFor(m => m.Directions, new { placeholder = "Boil Water \nAdd Rice to boiling water \nSimmer for 15 minutes", rows = "10", cols = "75" }) @*{ htmlAttributes = new { @class = "form-control" }*@
                 @*@Html.ValidationMessageFor(model => model.Directions, "", new { @class = "text-danger" })*@
+
             </div>
             <br>
         </div>
@@ -42,6 +44,7 @@
             <div class="col-md-10, body">
                 @Html.TextAreaFor(m => m.Ingredients, new { placeholder= "1 Cup of white rice \n2 Cups of water", rows = "10", cols = "75" }) @*{ htmlAttributes = new { @class = "form-control" }*@
                 @*@Html.ValidationMessageFor(model => model.Ingredients, "", new { @class = "text-danger" })*@
+
             </div>
         </div>
 
@@ -51,7 +54,7 @@
             <br>
             <div class="col-md-10, body">
                 @Html.TextBoxFor(m => m.Tags, new { placeholder ="Healthy; Grains;" }) @*{ htmlAttributes = new { @class = "form-control" }*@
-                @*@Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })*@
+                @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
             </div>
         </div>
         <br>
@@ -67,11 +70,14 @@
                 Text = "Public",
                 Value = "1"
             });
+            <p>Would you like to share this recipe?</p>
             @Html.DropDownListFor(Model => Model.PublicOrPrivate, listItems)
+            @Html.ValidationMessageFor(model => model.PublicOrPrivate, "", new { @class = "text-danger" })
         }
 
         @{
             <br>
+            <p>Please choose one or many categories:</p>
             List<string> catString = new List<string>();
             foreach (var kvp in Model.ChoseCategory)
             {

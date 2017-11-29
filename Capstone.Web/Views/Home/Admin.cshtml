@@ -13,7 +13,7 @@
 <p></p>
 @using (Html.BeginForm("Admin", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-
+    <h4>Recipes That Want To Be Made Public:</h4>
     <table class="table">
         <tr>
             <th>
@@ -47,6 +47,8 @@
         </tr>
         @for (int i = 0; i < Model.Count; i++)
         {
+            if (Model[i].Publics == 1 && Model[i].Approved == 0)
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => Model[i].RecipeID)
@@ -88,56 +90,92 @@
                 </td>
 
             </tr>
+            }
+            else
+            {
+                @Html.HiddenFor(modelItem => Model[i].RecipeID)
+                @Html.HiddenFor(modelItem => Model[i].Name)
+                @Html.HiddenFor(modelItem => Model[i].Directions)
+                @Html.HiddenFor(modelItem => Model[i].UserID)
+                @Html.HiddenFor(modelItem => Model[i].UserName)
+                @Html.HiddenFor(modelItem => Model[i].Ingredients)
+                @Html.HiddenFor(modelItem => Model[i].ImageName)
+                @Html.HiddenFor(modelItem => Model[i].Tags)
 
+            }
         }
+
+
     </table>
-    <div class="form-group, body">
-        <div id="ImageName" class="col-md-1, body">
-            <input type="submit" value="Create" class="btn btn-default, col-lg-1, body" />
-        </div>
-    </div>
+            <button>Submit</button>
+
+
 }
+       <table> 
+
+           
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    
+                    
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model[i].Name)
+                            @Html.HiddenFor(modelItem => Model[i].Name)
+                            @*@Html.HiddenFor(modelItem => Model[i].RecipeID)*@
+                            <input name="recipeId" type="hidden" value="@Model[i].RecipeID" />
+                        </td>
+                        <td>
+                            <input type="file" name="file" />
+                            <input type="submit" value="OK" />
+                        </td>
+                        @*@(ViewBag.Model = Model[i])*@
+                    </tr>
+                }
 
 
-    <table>
-    @for (int i = 0; i < Model.Count; i++)
+            }
+        </table>
+
+
+    
+    @using (Html.BeginForm("Admin", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
+        <table>
+            <tr>
+                <td>
+                    <h4>All Recipes, Delete If Wanted</h4>
+                </td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Delete?</td>
+            </tr>
+
+
+            @for (int i = 0; i < Model.Count; i++)
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => Model[i].Name)
                     @Html.HiddenFor(modelItem => Model[i].Name)
-                    @*@Html.HiddenFor(modelItem => Model[i].RecipeID)*@
-                    <input name="recipeId" type="hidden" value="@Model[i].RecipeID"/>
+                    @Html.HiddenFor(modelItem => Model[i].RecipeID)
                 </td>
                 <td>
-                    <input type="file" name="file" />
-                    <input type="submit" value="OK" />
-                </td>
-                @(ViewBag.Model = Model[i])
-            </tr>
-        }
-
-
-    }
-</table>
-
-
-
-                
-
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.CheckBoxFor(modelItem => Model[i].DeleteRecipe)
                 </td>
             </tr>
+            }
+        </table>
+            <button>Submit</button>
+     }
+
+        
 
 
-    </table>
-        <button>Submit</button>
+
         <table>
             <tr>
                 <td>
@@ -168,5 +206,6 @@
 
             </tr>
         </table>
+
 
 
