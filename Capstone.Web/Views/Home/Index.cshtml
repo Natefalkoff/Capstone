@@ -15,9 +15,24 @@
     <div id="home">
     @foreach (var item in Model)
     {
+        List<string> colors = new List<string>();
+        colors.Add("#E5E4E2");
+        colors.Add("#98AFC7");
+        colors.Add("#659EC7");
+        colors.Add("#4CC417");
+        colors.Add("#FFFF00");
+        colors.Add("#F87217");
+        colors.Add("#F70D1A");
+        colors.Add("#ECC5C0");
+        colors.Add("#FAAFBA");
+        colors.Add("#FF00FF");
+        colors.Add("#6C2DC7");
+        Random r = new Random();
+        int rInt = r.Next(0, colors.Count - 1);
+
         @*<div class="row">*@
             <div class="panel panel-default">
-                <div class="panel-heading">
+                <div class="panel-heading" style="background-color: @colors[r.Next(0, colors.Count - 1)]">
                      @Html.DisplayFor(modelItem => item.Name)
                 </div>
                 <div class="panel-body">

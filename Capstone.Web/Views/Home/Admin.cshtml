@@ -111,6 +111,7 @@
 
 
 }
+        <h4>Add or Change Recipe Image:</h4>
        <table> 
 
            
@@ -124,6 +125,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => Model[i].Name)
                             @Html.HiddenFor(modelItem => Model[i].Name)
+                            @Html.DisplayFor(modelItem => Model[i].ImageName)
                             @*@Html.HiddenFor(modelItem => Model[i].RecipeID)*@
                             <input name="recipeId" type="hidden" value="@Model[i].RecipeID" />
                         </td>
