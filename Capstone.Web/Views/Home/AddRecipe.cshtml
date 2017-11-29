@@ -28,7 +28,7 @@
             @Html.Label("Enter Directions Separated by Using The 'Enter' Key", htmlAttributes: new { @class = "control-label col-md-12" })
            <br>
             <div class="col-md-10, bodyByBod">
-                @Html.TextAreaFor(m => m.Directions, new { placeholder = "Boil Water \nAdd Rice to boiling water \nSimmer for 15 minutes" }) @*{ htmlAttributes = new { @class = "form-control" }*@
+                @Html.TextAreaFor(m => m.Directions, new { placeholder = "Boil Water \nAdd Rice to boiling water \nSimmer for 15 minutes", rows = "10", cols = "75" }) @*{ htmlAttributes = new { @class = "form-control" }*@
                 @*@Html.ValidationMessageFor(model => model.Directions, "", new { @class = "text-danger" })*@
             </div>
             <br>
@@ -40,7 +40,7 @@
             @Html.Label("Enter Ingredients Separated by Using The 'Enter' Key", htmlAttributes: new { @class = "control-label col-md-12" })
             <br>
             <div class="col-md-10, bodyByBod">
-                @Html.TextAreaFor(m => m.Ingredients, new { placeholder= "1 Cup of white rice \n2 Cups of water" }) @*{ htmlAttributes = new { @class = "form-control" }*@
+                @Html.TextAreaFor(m => m.Ingredients, new { placeholder= "1 Cup of white rice \n2 Cups of water", rows = "10", cols = "75" }) @*{ htmlAttributes = new { @class = "form-control" }*@
                 @*@Html.ValidationMessageFor(model => model.Ingredients, "", new { @class = "text-danger" })*@
             </div>
         </div>
