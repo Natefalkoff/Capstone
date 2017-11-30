@@ -31,8 +31,7 @@ namespace Capstone.Web.Models
         public List<RecipeModel> Recipes { get; set; }
         public List<RecipeModel> Plan { get; set; }
         public string Salt { get; set; }
-
-        [Required(ErrorMessage = "*")]
+        
         public string TempPassword { get; set; }
 
         public int Signup { get; set; }

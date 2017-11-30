@@ -82,7 +82,7 @@
                                     }
                                     @using Capstone.Web.DAL@if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
                                     {
-                                        <li><a href="@Url.Action("ChangePassword","User")">Plan</a></li>
+                                        <li><a href="@Url.Action("ChangePassword","User")">Change Password</a></li>
                                     }
                                 </ul>
                             </li>
@@ -97,7 +97,7 @@
                                     <li><a href="@Url.Action("Index","Plan")">Plan</a></li>
                                     <li><a href="@Url.Action("AddRecipe","Home")">Add Recipe</a></li>
                                     <li><a href="@Url.Action("UserPage","User")">User Page</a></li>
-                                    <li><a href="@Url.Action("ChangePassword","User")">Plan</a></li>
+                                    <li><a href="@Url.Action("ChangePassword","User")">Change Password</a></li>
                                 </ul>
                             </li>
                             }

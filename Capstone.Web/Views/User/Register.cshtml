@@ -16,7 +16,7 @@
 
             <div class="body">
                 @Html.TextBoxFor(m => m.UserName, new { placeholder = "User Name" })
-                @Html.ValidationMessageFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
                 @Html.ValidationMessage("username-exists")
             </div>
             <br>
@@ -24,25 +24,25 @@
 
             <div class="body">
                 @Html.TextBoxFor(m => m.Email, new { placeholder = "Email" })
-                @Html.ValidationMessageFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
             </div>
             <br>
 
             <div class="body">
                 @Html.TextBoxFor(m => m.ConfirmEmail, new { placeholder = "Confirm Email" })
-                @Html.ValidationMessageFor(m => m.ConfirmEmail)
+                @Html.ValidationMessageFor(m => m.ConfirmEmail, "", new { @class = "text-danger" })
             </div>
             <br>
             <div class="body">
                 @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })
-                @Html.ValidationMessageFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
             </div>
             <br>
 
 
             <div class="body">
                 @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirm Password" })
-                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
             </div>
             <br>
 
