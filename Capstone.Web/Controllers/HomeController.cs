@@ -63,6 +63,10 @@ namespace Capstone.Web.Controllers
         [HttpPost]
         public ActionResult AddRecipe(RecipeModel recipe, HttpPostedFileBase ImageName)
         {
+            //if (!ModelState.IsValid)
+            //{
+            //    return RedirectToAction("AddRecipe");
+            //}
             UserModel user = Session["user"] as UserModel;
             // When a user logs in, Session[authorizationlevel] stores their auth level as 1, 2 ,3 or null.  From the Authorize class,
             // runs the Admin method, taking in Session cast as a int?
@@ -240,7 +244,7 @@ namespace Capstone.Web.Controllers
             
 
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Admin");
         }
     }
 }

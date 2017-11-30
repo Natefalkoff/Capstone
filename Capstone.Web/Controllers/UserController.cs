@@ -53,7 +53,10 @@ namespace Capstone.Web.Controllers
         [Route("users/new")]
         public ActionResult Register(UserModel model)
         {
-
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Register");
+            }
 
 
             UserModel user = userDal.GetUser(model.UserName);
@@ -95,6 +98,10 @@ namespace Capstone.Web.Controllers
         [HttpPost]
         public ActionResult ChangePassword(UserModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("ChangePassword");
+            }
             UserModel user = Session["user"] as UserModel;
             HashProvider hash = new HashProvider();
             string s = model.TempPassword;
@@ -143,6 +150,10 @@ namespace Capstone.Web.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Login");
+            }
             //HashProvider hash = new HashProvider();
             //string password = hash.HashPassword(model.Password);
             //model.Password = model.Password;

@@ -4,35 +4,32 @@
     ViewBag.Title = "Details";
 }
 
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
+<script type="text/javascript" src="~/Content/masonry.pkgd.min.js"></script>
+<script type="text/javascript" src="~/Content/masonry-docs.min.js"></script>
+<script type="text/javascript" src="~/Content/jquery.js"></script>
+
+
+<script src="~/Content/jquery.min.js"></script>
+<script src="~/Content/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.panel-heading').each(function () {
+            var hue = 'rgb(' + (Math.floor((256 - 199) * Math.random()) + 200) + ',' + (Math.floor((256 - 199) * Math.random()) + 200) + ',' + (Math.floor((256 - 199) * Math.random()) + 200) + ')';
+            $(this).css("background-color", hue);
+        });
+    });
+</script>
+
 <h2>Details</h2>
 
 
 @using (Html.BeginForm("Details", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <input type="button" name="btnprint" value="Print" onclick="PrintMe('printableArea')" />
-    <input type="button" name="btnprint5x7" value="Print 5x7" onclick="Print5x7('printableArea')" />
-    <div id="printableArea">
+    <input type="button" class="btn btn-outline-dark" name="btnprint" value="Print" onclick="PrintMe('printableArea')" />
+    
 
-        @*<script language="javascript">
-            @media print{
-            var css = '@page { size: landscape; }',
-            head = document.head || document.getElementsByTagName('head')[0],
-            style = document.createElement('style');
-
-            style.type = 'text/css';
-            style.media = 'print';
-
-            if (style.styleSheet){
-            style.styleSheet.cssText = css;
-            } else {
-            style.appendChild(document.createTextNode(css));
-            }
-
-            head.appendChild(style);
-
-            window.print();
-            }
-        </script>*@
         <script language="javascript">
             function PrintMe(DivID) {
                 var disp_setting = "toolbar=yes,location=no,";
@@ -57,86 +54,50 @@
             }
         </script>
 
-        <h4>@Model.Name</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-
-                @Html.HiddenFor(model => model.RecipeID)
-            </dt>
-
-            <dd>
-
-                @Html.HiddenFor(model => model.Name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Directions)
-                @Html.HiddenFor(model => model.Directions)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Directions)
-            </dd>
-
-
-            <dd>
-                @Html.HiddenFor(model => model.UserID)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Ingredients)
-                @Html.HiddenFor(model => model.Ingredients)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Ingredients)
-            </dd>
-
-            <dd>
-                <img src="~/Img/@Model.ImageName" />
-                @Html.HiddenFor(model => model.ImageName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Tags)
-                @Html.HiddenFor(model => model.TagsList)
-            </dt>
+   
+        <div id="printableArea" class="container-fluid">
+            <div style="padding-bottom:30px" class="panel panel-default">
+                <div style="font-weight:bold" class="panel-heading"><h2>@Model.Name</h2></div>
+                
+                <div class="col-md-4 print">
+                    <h4 style="font-weight:bold">Directions</h4><hr />
+                    @Html.Raw(Model.Directions.Replace(Environment.NewLine, "<br/> <hr />"))
+                    @Html.HiddenFor(model => model.Directions)
+                </div>
+                
+                <div class="col-md-4 print">
+                    <h4 style="font-weight:bold">Ingreditents</h4><hr />
+                    @Html.Raw(Model.Ingredients.Replace(Environment.NewLine, "<br/> <hr />"))
+                    @Html.HiddenFor(model => model.Ingredients)
+                </div>
+                <div id="notToBePrinted" class="col-md-4">
+                    <img style="width:100%; height:auto" src="~/Img/@Model.ImageName" />
+                    @Html.HiddenFor(model => model.ImageName)
+                    <div class="col-md-1">
+                        <p style="font-weight:bold">Tags</p><hr />
+                        @foreach(string tag in Model.TagsList)
+                        {
+                            <p>@tag</p>
+                            <hr />
+                        }
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-1">
+                        <p style="font-weight:bold">Categories</p><hr />
+                        @foreach(string cat in Model.Categories)
+                        {
+                            <p>@cat</p>
+                            <hr />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-            @{
-
-                foreach (string s in Model.TagsList)
-                {
-                    <dd>
-                        @s
-                    </dd>
-                }
-            }
+    
 
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Categories)
-                @Html.HiddenFor(model => model.Categories)
-            </dt>
-            @{
-                foreach (string s in Model.Categories)
-                {
-                    <dd>
-                        @s
-                    </dd>
-                }
-            }
-
-
-            <dt>
-
-                @Html.HiddenFor(model => model.Publics)
-            </dt>
-
-
-        </dl>
-    </div>
 
     <div>
         @using Capstone.Web.DAL @if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
@@ -144,7 +105,7 @@
 
             <p>If Admin Would Like To Add Tags separated by semicolon (;)</p>
                 @Html.TextBoxFor(model => model.Tags)
-                <button> Submit </button>
+                <button class="btn btn-outline-dark"> Submit </button>
         }
     </div>
         @*<p>

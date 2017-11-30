@@ -10,22 +10,31 @@
 <script type="text/javascript" src="~/Content/masonry-docs.min.js"></script>
 <script type="text/javascript" src="~/Content/jquery.js"></script>
 
+<script src="~/Content/jquery.min.js"></script>
+<script src="~/Content/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.panel-heading').each(function () {
+            var hue = 'rgb(' + (Math.floor((256 - 199) * Math.random()) + 200) + ',' + (Math.floor((256 - 199) * Math.random()) + 200) + ',' + (Math.floor((256 - 199) * Math.random()) + 200) + ')';
+            $(this).css("background-color", hue);
+        });
+    });
+</script>
+
 
 <div class="container" style="background-color:gainsboro">
     <div id="home">
     @foreach (var item in Model)
     {
-        @*<div class="row">*@
             <div class="panel panel-default">
                 <div class="panel-heading">
                      @Html.DisplayFor(modelItem => item.Name)
                 </div>
                 <div class="panel-body">
                     <a href="@Url.Action("Details","Home", new { id = item.RecipeID })"><img style="width:100%; height:auto" src="~/Img/@item.ImageName" /></a>
-                    @Html.ActionLink("Details", "Details", new { id = item.RecipeID })
+                    @Html.ActionLink("Details", "Home", new { id = item.RecipeID })
                 </div>
             </div>
-        @*</div>*@
     }
     </div>
 </div>
