@@ -63,6 +63,7 @@
                     <h4 style="font-weight:bold">Directions</h4><hr />
                     @Html.Raw(Model.Directions.Replace(Environment.NewLine, "<br/> <hr />"))
                     @Html.HiddenFor(model => model.Directions)
+                    @Html.HiddenFor(model => model.RecipeID)
                 </div>
                 
                 <div class="col-md-4 print">
@@ -104,7 +105,7 @@
                 {
 
             <p>If Admin Would Like To Add Tags separated by semicolon (;)</p>
-                @Html.TextBoxFor(model => model.Tags)
+                @Html.TextBoxFor(model => model.Tags, new { @class = "form-control" })
                 <button class="btn btn-outline-dark"> Submit </button>
         }
     </div>
