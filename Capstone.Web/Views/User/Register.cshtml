@@ -10,6 +10,14 @@
 <script type="text/javascript" src="~/Content/masonry-docs.min.js"></script>
 <script type="text/javascript" src="~/Content/jquery.js"></script>
 
+            <div class="body">
+                @Html.TextBoxFor(m => m.UserName, new { placeholder = "User Name" })
+                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                @Html.ValidationMessage("username-exists")
+            </div>
+            <br>
+
+
 <script src="~/Content/jquery.min.js"></script>
 <script src="~/Content/bootstrap.min.js"></script>
 <script>
@@ -21,11 +29,6 @@
     });
 </script>
 
-<h4>@Convert.ToString(ViewBag.Message)</h4>
-
-        <h2 style="font-size:48px">Register Now</h2>
-        <h4 style="font-style:italic">Gain access to additional features!</h4>
-        @*<h3>Create your own meal plan!</h3>*@
 
 @using (Html.BeginForm("Register", "User", FormMethod.Post))
 {
@@ -37,11 +40,13 @@
             <div class="col-md-4"></div>
             <div class="panel-body col-md-4">
 
+
                     @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "User Name" })
                     @Html.ValidationMessageFor(m => m.UserName, "")
                     @Html.ValidationMessage("username-exists")
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
                     @Html.ValidationMessageFor(m => m.Email, "")
+
 
                     @Html.TextBoxFor(m => m.ConfirmEmail, new { @class = "form-control", placeholder = "Confirm Email" })
                     @Html.ValidationMessageFor(m => m.ConfirmEmail, "")

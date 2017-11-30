@@ -55,7 +55,7 @@ namespace Capstone.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Message = "Sorry, Invalid Registration";
+
                 return View("Register");
             }
 
@@ -97,11 +97,11 @@ namespace Capstone.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult ChangePassword(UserModel model)
+        public ActionResult ChangePassword(ChangePasswordModel model)
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("ChangePassword");
+                return View();
             }
             UserModel user = Session["user"] as UserModel;
             HashProvider hash = new HashProvider();
@@ -125,10 +125,10 @@ namespace Capstone.Web.Controllers
             {
                 
                 string password = hash.HashPassword(model.Password);
-                model.Salt = hash.SaltValue;
+                user.Salt = hash.SaltValue;
                 model.Password = password;
-                model.AuthorizationLevel = 2;
-                userDal.ChangePassword(model.Password, model.Salt, user.UserName);
+                user.AuthorizationLevel = 2;
+                userDal.ChangePassword(model.Password, user.Salt, user.UserName);
 
                 //FormsAuthentication.SetAuthCookie(user.Email, true);
                 // Session[SessionKeys.Username] = model.EmailAddress;
@@ -153,7 +153,7 @@ namespace Capstone.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("Login");
+                return View();
             }
             //HashProvider hash = new HashProvider();
             //string password = hash.HashPassword(model.Password);
