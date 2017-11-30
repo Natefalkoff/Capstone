@@ -96,6 +96,7 @@ namespace Capstone.Web.DAL
                     while (results.Read())
                     {
                         RecipeModel r = new RecipeModel();
+                        r.RecipeID = Convert.ToInt32(results["recipe_id"]);
                         r.Directions = Convert.ToString(results["directions"]);
                         r.ImageName = Convert.ToString(results["image_name"]);
                         r.UserName = Convert.ToString(results["users_name"]);
