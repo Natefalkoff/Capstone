@@ -4,9 +4,9 @@
     ViewBag.Title = "UserPage";
 }
 
-@*@using Capstone.Web.Models @(UserModel m = Session["user"] as UserModel());*@
 
-<h2>Welcome </h2>
+
+<h2>Welcome @Convert.ToString(ViewBag.UserName).ToUpper()!</h2>
 
 <p>
     @Html.ActionLink("Add Recipe", "AddRecipe", "Home")
