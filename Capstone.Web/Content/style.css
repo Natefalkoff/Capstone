@@ -105,7 +105,10 @@ html, body {
 }
 /* END Media Query */
 
-
+.displayblock {
+    display: block;
+    text-align: center;
+}
 
 *, *:before, *:after {
     box-sizing: border-box !important;
@@ -176,6 +179,15 @@ button {
 
 }
 
+.row.match-my-cols {
+    overflow: hidden;
+}
+
+    .row.match-my-cols [class*="col-"] {
+        margin-bottom: -99999px;
+        padding-bottom: 99999px;
+    }
+
     .row > [class*='col-'] {
         display: flex;
         flex-direction: column;
@@ -189,7 +201,7 @@ button {
 }
 
 #picbox {
-    width: 200px;
+    width: 750px;
     height: auto;
 }
 

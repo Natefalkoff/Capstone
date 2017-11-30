@@ -78,7 +78,7 @@ namespace Capstone.Web.Controllers
         public ActionResult ViewPlan (int id)
         {
             List<PlanModel> model = planDal.GetPlan(id);
-
+            Session["PlanID"] = id;
             return View("ViewPlan", model);
         }
 
@@ -123,6 +123,23 @@ namespace Capstone.Web.Controllers
         public ActionResult AddMealConfirmation (DropDownPlans model)
         {
             return View();
+        }
+
+        public ActionResult DeleteMeal (int id)
+        {
+            int planid;
+
+            planid = (int)Session["PlanID"];
+          
+
+            planDal.DeleteMeal(planid, id);
+
+            DropDownPlans model = new DropDownPlans();
+            model.currentID = planid;
+
+            return RedirectToAction("ViewPlan", "Plan", new { id = planid });
+
+
         }
     }
 }
