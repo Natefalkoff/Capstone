@@ -4,13 +4,31 @@
     ViewBag.Title = "Details";
 }
 
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
+<script type="text/javascript" src="~/Content/masonry.pkgd.min.js"></script>
+<script type="text/javascript" src="~/Content/masonry-docs.min.js"></script>
+<script type="text/javascript" src="~/Content/jquery.js"></script>
+
+
+<script src="~/Content/jquery.min.js"></script>
+<script src="~/Content/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.panel-heading').each(function () {
+            var hue = 'rgb(' + (Math.floor((256 - 199) * Math.random()) + 200) + ',' + (Math.floor((256 - 199) * Math.random()) + 200) + ',' + (Math.floor((256 - 199) * Math.random()) + 200) + ')';
+            $(this).css("background-color", hue);
+        });
+    });
+</script>
+
 <h2>Details</h2>
 
 
 @using (Html.BeginForm("Details", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <input type="button" class="btn btn-outline-dark" name="btnprint" value="Print" onclick="PrintMe('printableArea')" />
-    <div id="printableArea">
+    <div>
 
         @*<script language="javascript">
             @media print{
@@ -130,6 +148,34 @@
 
         </dl>
     </div>
+
+   
+        <div id="printableArea" class="container-fluid">
+            <div style="padding-bottom:30px" class="panel panel-default">
+                <div style="font-weight:bold" class="panel-heading"><h2>@Model.Name</h2></div>
+                
+                <div class="col-md-4">
+                    <h4 style="font-weight:bold">Directions</h4><hr />
+                    @Html.Raw(Model.Directions.Replace(Environment.NewLine, "<br/> <hr />"))
+                    @Html.HiddenFor(model => model.Directions)
+                </div>
+                
+                <div class="col-md-4">
+                    <h4 style="font-weight:bold">Ingreditents</h4><hr />
+                    @Html.Raw(Model.Ingredients.Replace(Environment.NewLine, "<br/> <hr />"))
+                    @Html.HiddenFor(model => model.Ingredients)
+                </div>
+                <div id="notToBePrinted" class="col-md-4">
+                    <img style="width:100%; height:auto" src="~/Img/@Model.ImageName" />
+                    @Html.HiddenFor(model => model.ImageName)
+                </div>
+            </div>
+        </div>
+
+
+    
+
+
 
     <div>
         @using Capstone.Web.DAL @if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
