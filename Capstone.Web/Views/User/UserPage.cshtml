@@ -41,8 +41,8 @@
                 </div>
                 <div class="panel-body">
                     <a href="@Url.Action("Details","Home", new { id = item.RecipeID })"><img style="width:100%; height:auto" src="~/Img/@item.ImageName" /></a>
-                    @Html.ActionLink("Details", "Home", new { id = item.RecipeID })
-                </div>
+                    <a href="@Url.Action("Details","Home", new { id = item.RecipeID })">Details</a>
+</div>
             </div>
         }
     </div>
