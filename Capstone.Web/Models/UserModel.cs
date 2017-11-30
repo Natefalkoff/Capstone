@@ -13,17 +13,17 @@ namespace Capstone.Web.Models
         [Required(ErrorMessage = "*")]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required]
         [Compare("Email", ErrorMessage = "Does not match email")]
         public string ConfirmEmail { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required]
         [Compare("Password", ErrorMessage = "Does not match password")]
         public string ConfirmPassword { get; set; }
 
@@ -32,7 +32,7 @@ namespace Capstone.Web.Models
         public List<RecipeModel> Plan { get; set; }
         public string Salt { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required]
         public string TempPassword { get; set; }
 
         public int Signup { get; set; }

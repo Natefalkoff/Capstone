@@ -3,63 +3,62 @@
 @{
     ViewBag.Title = "Register";
 }
-<br>
-<section class="container" style="background-color:gainsboro">
-    <div id="Register">
+
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
+<script type="text/javascript" src="~/Content/masonry.pkgd.min.js"></script>
+<script type="text/javascript" src="~/Content/masonry-docs.min.js"></script>
+<script type="text/javascript" src="~/Content/jquery.js"></script>
+
+<script src="~/Content/jquery.min.js"></script>
+<script src="~/Content/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.panel-heading').each(function () {
+            var hue = 'rgb(' + (Math.floor((256 - 199) * Math.random()) + 200) + ',' + (Math.floor((256 - 199) * Math.random()) + 200) + ',' + (Math.floor((256 - 199) * Math.random()) + 200) + ')';
+            $(this).css("background-color", hue);
+        });
+    });
+</script>
+
+<h4>@Convert.ToString(ViewBag.Message)</h4>
+
         <h2 style="font-size:48px">Register Now</h2>
         <h4 style="font-style:italic">Gain access to additional features!</h4>
         @*<h3>Create your own meal plan!</h3>*@
 
-        @using (Html.BeginForm("Register", "User", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
+@using (Html.BeginForm("Register", "User", FormMethod.Post))
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="container">
+        
+        <div class="panel panel-default">
+            <div class="panel-heading"><h2>Complete Registration</h2></div>
+            <div class="col-md-4"></div>
+            <div class="panel-body col-md-4">
 
-            <div class="body">
-                @Html.TextBoxFor(m => m.UserName, new { placeholder = "User Name" })
-                @Html.ValidationMessageFor(m => m.UserName)
-                @Html.ValidationMessage("username-exists")
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "User Name" })
+                    @Html.ValidationMessageFor(m => m.UserName, "")
+                    @Html.ValidationMessage("username-exists")
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                    @Html.ValidationMessageFor(m => m.Email, "")
+
+                    @Html.TextBoxFor(m => m.ConfirmEmail, new { @class = "form-control", placeholder = "Confirm Email" })
+                    @Html.ValidationMessageFor(m => m.ConfirmEmail, "")
+
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "")
+
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class="form-control", placeholder = "Confirm Password" })
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "")
+
+                    <p>Would you like to sign up for emails with recipe updates?</p>
+                    @Html.CheckBoxFor(m => m.SignupBool, new { @class = "form-control" })
+                
+                <button class="btn btn-danger">Submit</button>
             </div>
-            <br>
-
-
-            <div class="body">
-                @Html.TextBoxFor(m => m.Email, new { placeholder = "Email" })
-                @Html.ValidationMessageFor(m => m.Email)
-            </div>
-            <br>
-
-            <div class="body">
-                @Html.TextBoxFor(m => m.ConfirmEmail, new { placeholder = "Confirm Email" })
-                @Html.ValidationMessageFor(m => m.ConfirmEmail)
-            </div>
-            <br>
-            <div class="body">
-                @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })
-                @Html.ValidationMessageFor(m => m.Password)
-            </div>
-            <br>
-
-
-            <div class="body">
-                @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirm Password" })
-                @Html.ValidationMessageFor(m => m.ConfirmPassword)
-            </div>
-            <br>
-
-            <div class="body">
-                <p style="font-size:14px;">Would you like to sign up for emails with recipe updates?</p>
-                @Html.CheckBoxFor(m => m.SignupBool)
-            </div>
-
-
-            <div class="body">
-                <button>Register</button>
-            </div>
-
-        }
+            <div class="col-md-4"></div>
+        </div>
+        
     </div>
-
-    </section>
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

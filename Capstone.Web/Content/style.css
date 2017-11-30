@@ -83,7 +83,7 @@ html, body {
 
 @media (max-width: 767px) {
     .dropdown-menu > li > a {
-        background-color: #006b96;
+        background-color: tomato;
         color: #ffffff;
     }
 

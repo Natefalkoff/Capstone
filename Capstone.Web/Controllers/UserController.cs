@@ -55,7 +55,8 @@ namespace Capstone.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("Register");
+                ViewBag.Message = "Sorry, Invalid Registration";
+                return View("Register");
             }
 
 
@@ -157,8 +158,8 @@ namespace Capstone.Web.Controllers
             //HashProvider hash = new HashProvider();
             //string password = hash.HashPassword(model.Password);
             //model.Password = model.Password;
-
-            if (ModelState.IsValid)
+            UserModel m = userDal.GetUser(model.UserName);
+            if (ModelState.IsValid &&  m.Salt != null)
             {
                 UserModel userLogin = userDal.GetUser(model.UserName);
 
@@ -191,7 +192,7 @@ namespace Capstone.Web.Controllers
 
             UserModel user = userDal.GetUser(model.UserName);
 
-            return RedirectToAction("Index", "Home");
+            return View("Login");
         }
 
         public ActionResult UserPage()

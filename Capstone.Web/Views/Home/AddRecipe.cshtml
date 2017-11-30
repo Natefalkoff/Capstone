@@ -33,6 +33,7 @@
                     <div>
                     <p style="font-weight:bold">Recipe Name</p>
                     @Html.TextBoxFor(m => m.Name, htmlAttributes: new { @class = "form-control col-md-4", rows = "10" })
+                        @Html.ValidationMessageFor(model => model.Tags, "Please Enter Recipe Name")
                     </div>
                 </div>
                 <div class="panel-body">
@@ -40,16 +41,20 @@
                         <p style="font-weight:bold">Ingredients</p>
                         <p>Separate Ingredients By Using New Line, 'Enter' Key</p>
                         @Html.TextAreaFor(m => m.Ingredients, new { @class = "form-control force-to-bottom", placeholder = "1 Cup of white rice \n2 Cups of water", rows = "10", cols = "75" })
+                        @Html.ValidationMessageFor(model => model.Tags, "Please Enter Ingredients")
                     </div>
                     <div class="col-md-4">
                         <p style="font-weight:bold">Directions</p>
                         <p>Separate Direction Steps By Using New Line, 'Enter' Key</p>
                         @Html.TextAreaFor(m => m.Directions, new { @class = "form-control force-to-bottom", placeholder = "1 Cup of white rice \n2 Cups of water", rows = "10", cols = "75" })
+                        @Html.ValidationMessageFor(model => model.Tags, "Please Enter Directions")
                     </div>
                     <div class="col-md-4">
                         <p style="font-weight:bold">Tags</p>
                         <p>Separate Tags With Semi-Colon, (;)</p>
-                        @Html.TextBoxFor(m => m.Tags, new { @class = "form-control", placeholder = "Healthy; Grains;" })<hr />
+                        @Html.TextBoxFor(m => m.Tags, new { @class = "form-control", placeholder = "Healthy; Grains;" })
+                        @Html.ValidationMessageFor(model => model.Tags, "Please Enter At Least One Tag")
+                        <hr />
                         <p>Please Choose One Or Many Categories:</p>
                         @{List<string> catString = new List<string>();
                             foreach (var kvp in Model.ChoseCategory)

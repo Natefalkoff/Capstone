@@ -61,12 +61,12 @@ namespace Capstone.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddRecipe(RecipeModel recipe, HttpPostedFileBase ImageName)
+        public ActionResult AddRecipe(RecipeModel recipe)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return RedirectToAction("AddRecipe");
-            //}
+            if (recipe.ChoseCategory == null || recipe.Ingredients == null || recipe.Name == null || recipe.Tags == null || recipe.Directions == null)
+            {
+                return RedirectToAction("AddRecipe");
+            }
             UserModel user = Session["user"] as UserModel;
             // When a user logs in, Session[authorizationlevel] stores their auth level as 1, 2 ,3 or null.  From the Authorize class,
             // runs the Admin method, taking in Session cast as a int?
@@ -75,21 +75,21 @@ namespace Capstone.Web.Controllers
             {
                 List<string> tagArray = new List<string>();
                 string fileName = "";
-                try
-                {
-                    if (ImageName.ContentLength > 0)
-                    {
-                        fileName = Path.GetFileName(ImageName.FileName);
-                        string path = Path.Combine(Server.MapPath("~/Img/"), fileName);
-                        ImageName.SaveAs(path);
-                    }
-                    ViewBag.Message = "File Uploaded Successfully!";
-                }
-                catch
-                {
-                    ViewBag.Message = "File Upload Failed!";
-                }
-                recipe.ImageName = fileName;
+                //try
+                //{
+                //    if (ImageName.ContentLength > 0)
+                //    {
+                //        fileName = Path.GetFileName(ImageName.FileName);
+                //        string path = Path.Combine(Server.MapPath("~/Img/"), fileName);
+                //        ImageName.SaveAs(path);
+                //    }
+                //    ViewBag.Message = "File Uploaded Successfully!";
+                //}
+                //catch
+                //{
+                //    ViewBag.Message = "File Upload Failed!";
+                //}
+                //recipe.ImageName = fileName;
                 if (recipe.PublicOrPrivate != null)
                 {
                     recipe.Publics = Int32.Parse(recipe.PublicOrPrivate);
