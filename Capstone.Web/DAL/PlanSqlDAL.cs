@@ -24,7 +24,7 @@ namespace Capstone.Web.DAL
         private string getAllUserUserPlansSql = "select * from user_plan WHERE users_id = @userid";
 
         private string CreateMealSql = "INSERT INTO meal (day_of_week, meal_name) VALUES (@dayofweek, @mealname); SELECT CAST(scope_identity() AS int)";
-        private string addMealAndPlanID= "INSERT INTO meal_plan (plan_id, meal_id) VALUES (@planid, @mealid)";
+        private string addMealAndPlanID = "INSERT INTO meal_plan (plan_id, meal_id) VALUES (@planid, @mealid)";
         private string addMealAndRecipeIDSql = "INSERT INTO meal_recipe (meal_id, recipe_id) VALUES (@mealid, @recipeid)";
 
         private string GetAllMealsInPlanSql = "select meal_id from meal_plan where plan_id = @planid";
@@ -42,7 +42,7 @@ namespace Capstone.Web.DAL
             this.connectionString = connectionString;
         }
 
-        public string GetPlanName (int planID)
+        public string GetPlanName(int planID)
         {
             string result = "";
             try
@@ -56,8 +56,8 @@ namespace Capstone.Web.DAL
                     while (results.Read())
                     {
 
-                       result = Convert.ToString(results["plan_name"]);
-                       
+                        result = Convert.ToString(results["plan_name"]);
+
                     }
                 }
             }
@@ -68,7 +68,7 @@ namespace Capstone.Web.DAL
             return result;
         }
 
-        public int CreatePlan (string planName)
+        public int CreatePlan(string planName)
         {
             int planId = 0;
             try
@@ -89,7 +89,7 @@ namespace Capstone.Web.DAL
 
         }
 
-        public bool AddUserAndPlanID (int planID, int userID)
+        public bool AddUserAndPlanID(int planID, int userID)
         {
             try
             {
@@ -110,7 +110,7 @@ namespace Capstone.Web.DAL
             }
         }
 
-        public List<PlanModel> GetAllUserPlans (int userID)
+        public List<PlanModel> GetAllUserPlans(int userID)
         {
             List<PlanModel> result = new List<PlanModel>();
             try
@@ -137,7 +137,7 @@ namespace Capstone.Web.DAL
             return result;
         }
 
-        public int CreateMeal (string dayOfWeek, string mealtype)
+        public int CreateMeal(string dayOfWeek, string mealtype)
         {
             int mealId = 0;
             try
@@ -160,7 +160,7 @@ namespace Capstone.Web.DAL
         }
 
         //done ??? code review
-        public PlanModel GetMeal (int mealID)
+        public PlanModel GetMeal(int mealID)
         {
             PlanModel p = new PlanModel();
 
@@ -174,7 +174,7 @@ namespace Capstone.Web.DAL
                     SqlDataReader results = cmd.ExecuteReader();
                     while (results.Read())
                     {
-                      
+
                         p.Meal = Convert.ToString(results["meal_name"]);
                         p.Day = Convert.ToString(results["day_of_week"]);
                     }
@@ -189,7 +189,7 @@ namespace Capstone.Web.DAL
 
         }
 
-        public bool AddMealAndPlanID (int mealID, int planID)
+        public bool AddMealAndPlanID(int mealID, int planID)
         {
             try
             {
@@ -210,7 +210,7 @@ namespace Capstone.Web.DAL
             }
         }
 
-        public bool InsertMealAndRecipeID (int mealID, int recipeID)
+        public bool InsertMealAndRecipeID(int mealID, int recipeID)
         {
             try
             {
@@ -271,7 +271,7 @@ namespace Capstone.Web.DAL
                     SqlDataReader results = cmd.ExecuteReader();
                     while (results.Read())
                     {
-                        
+
                         result = Int32.Parse((results["recipe_id"].ToString()));
                     }
 
@@ -285,9 +285,9 @@ namespace Capstone.Web.DAL
         }
 
         //this can get recipe data from a list of mealIDs
-        public List<RecipeModel> GetAllRecipesFromMeals (List<int> mealIDs)
+        public List<RecipeModel> GetAllRecipesFromMeals(List<int> mealIDs)
         {
-          
+
             List<int> Recipes = new List<int>();
             foreach (int mealID in mealIDs)
             {
@@ -308,7 +308,7 @@ namespace Capstone.Web.DAL
             return AllRecipes;
         }
 
-        public List<PlanModel> GetPlan (int planID)
+        public List<PlanModel> GetPlan(int planID)
         {
             List<int> allMeals = this.GetAllMealsInPlan(planID);
             List<PlanModel> result = new List<PlanModel>();
@@ -339,19 +339,30 @@ namespace Capstone.Web.DAL
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(DeleteMealPlanSql, conn);
-                SqlCommand cmd1 = new SqlCommand(DeleteMealRecipeSql, conn);
-                SqlCommand cmd2 = new SqlCommand(DeleteMealSql, conn);
-                cmd.Parameters.AddWithValue("@mealid", mealID);
-                cmd1.Parameters.AddWithValue("@mealid", mealID);
-                cmd2.Parameters.AddWithValue("@mealid", mealID);
-                cmd.ExecuteNonQuery();
-                cmd1.ExecuteNonQuery();
-                int rows = cmd2.ExecuteNonQuery();
+                try
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(DeleteMealPlanSql, conn);
+                    SqlCommand cmd1 = new SqlCommand(DeleteMealRecipeSql, conn);
+                    SqlCommand cmd2 = new SqlCommand(DeleteMealSql, conn);
+                    cmd.Parameters.AddWithValue("@mealid", mealID);
+                    cmd1.Parameters.AddWithValue("@mealid", mealID);
+                    cmd2.Parameters.AddWithValue("@mealid", mealID);
+                    cmd.ExecuteNonQuery();
+                    cmd1.ExecuteNonQuery();
+                    int rows = cmd2.ExecuteNonQuery();
+
+                    return rows > 0;
+                }
+
+                catch (SqlException ex)
+                {
+                    throw;
+                }
 
 
-                return rows > 0;
+
+               
             }
         }
     }

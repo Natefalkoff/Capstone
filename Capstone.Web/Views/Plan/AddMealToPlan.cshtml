@@ -4,118 +4,126 @@
 @{
     ViewBag.Title = "AddMealToPlan";
 }
-
-<h2>Add A Meal</h2>
-
-@using (Html.BeginForm("AddMealToPlan", "Plan", FormMethod.Post))
-{
-
-    List<SelectListItem> plans = new List<SelectListItem>();
-
-
-    foreach (PlanModel plan in Model.PlanModels)
-    {
-
-        plans.Add(new SelectListItem
-        {
-            Text = plan.PlanName,
-            Value = plan.PlanId.ToString()
-        });
-    }
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-1">
-                @Html.LabelFor(Model => Model.selectedPlan, "Select A Plan")
-            </div>
-
-            <div class="col-md-3">
-                @Html.DropDownListFor(Model => Model.selectedPlan, plans, new { @class = "btn btn-default dropdown-toggle" })
-            </div>
-        </div>
+<div class="container" style="background-color:gainsboro">
+    <div class="panel panel-default" style="background-color: lightpink">
+        <div class="panel-heading"></div>
+        <h2>Add A Meal</h2>
     </div>
-
-    <br />
-
-    List<SelectListItem>
-        recipes = new List<SelectListItem>
-            ();
-    foreach (RecipeModel recipe in Model.Recipes)
-    {
-        recipes.Add(new SelectListItem
+    <div class="panel-body">
+        @using (Html.BeginForm("AddMealToPlan", "Plan", FormMethod.Post))
         {
-            Text = recipe.Name,
-            Value = recipe.RecipeID.ToString()
-        });
-    }
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-1">
-              @Html.LabelFor(Model => Model.selectedRecipe, "Select A Recipe")
+
+            List<SelectListItem> plans = new List<SelectListItem>();
+
+
+            foreach (PlanModel plan in Model.PlanModels)
+            {
+
+                plans.Add(new SelectListItem
+                {
+                    Text = plan.PlanName,
+                    Value = plan.PlanId.ToString()
+                });
+            }
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1">
+                        @Html.LabelFor(Model => Model.selectedPlan, "Plan")
+                    </div>
+
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(Model => Model.selectedPlan, plans, new { @class = "btn btn-default dropdown-toggle" })
+                    </div>
+                </div>
             </div>
 
-            <div class="col-md-3">
-                @Html.DropDownListFor(Model => Model.selectedRecipe, recipes, new { @class = "btn btn-default dropdown-toggle" })
+            <br />
+
+            List<SelectListItem>
+                recipes = new List<SelectListItem>
+                    ();
+            foreach (RecipeModel recipe in Model.Recipes)
+            {
+                recipes.Add(new SelectListItem
+                {
+                    Text = recipe.Name,
+                    Value = recipe.RecipeID.ToString()
+                });
+            }
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1">
+                        @Html.LabelFor(Model => Model.selectedRecipe, "Recipe")
+                    </div>
+
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(Model => Model.selectedRecipe, recipes, new { @class = "btn btn-default dropdown-toggle" })
+                    </div>
+                </div>
             </div>
-        </div>
+
+
+
+            <br />
+
+            List<SelectListItem>
+                days = new List<SelectListItem>
+                    ();
+            foreach (string day in Model.Days)
+            {
+                days.Add(new SelectListItem
+                {
+                    Text = day,
+                    Value = day
+                });
+            }
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1">
+                        @Html.LabelFor(Model => Model.selectedDay, "Day")
+                    </div>
+
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(Model => Model.selectedDay, days, new { @class = "btn btn-default dropdown-toggle" })
+                    </div>
+                </div>
+            </div>
+
+
+
+            <br />
+
+            List<SelectListItem>
+                meals = new List<SelectListItem>
+                    ();
+            foreach (string meal in Model.Meals)
+            {
+                meals.Add(new SelectListItem
+                {
+                    Text = meal,
+                    Value = meal
+                });
+            }
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1">
+                        @Html.LabelFor(Model => Model.selectedMeal, "Meal")
+                    </div>
+
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(Model => Model.selectedMeal, meals, new { @class = "btn btn-default dropdown-toggle" })
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <br />
+
+            <button class="buttonbox">Add Meal</button>
+            <br />
+            @Html.ActionLink("Back to List", "Index")
+        }
     </div>
-
-   
-
-    <br />
-
-    List<SelectListItem>
-        days = new List<SelectListItem>
-            ();
-    foreach (string day in Model.Days)
-    {
-        days.Add(new SelectListItem
-        {
-            Text = day,
-            Value = day
-        });
-    }
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-1">
-                @Html.LabelFor(Model => Model.selectedDay, "Select A Day")
-            </div>
-
-            <div class="col-md-3">
-                @Html.DropDownListFor(Model => Model.selectedDay, days, new { @class = "btn btn-default dropdown-toggle" })
-            </div>
-        </div>
-    </div>
-
-  
-
-    <br />
-
-    List<SelectListItem>
-        meals = new List<SelectListItem>
-            ();
-    foreach (string meal in Model.Meals)
-    {
-        meals.Add(new SelectListItem
-        {
-            Text = meal,
-            Value = meal
-        });
-    }
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-1">
-                @Html.LabelFor(Model => Model.selectedMeal, "Select A Meal")
-            </div>
-
-            <div class="col-md-3">
-                @Html.DropDownListFor(Model => Model.selectedMeal, meals, new { @class = "btn btn-default dropdown-toggle" })
-            </div>
-        </div>
-    </div>
-
-  
-
-    <br />
-
-    <button class="buttonbox">Add Meal</button>
-}
+</div>

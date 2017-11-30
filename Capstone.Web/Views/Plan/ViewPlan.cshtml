@@ -8,105 +8,159 @@
 }
 
 
-<div class="container">
-    <div class= "row match-my-cols">
-        <div class ="col-md-4" style="background-color: lightcoral">
-            <h2 style="background-color: lightcoral">Sunday</h2>
+
+<div class="container" style="background-color:gainsboro">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color: lightcoral">
+                <h2>Sunday</h2>
+            </div>
             @foreach (PlanModel plan in Model)
             {
-                if (plan.Day == "Sunday")
-                {
-                    <h4>@plan.Meal</h4>
-                    <p>@plan.Recipes.Name</p>
-                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable." /> </a>
-                   <button id="@plan.MealId delete">delete</button>
-                }
-
+                <div class="panel-body" style="background-color: lemonchiffon">
+                    @if (plan.Day == "Sunday")
+                    { 
+                        using (Html.BeginForm("DeleteMeal", "Plan", new { id = plan.MealId }, FormMethod.Get))
+                        {
+                            <h4>@plan.Meal</h4>
+                            <p>@plan.Recipes.Name</p>
+                            <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                            <button class="btn displayblock btn-outline-dark">delete</button>
+                        }
+                    }
+                </div>
             }
         </div>
 
-        <div class="col-md-4" style="background-color: lightsalmon" id="height100">
-            <h2>Monday</h2>
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color: lightsalmon">
+                <h2>Monday</h2>
+            </div>
             @foreach (PlanModel plan in Model)
             {
-                if (plan.Day == "Monday")
-                {
-                    <h4>@plan.Meal</h4>
-                    <p>@plan.Recipes.Name</p>
-                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable."/> </a>
-                }
+                <div class="panel-body" style="background-color: lemonchiffon">
+                    @if (plan.Day == "Monday")
+                    {
+                        using (Html.BeginForm("DeleteMeal", "Plan", new { id = plan.MealId }, FormMethod.Get))
+                        {
+                        <h4>@plan.Meal</h4>
+                        <p>@plan.Recipes.Name</p>
+                        <a href="@Url.Action("Details", "Home", new { id = plan.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable." /> </a>
+                   
+                        <button class="btn displayblock btn-outline-dark">delete</button>
+                        }
+                    }
+                </div>
             }
         </div>
 
-        <div class="col-md-4" style="background-color: lightgoldenrodyellow" id="height100">
-            <h2>Tuesday</h2>
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color: lightpink">
+                <h2>Tuesday</h2>
+            </div>
             @foreach (PlanModel plan in Model)
-            {
-                if (plan.Day == "Tuesday")
+            {   <div class="panel-body" style="background-color: lemonchiffon">
+                @if (plan.Day == "Tuesday")
                 {
+                    using (Html.BeginForm("DeleteMeal", "Plan", new { id = plan.MealId }, FormMethod.Get))
+                    {
                     <h4>@plan.Meal</h4>
                     <p>@plan.Recipes.Name</p>
-                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable."  /> </a>
+                    <a href="@Url.Action(" Details", "Home" , new {id=plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable." /> </a>
+                        <button class="btn displayblock btn-outline-dark">delete</button>
+                    }
                 }
+            </div>
             }
         </div>
     </div>
 
-    <div class="row match-my-cols">
-        <div class="col-md-3" style="background-color: lightseagreen">
-            <h2>Wednesday</h2>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color: lightskyblue">
+                <h2>Wednesday</h2>
+            </div>
             @foreach (PlanModel plan in Model)
-            {
-                if (plan.Day == "Wednesday")
+            { <div class="panel-body" style="background-color: lemonchiffon">
+                @if (plan.Day == "Wednesday")
                 {
+                    using (Html.BeginForm("DeleteMeal", "Plan", new { id = plan.MealId }, FormMethod.Get))
+                    {
                     <h4>@plan.Meal</h4>
                     <p>@plan.Recipes.Name</p>
-                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable."  /> </a>
+                    <a href="@Url.Action(" Details", "Home" , new {id=plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable." /> </a>
+                        <button class="btn displayblock btn-outline-dark">delete</button>
+                    }
                 }
+            </div>
             }
         </div>
 
-        <div class="col-md-3" style="background-color: lightskyblue">
-            <h2>Thursday</h2>
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color: lightsteelblue">
+                <h2>Thursday</h2>
+            </div>
             @foreach (PlanModel plan in Model)
-            {
-                if (plan.Day == "Thursday")
+            { <div class="panel-body" style="background-color: lemonchiffon">
+                @if (plan.Day == "Thursday")
                 {
+                    using (Html.BeginForm("DeleteMeal", "Plan", new { id = plan.MealId }, FormMethod.Get))
+                    {
                     <h4>@plan.Meal</h4>
                     <p>@plan.Recipes.Name</p>
-                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable."  /> </a>
+                    <a href="@Url.Action(" Details", "Home" , new {id=plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable." /> </a>
+           
+                        <button class="btn displayblock btn-outline-dark">delete</button>
+                    }
                 }
+            </div>
             }
         </div>
 
-        <div class="col-md-3" style="background-color: mediumpurple">
-            <h2>Friday</h2>
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color: paleturquoise">
+                <h2>Friday</h2>
+            </div>
             @foreach (PlanModel plan in Model)
-            {
-                if (plan.Day == "Friday")
+            { <div class="panel-body" style="background-color: lemonchiffon">
+                @if (plan.Day == "Friday")
                 {
+                    using (Html.BeginForm("DeleteMeal", "Plan", new { id = plan.MealId }, FormMethod.Get))
+                    {
                     <h4>@plan.Meal</h4>
                     <p>@plan.Recipes.Name</p>
-                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable." /> </a>
+                    <a href="@Url.Action(" Details", "Home" , new {id=plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable." /> </a>
+              
+                        <button class="btn displayblock btn-outline-dark">delete</button>
+                    }
                 }
+            </div>
             }
         </div>
+    </div>
 
-        <div class="col-md-3" style="background-color: mediumorchid">
-            <h2>Saturday</h2>
+    <div class="row-fluid">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color: lightgreen">
+                <h2>Saturday</h2>
+            </div>
             @foreach (PlanModel plan in Model)
-            {
-                if (plan.Day == "Saturday")
+            { <div class="panel-body" style="background-color: lemonchiffon">
+                @if (plan.Day == "Saturday")
                 {
+
+                    using (Html.BeginForm("DeleteMeal", "Plan", new { id = plan.MealId }, FormMethod.Get))
+                    {
                     <h4>@plan.Meal</h4>
-                    <p>@plan.Recipes.Name</p>
-                    <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable."  /> </a>
+                <p>@plan.Recipes.Name</p>
+                <a href="@Url.Action(" Details", "Home" , new {id=plan.Recipes.RecipeID})"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" alt="Picture unavailable." /> </a>
+            
+                        <button class="btn displayblock btn-outline-dark" >delete</button>
+                    }
                 }
+            </div>
             }
         </div>
     </div>
 
 </div>
-
-
-

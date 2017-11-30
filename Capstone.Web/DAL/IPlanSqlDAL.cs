@@ -22,6 +22,7 @@ namespace Capstone.Web.DAL
 
         PlanModel GetMeal(int mealID);
 
+        bool DeleteMeal(int planID, int mealID);
 
         bool AddMealAndPlanID(int mealID, int planID);
 
