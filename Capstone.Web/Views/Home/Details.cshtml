@@ -28,28 +28,8 @@
 @using (Html.BeginForm("Details", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <input type="button" class="btn btn-outline-dark" name="btnprint" value="Print" onclick="PrintMe('printableArea')" />
-    <div>
+    
 
-        @*<script language="javascript">
-            @media print{
-            var css = '@page { size: landscape; }',
-            head = document.head || document.getElementsByTagName('head')[0],
-            style = document.createElement('style');
-
-            style.type = 'text/css';
-            style.media = 'print';
-
-            if (style.styleSheet){
-            style.styleSheet.cssText = css;
-            } else {
-            style.appendChild(document.createTextNode(css));
-            }
-
-            head.appendChild(style);
-
-            window.print();
-            }
-        </script>*@
         <script language="javascript">
             function PrintMe(DivID) {
                 var disp_setting = "toolbar=yes,location=no,";
@@ -73,81 +53,6 @@
                 docprint.focus();
             }
         </script>
-
-        <h4>@Model.Name</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            
-
-                @Html.HiddenFor(model => model.RecipeID)
-                @Html.HiddenFor(model => model.Name)
-            <dt>
-                @Html.DisplayNameFor(model => model.Directions)
-                @Html.HiddenFor(model => model.Directions)
-            </dt>
-
-            <dd>
-                @Html.Raw(Model.Directions.Replace(Environment.NewLine, "<br/> <hr />"))
-            </dd>
-
-
-            <dd>
-                @Html.HiddenFor(model => model.UserID)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Ingredients)
-                @Html.HiddenFor(model => model.Ingredients)
-            </dt>
-
-            <dd>
-                @Html.Raw(Model.Ingredients.Replace(Environment.NewLine, "<br/> <hr/>"))
-            </dd>
-
-            <dd>
-                <img src="~/Img/@Model.ImageName" />
-                @Html.HiddenFor(model => model.ImageName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Tags)
-                @Html.HiddenFor(model => model.TagsList)
-            </dt>
-
-
-            @{
-
-                foreach (string s in Model.TagsList)
-                {
-                    <dd>
-                        @s
-                    </dd>
-                }
-            }
-
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Categories)
-                @Html.HiddenFor(model => model.Categories)
-            </dt>
-            @{
-                foreach (string s in Model.Categories)
-                {
-                    <dd>
-                        @s
-                    </dd>
-                }
-            }
-
-
-            <dt>
-
-                @Html.HiddenFor(model => model.Publics)
-            </dt>
-
-
-        </dl>
-    </div>
 
    
         <div id="printableArea" class="container-fluid">
