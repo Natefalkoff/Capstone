@@ -11,72 +11,106 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>_Layout</title>
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="~/Scripts/jquery-3.1.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/jquery.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="~/Content/masonry.pkgd.min.js"></script>
     <script type="text/javascript" src="~/Content/masonry-docs.min.js"></script>
-    <script type="text/javascript" src="~/Content/jquery.js"></script>
+
     <link href="~/Content/style.css" rel="stylesheet" />
+    <script src="~/Content/jquery.min.js"></script>
+    <script src="~/Content/bootstrap.min.js"></script>
+    <script>
+        var main = function () {
+            $('.dropdown-toggle').click(function () {
+                $(this).parent().find('.dropdown-menu').toggle();
+            });
+        };
+        $(document).ready(main);
+    </script>
 
 </head>
 
 <body class="body">
     <header class="body"> 
             <a href="@Url.Action("Index","Home")"><img src="~/Img/Cancer-Support-Community.jpg" alt="Cancer Support Community Central Ohio" class="body dingleberry"/></a>
-        @*<a href="@Url.Action("Index", "Home")"><img src="~/Img/cancer-foundation-cancer-ribbons.jpg" alt="Support All Those Affected By Cancer" class="rightImage"/></a>*@
-
-
         </header>
-    <br>
-   
-    <div> @*class="navbar navbar-inverse navbar-fixed-top"*@
-        <div class="container nav">
-            <div>
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("| Home |", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                @Html.ActionLink("| Register |", "Register", "User", new { area = "" }, new { @class = "navbar-brands" })
-                @Html.ActionLink("| Login |", "Login", "User", new { area = "" }, new { @class = "navbar-brands" })
-                @Html.ActionLink("| Search |", "Search", "Search", new { area = "" }, new { @class = "navbar-brand" })
-                @if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
-                {
-                @Html.ActionLink("| Plan |", "Index", "Plan", new { area = "" }, new { @class = "navbar-brands" })
-                }
-                @using Capstone.Web.DAL@if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
-                {
-                @Html.ActionLink("| Add Recipe |", "AddRecipe", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                }
-                @if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
-                {
-                    @Html.ActionLink("| Change Password |", "ChangePassword", "User", new { area = "" }, new { @class = "navbar-brands" })
-                }
-                @if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
-                {
-                @Html.ActionLink("| Admin |", "Admin", "Home", new { area = "" }, new { @class = "navbar-brands" })
-                }
-                @if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
-                {
-                    @Html.ActionLink("| User Page |", "UserPage", "User", new { area = "" }, new { @class = "navbar-brands" })
-                }
-                @if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
-                {
-                    @Html.ActionLink("| Logout |", "Logout", "User", new { area = "" }, new { @class = "navbar-brand" })
-                }
-
+    <br>   
+    <div>
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="@Url.Action("Index","Home")">Home</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="@Url.Action("Search","Search")">Search <span class="sr-only">(current)</span></a></li>
+                            
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="@Url.Action("Login","User")">Login</a></li>
+                                    <li><a href="@Url.Action("Register","User")">Register</a></li>
+                                    @using Capstone.Web.DAL@if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
+                                    {
+                                    <li><a href="@Url.Action("Index","Plan")">Plan</a></li>
+                                    }
+                                    
+                                    @using Capstone.Web.DAL@if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
+                                    {
+                                        <li><a href="@Url.Action("AddRecipe","Home")">Add Recipe</a></li>
+                                    }                                    
+                                    
+                                    @using Capstone.Web.DAL@if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
+                                    {
+                                        <li><a href="@Url.Action("UserPage","User")">User Page</a></li>
+                                    }
+                                    @using Capstone.Web.DAL@if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
+                                    {
+                                        <li><a href="@Url.Action("ChangePassword","User")">Plan</a></li>
+                                    }
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            @using Capstone.Web.DAL@if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
+                            {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="@Url.Action("Admin","Home")">Admin</a></li>
+                                    <li><a href="@Url.Action("Index","Plan")">Plan</a></li>
+                                    <li><a href="@Url.Action("AddRecipe","Home")">Add Recipe</a></li>
+                                    <li><a href="@Url.Action("UserPage","User")">User Page</a></li>
+                                    <li><a href="@Url.Action("ChangePassword","User")">Plan</a></li>
+                                </ul>
+                            </li>
+                            }
+                            @if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
+                            {
+                                <li><a href="@Url.Action("Logout", "User")">Logout</a></li>
+                            }
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav, navbar-nav"></ul>
             </div>
-        </div>
-    </div>
 
 
     <div>

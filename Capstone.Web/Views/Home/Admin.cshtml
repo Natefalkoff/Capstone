@@ -14,8 +14,8 @@
 @using (Html.BeginForm("Admin", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <h4>Recipes That Want To Be Made Public:</h4>
-    <table class="table">
-        <tr>
+    <table class="table image_border_bottom">
+        <tr class="image_table_row">
             <th>
                 Recipe ID
             </th>
@@ -49,7 +49,7 @@
         {
             if (Model[i].Publics == 1 && Model[i].Approved == 0)
             {
-            <tr>
+            <tr class="image_table_row">
                 <td>
                     @Html.DisplayFor(modelItem => Model[i].RecipeID)
                     @Html.HiddenFor(modelItem => Model[i].RecipeID)
@@ -107,13 +107,17 @@
 
 
     </table>
-            <button>Submit</button>
+    <button type="button" class="btn btn-outline-dark">Submit</button>
 
 
 }
         <h4>Add or Change Recipe Image:</h4>
-       <table> 
-
+       <table class="image_border_bottom"> 
+           <tr>
+               <td>Recipe Name</td>
+               <td>Image Name</td>
+               <td>Add or Change Image</td>
+           </tr>
            
             @for (int i = 0; i < Model.Count; i++)
             {
@@ -121,7 +125,7 @@
                 {
                     
                     
-                    <tr>
+                    <tr class="image_table_row">
                         <td>
                             @Html.DisplayFor(modelItem => Model[i].Name)
                             @Html.HiddenFor(modelItem => Model[i].Name)
@@ -130,8 +134,8 @@
                             <input name="recipeId" type="hidden" value="@Model[i].RecipeID" />
                         </td>
                         <td>
-                            <input type="file" name="file" />
-                            <input type="submit" value="OK" />
+                            <input type="file" class="btn btn-outline-dark" name="file" />
+                            <input type="submit" class="btn btn-outline-dark" value="OK" />
                         </td>
                         @*@(ViewBag.Model = Model[i])*@
                     </tr>
@@ -141,17 +145,18 @@
             }
         </table>
 
-
-    
+<div class="container">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
     @using (Html.BeginForm("Admin", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        <table>
+        <table class="image_border_bottom table text-center">
             <tr>
                 <td>
                     <h4>All Recipes, Delete If Wanted</h4>
                 </td>
             </tr>
-            <tr>
+            <tr class="image_table_row">
                 <td>Name</td>
                 <td>Delete?</td>
             </tr>
@@ -159,7 +164,7 @@
 
             @for (int i = 0; i < Model.Count; i++)
             {
-            <tr>
+            <tr class="image_table_row">
                 <td>
                     @Html.DisplayFor(modelItem => Model[i].Name)
                     @Html.HiddenFor(modelItem => Model[i].Name)
@@ -171,13 +176,14 @@
             </tr>
             }
         </table>
-            <button>Submit</button>
-     }
+        <button type="button" class="btn btn-outline-dark">Submit</button>
+    }
+        </div>
+<div class="col-md-3"></div>
+  </div>      
 
-        
 
-
-
+<h4>Users Subscribed to Emails</h4>
         <table>
             <tr>
                 <td>

@@ -4,27 +4,30 @@
     ViewBag.Title = "Login";
 }
 
+@Html.ValidationMessage("invalid-credentials")
+
 <div id="login" class="container" style="background-color:gainsboro">
     <h2>Login</h2>
     <section class="centeredPanel">
     <br>
     @using (Html.BeginForm("Login", "User", FormMethod.Post))
     {
-        @Html.ValidationMessage("invalid-credentials")
+        <div class="container" style="padding-bottom:30px">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <form action="" method="post" name="Login_Form" class="form-signin">
+                    <h3 class="form-signin-heading">Welcome Back! Please Sign In</h3>
+                    <hr class="colorgraph"><br>
 
-        <div class="body panel-body">
-            @Html.TextBoxFor(m => m.UserName, new { placeholder = "User Name" })
-            @Html.ValidationMessageFor(m => m.UserName)
-        </div>
-        <br>
-        <div class="body">
-            @Html.PasswordFor(m => m.Password, new { placeholder = "password" })
-            @Html.ValidationMessageFor(m => m.Password)
-        </div>
-        <br>
-        <div class="body">
-        <button>Login</button>
+                    <input type="text" class="form-control" name="Username" placeholder="Username" required="" autofocus="" />
+                    <input type="password" class="form-control" name="Password" placeholder="Password" required="" />
+
+                    <button class="btn btn-danger btn-lg btn-block" name="Submit" value="Login" type="Submit">Login</button>
+                </form>
             </div>
+            <div class="md-col-4"></div>
+        </div>
+
     }
         </section>
 </div>

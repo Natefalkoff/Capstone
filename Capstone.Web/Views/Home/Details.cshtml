@@ -9,8 +9,7 @@
 
 @using (Html.BeginForm("Details", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <input type="button" name="btnprint" value="Print" onclick="PrintMe('printableArea')" />
-    <input type="button" name="btnprint5x7" value="Print 5x7" onclick="Print5x7('printableArea')" />
+    <input type="button" class="btn btn-outline-dark" name="btnprint" value="Print" onclick="PrintMe('printableArea')" />
     <div id="printableArea">
 
         @*<script language="javascript">
@@ -60,23 +59,17 @@
         <h4>@Model.Name</h4>
         <hr />
         <dl class="dl-horizontal">
-            <dt>
+            
 
                 @Html.HiddenFor(model => model.RecipeID)
-            </dt>
-
-            <dd>
-
                 @Html.HiddenFor(model => model.Name)
-            </dd>
-
             <dt>
                 @Html.DisplayNameFor(model => model.Directions)
                 @Html.HiddenFor(model => model.Directions)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Directions)
+                @Html.Raw(Model.Directions.Replace(Environment.NewLine, "<br/> <hr />"))
             </dd>
 
 
@@ -90,7 +83,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Ingredients)
+                @Html.Raw(Model.Ingredients.Replace(Environment.NewLine, "<br/> <hr/>"))
             </dd>
 
             <dd>
@@ -144,7 +137,7 @@
 
             <p>If Admin Would Like To Add Tags separated by semicolon (;)</p>
                 @Html.TextBoxFor(model => model.Tags)
-                <button> Submit </button>
+                <button class="btn btn-outline-dark"> Submit </button>
         }
     </div>
         @*<p>
