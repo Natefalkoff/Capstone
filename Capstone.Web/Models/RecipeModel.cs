@@ -11,13 +11,13 @@ namespace Capstone.Web.Models
     {
         public int RecipeID { get; set; }
 
-        //[Required(ErrorMessage ="Please Enter Recipe Name")]
+        [Required(ErrorMessage = "Please Enter Recipe Name")]
         public string Name { get; set; }
-        //[Required(ErrorMessage ="Please Enter Directions")]
+        [Required(ErrorMessage = "Please Enter Directions")]
         public string Directions { get; set; }
         public int UserID { get; set; }
         public string UserName { get; set; }
-        //[Required(ErrorMessage ="Please Enter Ingredients")]
+        [Required(ErrorMessage = "Please Enter Ingredients")]
         public string Ingredients { get; set; }
 
         //[DataType(DataType.Upload)]
@@ -26,13 +26,13 @@ namespace Capstone.Web.Models
         //[DataType(DataType.Upload)]
         //HttpPostedFileBase ImageUpload { get; set; }
         public List<string> TagsList { get; set; }
-        //[Required(ErrorMessage ="Please Enter At Least One Tag")]
+        [Required(ErrorMessage = "Please Enter At Least One Tag")]
         public string Tags { get; set; }
         public List<string> Categories { get; set; }
         public int Publics { get; set; }
         public List<bool> Chosen { get; set; }
 
-        //[Required(ErrorMessage = "Please Choose At Least 1 Category")]
+        [Required(ErrorMessage = "Please Choose At Least 1 Category")]
         public Dictionary<string, bool> ChoseCategory { get; set; }
         public int Approved { get; set; }
         public bool IsPublics { get; set; }

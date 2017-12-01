@@ -31,9 +31,13 @@
             <div class="panel-heading"><h2 style="font-weight:bold">Add A Recipe</h2></div>
                 <div class="panel-body">
                     <div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
                     <p style="font-weight:bold">Recipe Name</p>
                     @Html.TextBoxFor(m => m.Name, htmlAttributes: new { @class = "form-control col-md-4", rows = "10" })
-                        @Html.ValidationMessageFor(model => model.Tags, "Please Enter Recipe Name")
+                        @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+                        <div class="col-md-4"></div>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -41,49 +45,53 @@
                         <p style="font-weight:bold">Ingredients</p>
                         <p>Separate Ingredients By Using New Line, 'Enter' Key</p>
                         @Html.TextAreaFor(m => m.Ingredients, new { @class = "form-control force-to-bottom", placeholder = "1 Cup of white rice \n2 Cups of water", rows = "10", cols = "75" })
-                        @Html.ValidationMessageFor(model => model.Tags, "Please Enter Ingredients")
+                        @Html.ValidationMessageFor(model => model.Ingredients)
                     </div>
                     <div class="col-md-4">
                         <p style="font-weight:bold">Directions</p>
                         <p>Separate Direction Steps By Using New Line, 'Enter' Key</p>
                         @Html.TextAreaFor(m => m.Directions, new { @class = "form-control force-to-bottom", placeholder = "1 Cup of white rice \n2 Cups of water", rows = "10", cols = "75" })
-                        @Html.ValidationMessageFor(model => model.Tags, "Please Enter Directions")
+                        @Html.ValidationMessageFor(model => model.Directions)
                     </div>
                     <div class="col-md-4">
                         <p style="font-weight:bold">Tags</p>
                         <p>Separate Tags With Semi-Colon, (;)</p>
                         @Html.TextBoxFor(m => m.Tags, new { @class = "form-control", placeholder = "Healthy; Grains;" })
-                        @Html.ValidationMessageFor(model => model.Tags, "Please Enter At Least One Tag")
+                        @Html.ValidationMessageFor(model => model.Tags)
                         <hr />
                         <p>Please Choose One Or Many Categories:</p>
-                        @{List<string> catString = new List<string>();
-                            foreach (var kvp in Model.ChoseCategory)
-                            {
-                                @Html.HiddenFor(Model => Model.ChoseCategory.Keys)
-                                @Html.Label(kvp.Key)
-                                @Html.CheckBoxFor(Model => Model.ChoseCategory[kvp.Key], false)
-                                
-                            }
+                        <div>
+                            @{List<string> catString = new List<string>();
+                                foreach (var kvp in Model.ChoseCategory)
+                                {
+                                    @Html.HiddenFor(Model => Model.ChoseCategory.Keys)
+                                    @Html.Label(kvp.Key)
+                                    @Html.CheckBoxFor(Model => Model.ChoseCategory[kvp.Key], false)
+                                  
+                                }
 
-                        <hr />
-                            List<SelectListItem>
-                            listItems = new List<SelectListItem>();
+
+                                <hr />
+                                List<SelectListItem>
+                                listItems = new List<SelectListItem>();
                                 listItems.Add(new SelectListItem
                                 {
-                                Text = "Private",
-                                Value = "0"
+                                    Text = "Private",
+                                    Value = "0"
                                 });
                                 listItems.Add(new SelectListItem
                                 {
-                                Text = "Public",
-                                Value = "1"
+                                    Text = "Public",
+                                    Value = "1"
                                 });
                                 <p> Would you like to share this recipe ?</p>
                                 @Html.DropDownListFor(Model => Model.PublicOrPrivate, listItems, new { @class = "form-control addRecipeCats" })
 
 
                                 @Html.ValidationMessageFor(model => model.PublicOrPrivate, "", new { @class = "text-danger" })
-                                }
+                            }
+                        </div>
+
                         
                     </div>
                 </div>
