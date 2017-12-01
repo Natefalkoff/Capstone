@@ -1,4 +1,5 @@
 ﻿@model Capstone.Web.Models.RecipeModel
+@using System.Web.Security.AntiXss
 
 @{
     ViewBag.Title = "Details";
@@ -61,14 +62,14 @@
                 
                 <div class="col-md-4 print">
                     <h4 style="font-weight:bold">Directions</h4><hr />
-                    @Html.Raw(Model.Directions.Replace(Environment.NewLine, "<br/> <hr />"))
+                    @MvcHtmlString.Create(Html.Encode(Model.Directions).Replace(Environment.NewLine, "<br /> <hr />"))
                     @Html.HiddenFor(model => model.Directions)
                     @Html.HiddenFor(model => model.RecipeID)
                 </div>
                 
                 <div class="col-md-4 print">
                     <h4 style="font-weight:bold">Ingredients</h4><hr />
-                    @Html.Raw(Model.Ingredients.Replace(Environment.NewLine, "<br/> <hr />"))
+                    @MvcHtmlString.Create(Html.Encode(Model.Ingredients).Replace(Environment.NewLine, "<br /> <hr />"))
                     @Html.HiddenFor(model => model.Ingredients)
                 </div>
                 <div id="notToBePrinted" class="col-md-4">
@@ -100,18 +101,18 @@
 
 
 
-    <div>
+    <div style="padding-bottom:35px">
         @using Capstone.Web.DAL @if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
                 {
-
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
             <p>If Admin Would Like To Add Tags separated by semicolon (;)</p>
                 @Html.TextBoxFor(model => model.Tags, new { @class = "form-control" })
                 <button class="btn btn-outline-dark"> Submit </button>
+                </div>
+                <div class="col-md-3"></div>
         }
     </div>
-        @*<p>
-                @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-                @Html.ActionLink("Back to List", "Index")
-            </p>*@
+
                 }
 

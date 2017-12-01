@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Security.AntiXss;
 
 namespace Capstone.Web.Models
 {
@@ -39,5 +40,6 @@ namespace Capstone.Web.Models
         public string TempTags { get; set; }
         public List<UserModel> SubscribedUsers { get; set; }
         public bool DeleteRecipe { get; set; }
+
     }
 }
