@@ -28,7 +28,7 @@
 
 @using (Html.BeginForm("Details", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <input type="button" class="btn btn-outline-dark" name="btnprint" value="Print" onclick="PrintMe('printableArea')" />
+    <input type="button" class="btn btn-info" name="btnprint" value="Print" onclick="PrintMe('printableArea')" />
 
 
     <script language="javascript">
@@ -96,10 +96,15 @@
         </div>
     </div>
 }
-@using Capstone.Web.DAL @if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true) { 
-
-    <div>
-        @using Capstone.Web.Models{
+@using Capstone.Web.DAL @if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
+{
+    <div class="container" style="padding-bottom:35px">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Add Recipe To Existing Plan</h4></div>
+        <br />
+        @using Capstone.Web.Models
         @using (Html.BeginForm("AddMealToPlan", "Plan", FormMethod.Post))
         {
             DropDownPlans model = Session["dropDown"] as DropDownPlans;
@@ -118,45 +123,17 @@
             }
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-1">
+                    <div class="col-md-3">
                         @Html.LabelFor(Model => model.selectedPlan, "Plan")
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-9">
                         @Html.DropDownListFor(Model => model.selectedPlan, plans, new { @class = "btn btn-default dropdown-toggle" })
                     </div>
                 </div>
             </div>
 
-            <br />
-
-            //@Html.Hidden(model => model.selectedRecipe)
-            //List<SelectListItem>
-            //    recipes = new List<SelectListItem>
-            //        ();
-            //foreach (RecipeModel recipe in model.Recipes)
-            //{
-            //    recipes.Add(new SelectListItem
-            //    {
-            //        Text = recipe.Name,
-            //        Value = recipe.RecipeID.ToString()
-            //    });
-            //}
-            @*<div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-1">
-                        @Html.LabelFor(Model => model.selectedRecipe, "Recipe")
-                    </div>
-
-                    <div class="col-md-3">
-                        @Html.DropDownListFor(Model => model.selectedRecipe, recipes, new { @class = "btn btn-default dropdown-toggle" })
-                    </div>
-                </div>
-            </div>*@
-
             @Html.HiddenFor(Model => model.selectedRecipe)
-
-            <br />
 
             List<SelectListItem>
                 days = new List<SelectListItem>
@@ -171,18 +148,15 @@
             }
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-1">
+                    <div class="col-md-3">
                         @Html.LabelFor(Model => model.selectedDay, "Day")
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-9">
                         @Html.DropDownListFor(Model => model.selectedDay, days, new { @class = "btn btn-default dropdown-toggle" })
                     </div>
                 </div>
             </div>
-
-
-            <br />
 
             List<SelectListItem>
                 meals = new List<SelectListItem>
@@ -197,41 +171,37 @@
             }
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-1">
+                    <div class="col-md-3">
                         @Html.LabelFor(Model => model.selectedMeal, "Meal")
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-9">
                         @Html.DropDownListFor(Model => model.selectedMeal, meals, new { @class = "btn btn-default dropdown-toggle" })
                     </div>
                 </div>
             </div>
-
-
-
-
             <br />
-
             <button class="btn btn-danger">Add Meal</button>
             <br />
             @Html.ActionLink("Back to List", "Index")
         }
     </div>
-
+        </div>
+    <div class="col-md-4"></div>
+</div>
 }
 
-
+<div class="container" style="padding-bottom:35px">
 <div style="padding-bottom:35px">
     @using Capstone.Web.DAL @if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
     {
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
             <p>If Admin Would Like To Add Tags separated by semicolon (;)</p>
             @Html.TextBoxFor(model => model.Tags, new { @class = "form-control" })
             <button class="btn btn-outline-dark"> Submit </button>
         </div>
-        <div class="col-md-3"></div>
+        <div class="col-md-4"></div>
     }
 </div>
-
-                }
+    </div>
