@@ -31,10 +31,6 @@
         <div class="panel-group">
             <div class="panel-heading" style="background-color: lightcoral">
                 <h2>Sunday</h2>
-                <div class="col-md-3"><h4>Breakfast</h4></div>
-                <div class="col-md-3"><h4>Lunch</h4></div>
-                <div class="col-md-3"><h4>Dinner</h4></div>
-                <div class="col-md-3"><h4>Snack</h4></div>
             </div>
             @{ 
                 List<PlanModel> model = Model;
@@ -105,6 +101,9 @@
                     }
                     
                                <div class="col-md-3">
+                                   <div class="panel panel-default">
+                                       <div class="panel-heading individual"><h4>Breakfast</h4></div>
+                                       <div class="panel-body">
                                     @foreach (var m in breakfast)
                                     {
                                         <div class="panel panel-default">
@@ -118,8 +117,13 @@
                                         }
                                             </div>
                                     }
+                                           </div>
+                                       </div>
                                    </div>
                     <div class="col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Lunch</h4></div>
+                            <div class="panel-body">
                         @foreach (var m in lunch)
                         {
                             <div class="panel panel-default">
@@ -133,8 +137,13 @@
                                 }
                             </div>
                         }
+                                </div>
+                            </div>
                     </div>
                     <div class="col-md-3">
+                        <div class="panel panel-deafault">
+                            <div class="panel-heading individual"><h4>Dinner</h4></div>
+                            <div class="panel-body">
                         @foreach (var m in dinner)
                         {
                             <div class="panel panel-default">
@@ -148,8 +157,13 @@
                                 }
                             </div>
                         }
+                                </div>
+                            </div>
                     </div>
                     <div class="col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Snack</h4></div>
+                            <div class="panel-body">
                         @foreach (var m in snack)
                         {
                             <div class="panel panel-default">
@@ -161,6 +175,7 @@
                                             <button class="btn displayblock btn-outline-dark">delete</button>
                                         </div>
                                 }
+                                
                             </div>
 
 
@@ -174,6 +189,8 @@
 
 
                         }
+                                </div>
+                            </div>
                         </div>
                     </div>
                 }
@@ -186,10 +203,6 @@
         <div class="panel-group">
             <div class="panel-heading" style="background-color: lightsalmon">
                 <h2>Monday</h2>
-                <div class="col-md-3"><h4>Breakfast</h4></div>
-                <div class="col-md-3"><h4>Lunch</h4></div>
-                <div class="col-md-3"><h4>Dinner</h4></div>
-                <div class="col-md-3"><h4>Snack</h4></div>
             </div>
             @{
 
@@ -222,65 +235,96 @@
                     }
 
                     <div class="col-md-3">
-                        @foreach (var m in breakfast)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Breakfast</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in breakfast)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 }
                             </div>
-                        }
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        @foreach (var m in lunch)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Lunch</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in lunch)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 }
                             </div>
-                        }
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        @foreach (var m in dinner)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-deafault">
+                            <div class="panel-heading individual"><h4>Dinner</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in dinner)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 }
                             </div>
-                        }
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        @foreach (var m in snack)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Snack</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in snack)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
-                                }
-                            </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
 
-                        }
+                                    </div>
+
+
+
+
+
+                                    @*<h4>@plan.Meal</h4>
+                                        <a href="@Url.Action(" Details", "Home" , new {id=plan.Recipes.RecipeID})">@plan.Recipes.Name</a>
+                                        <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                                        <button class="btn displayblock btn-outline-dark">delete</button>*@
+
+
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
             }
@@ -294,10 +338,6 @@
         <div class="panel-group">
             <div class="panel-heading" style="background-color: lightpink">
                 <h2>Tuesday</h2>
-                <div class="col-md-3"><h4>Breakfast</h4></div>
-                <div class="col-md-3"><h4>Lunch</h4></div>
-                <div class="col-md-3"><h4>Dinner</h4></div>
-                <div class="col-md-3"><h4>Snack</h4></div>
             </div>
             @{
 
@@ -330,65 +370,96 @@
                     }
 
                     <div class="col-md-3">
-                        @foreach (var m in breakfast)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Breakfast</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in breakfast)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 }
                             </div>
-                        }
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        @foreach (var m in lunch)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Lunch</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in lunch)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 }
                             </div>
-                        }
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        @foreach (var m in dinner)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-deafault">
+                            <div class="panel-heading individual"><h4>Dinner</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in dinner)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 }
                             </div>
-                        }
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        @foreach (var m in snack)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Snack</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in snack)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
-                                }
-                            </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
 
-                        }
+                                    </div>
+
+
+
+
+
+                                    @*<h4>@plan.Meal</h4>
+                                        <a href="@Url.Action(" Details", "Home" , new {id=plan.Recipes.RecipeID})">@plan.Recipes.Name</a>
+                                        <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                                        <button class="btn displayblock btn-outline-dark">delete</button>*@
+
+
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
             }
@@ -401,10 +472,6 @@
         <div class="panel-group">
             <div class="panel-heading" style="background-color: lightskyblue">
                 <h2>Wednesday</h2>
-                <div class="col-md-3"><h4>Breakfast</h4></div>
-                <div class="col-md-3"><h4>Lunch</h4></div>
-                <div class="col-md-3"><h4>Dinner</h4></div>
-                <div class="col-md-3"><h4>Snack</h4></div>
             </div>
             @{
 
@@ -436,65 +503,96 @@
                     }
 
                     <div class="col-md-3">
-                        @foreach (var m in breakfast)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Breakfast</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in breakfast)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 }
                             </div>
-                        }
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        @foreach (var m in lunch)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Lunch</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in lunch)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 }
                             </div>
-                        }
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        @foreach (var m in dinner)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-deafault">
+                            <div class="panel-heading individual"><h4>Dinner</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in dinner)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 }
                             </div>
-                        }
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        @foreach (var m in snack)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Snack</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in snack)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
-                                }
-                            </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
 
-                        }
+                                    </div>
+
+
+
+
+
+                                    @*<h4>@plan.Meal</h4>
+                                        <a href="@Url.Action(" Details", "Home" , new {id=plan.Recipes.RecipeID})">@plan.Recipes.Name</a>
+                                        <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                                        <button class="btn displayblock btn-outline-dark">delete</button>*@
+
+
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
             }
@@ -507,10 +605,6 @@
         <div class="panel-group">
             <div class="panel-heading" style="background-color: lightsteelblue">
                 <h2>Thursday</h2>
-                <div class="col-md-3"><h4>Breakfast</h4></div>
-                <div class="col-md-3"><h4>Lunch</h4></div>
-                <div class="col-md-3"><h4>Dinner</h4></div>
-                <div class="col-md-3"><h4>Snack</h4></div>
             </div>
             @{
 
@@ -543,65 +637,96 @@
                     }
 
                     <div class="col-md-3">
-                        @foreach (var m in breakfast)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Breakfast</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in breakfast)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 }
                             </div>
-                        }
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        @foreach (var m in lunch)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Lunch</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in lunch)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 }
                             </div>
-                        }
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        @foreach (var m in dinner)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-deafault">
+                            <div class="panel-heading individual"><h4>Dinner</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in dinner)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 }
                             </div>
-                        }
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        @foreach (var m in snack)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Snack</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in snack)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
-                                }
-                            </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
 
-                        }
+                                    </div>
+
+
+
+
+
+                                    @*<h4>@plan.Meal</h4>
+                                        <a href="@Url.Action(" Details", "Home" , new {id=plan.Recipes.RecipeID})">@plan.Recipes.Name</a>
+                                        <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                                        <button class="btn displayblock btn-outline-dark">delete</button>*@
+
+
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
             }
@@ -614,10 +739,6 @@
         <div class="panel-group">
             <div class="panel-heading" style="background-color: paleturquoise">
                 <h2>Friday</h2>
-                <div class="col-md-3"><h4>Breakfast</h4></div>
-                <div class="col-md-3"><h4>Lunch</h4></div>
-                <div class="col-md-3"><h4>Dinner</h4></div>
-                <div class="col-md-3"><h4>Snack</h4></div>
             </div>
             @{
 
@@ -650,65 +771,96 @@
                     }
 
                     <div class="col-md-3">
-                        @foreach (var m in breakfast)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Breakfast</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in breakfast)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 }
                             </div>
-                        }
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        @foreach (var m in lunch)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Lunch</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in lunch)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 }
                             </div>
-                        }
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        @foreach (var m in dinner)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-deafault">
+                            <div class="panel-heading individual"><h4>Dinner</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in dinner)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 }
                             </div>
-                        }
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        @foreach (var m in snack)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Snack</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in snack)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
-                                }
-                            </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
 
-                        }
+                                    </div>
+
+
+
+
+
+                                    @*<h4>@plan.Meal</h4>
+                                        <a href="@Url.Action(" Details", "Home" , new {id=plan.Recipes.RecipeID})">@plan.Recipes.Name</a>
+                                        <a href="@Url.Action("Details", "Home", new {id = plan.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@plan.Recipes.ImageName" /> </a>
+                                        <button class="btn displayblock btn-outline-dark">delete</button>*@
+
+
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
             }
@@ -721,10 +873,6 @@
         <div class="panel-group">
             <div class="panel-heading" style="background-color: lightgreen">
                 <h2>Saturday</h2>
-                <div class="col-md-3"><h4>Breakfast</h4></div>
-                <div class="col-md-3"><h4>Lunch</h4></div>
-                <div class="col-md-3"><h4>Dinner</h4></div>
-                <div class="col-md-3"><h4>Snack</h4></div>
             </div>
             @{
 
@@ -757,65 +905,86 @@
                     }
 
                     <div class="col-md-3">
-                        @foreach (var m in breakfast)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Breakfast</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in breakfast)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 }
                             </div>
-                        }
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        @foreach (var m in lunch)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Lunch</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in lunch)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 }
                             </div>
-                        }
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        @foreach (var m in dinner)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-deafault">
+                            <div class="panel-heading individual"><h4>Dinner</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in dinner)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
+                                    </div>
                                 }
                             </div>
-                        }
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        @foreach (var m in snack)
-                        {
-                            <div class="panel panel-default">
-                                @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                        <div class="panel panel-default">
+                            <div class="panel-heading individual"><h4>Snack</h4></div>
+                            <div class="panel-body">
+                                @foreach (var m in snack)
                                 {
-                                    <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
-                                        <div class="panel-body">
-                                            <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
-                                            <button class="btn displayblock btn-outline-dark">delete</button>
-                                        </div>
-                                }
-                            </div>
+                                    <div class="panel panel-default">
+                                        @using (Html.BeginForm("DeleteMeal", "Plan", new { id = m.MealId }, FormMethod.Get))
+                                        {
+                                            <div class="panel-heading individual"><a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })">@m.Recipes.Name</a></div>
+                                            <div class="panel-body">
+                                                <a href="@Url.Action("Details", "Home", new { id = m.Recipes.RecipeID })"> <img id="picbox" src="~/Img/@m.Recipes.ImageName" /> </a>
+                                                <button class="btn displayblock btn-outline-dark">delete</button>
+                                            </div>
+                                        }
 
-                        }
+                                    </div>
+
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
             }
