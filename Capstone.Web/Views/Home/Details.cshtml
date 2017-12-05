@@ -29,90 +29,209 @@
 @using (Html.BeginForm("Details", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <input type="button" class="btn btn-outline-dark" name="btnprint" value="Print" onclick="PrintMe('printableArea')" />
-    
 
-        <script language="javascript">
-            function PrintMe(DivID) {
-                var disp_setting = "toolbar=yes,location=no,";
-                disp_setting += "directories=yes,menubar=yes,";
-                disp_setting += "scrollbars=yes,width=650, height=600, left=100, top=25";
-                var content_vlue = document.getElementById(DivID).innerHTML;
-                var docprint = window.open("", "", disp_setting);
-                docprint.document.open();
-                docprint.document.write('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"');
-                docprint.document.write('"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">');
-                docprint.document.write('<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">');
-                docprint.document.write('<head><title>My Title</title>');
-                docprint.document.write('<style type="text/css">body{margin:0px;');
-                docprint.document.write('font-family:verdana,Arial;color:#000;');
-                docprint.document.write('font-family:Verdana, Geneva, sans-serif; font-size:12px;}');
-                docprint.document.write('a{color:#000;text-decoration:none;} </style>');
-                docprint.document.write('</head><body onLoad="self.print()"><center>');
-                docprint.document.write(content_vlue);
-                docprint.document.write('</center></body></html>');
-                docprint.document.close();
-                docprint.focus();
-            }
-        </script>
 
-   
-        <div id="printableArea" class="container-fluid">
-            <div style="padding-bottom:30px" class="panel panel-default">
-                <div style="font-weight:bold" class="panel-heading"><h2>@Model.Name</h2></div>
-                
-                <div class="col-md-4 print">
-                    <h4 style="font-weight:bold">Directions</h4><hr />
-                    @MvcHtmlString.Create(Html.Encode(Model.Directions).Replace(Environment.NewLine, "<br /> <hr />"))
-                    @Html.HiddenFor(model => model.Directions)
-                    @Html.HiddenFor(model => model.RecipeID)
+    <script language="javascript">
+        function PrintMe(DivID) {
+            var disp_setting = "toolbar=yes,location=no,";
+            disp_setting += "directories=yes,menubar=yes,";
+            disp_setting += "scrollbars=yes,width=650, height=600, left=100, top=25";
+            var content_vlue = document.getElementById(DivID).innerHTML;
+            var docprint = window.open("", "", disp_setting);
+            docprint.document.open();
+            docprint.document.write('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"');
+            docprint.document.write('"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">');
+            docprint.document.write('<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">');
+            docprint.document.write('<head><title>My Title</title>');
+            docprint.document.write('<style type="text/css">body{margin:0px;');
+            docprint.document.write('font-family:verdana,Arial;color:#000;');
+            docprint.document.write('font-family:Verdana, Geneva, sans-serif; font-size:12px;}');
+            docprint.document.write('a{color:#000;text-decoration:none;} </style>');
+            docprint.document.write('</head><body onLoad="self.print()"><center>');
+            docprint.document.write(content_vlue);
+            docprint.document.write('</center></body></html>');
+            docprint.document.close();
+            docprint.focus();
+        }
+    </script>
+
+
+    <div id="printableArea" class="container-fluid">
+        <div style="padding-bottom:30px" class="panel panel-default">
+            <div style="font-weight:bold" class="panel-heading"><h2>@Model.Name</h2></div>
+
+            <div class="col-md-4 print">
+                <h4 style="font-weight:bold">Directions</h4><hr />
+                @MvcHtmlString.Create(Html.Encode(Model.Directions).Replace(Environment.NewLine, "<br /> <hr />"))
+                @Html.HiddenFor(model => model.Directions)
+                @Html.HiddenFor(model => model.RecipeID)
+            </div>
+
+            <div class="col-md-4 print">
+                <h4 style="font-weight:bold">Ingredients</h4><hr />
+                @MvcHtmlString.Create(Html.Encode(Model.Ingredients).Replace(Environment.NewLine, "<br /> <hr />"))
+                @Html.HiddenFor(model => model.Ingredients)
+            </div>
+            <div id="notToBePrinted" class="col-md-4">
+                <img style="width:100%; height:auto" src="~/Img/@Model.ImageName" />
+                @Html.HiddenFor(model => model.ImageName)
+                <div class="col-md-1">
+                    <p style="font-weight:bold;border-bottom: 1px solid black">Tags</p>
+                    @foreach (string tag in Model.TagsList)
+                    {
+                        <p style="border-bottom: 1px solid black">@tag</p>
+
+                    }
                 </div>
-                
-                <div class="col-md-4 print">
-                    <h4 style="font-weight:bold">Ingredients</h4><hr />
-                    @MvcHtmlString.Create(Html.Encode(Model.Ingredients).Replace(Environment.NewLine, "<br /> <hr />"))
-                    @Html.HiddenFor(model => model.Ingredients)
-                </div>
-                <div id="notToBePrinted" class="col-md-4">
-                    <img style="width:100%; height:auto" src="~/Img/@Model.ImageName" />
-                    @Html.HiddenFor(model => model.ImageName)
-                    <div class="col-md-1">
-                        <p style="font-weight:bold;border-bottom: 1px solid black">Tags</p>
-                        @foreach(string tag in Model.TagsList)
-                        {
-                            <p style="border-bottom: 1px solid black">@tag</p>
-                            
-                        }
-                    </div>
-                    <div class="col-md-2"></div>
-                    <div class="col-md-1">
-                        <p style="font-weight:bold;border-bottom: 1px solid black">Categories</p>
-                        @foreach(string cat in Model.Categories)
-                        {
-                            <p style="border-bottom: 1px solid black">@cat</p>
-                            
-                        }
-                    </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-1">
+                    <p style="font-weight:bold;border-bottom: 1px solid black">Categories</p>
+                    @foreach (string cat in Model.Categories)
+                    {
+                        <p style="border-bottom: 1px solid black">@cat</p>
+
+                    }
                 </div>
             </div>
         </div>
+    </div>
+}
+@using Capstone.Web.DAL @if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true) { 
+
+    <div>
+        @using Capstone.Web.Models{
+        @using (Html.BeginForm("AddMealToPlan", "Plan", FormMethod.Post))
+        {
+            DropDownPlans model = Session["dropDown"] as DropDownPlans;
+
+            List<SelectListItem> plans = new List<SelectListItem>();
 
 
-    
+            foreach (PlanModel plan in model.PlanModels)
+            {
 
-
-
-    <div style="padding-bottom:35px">
-        @using Capstone.Web.DAL @if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
+                plans.Add(new SelectListItem
                 {
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-            <p>If Admin Would Like To Add Tags separated by semicolon (;)</p>
-                @Html.TextBoxFor(model => model.Tags, new { @class = "form-control" })
-                <button class="btn btn-outline-dark"> Submit </button>
+                    Text = plan.PlanName,
+                    Value = plan.PlanId.ToString()
+                });
+            }
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1">
+                        @Html.LabelFor(Model => model.selectedPlan, "Plan")
+                    </div>
+
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(Model => model.selectedPlan, plans, new { @class = "btn btn-default dropdown-toggle" })
+                    </div>
                 </div>
-                <div class="col-md-3"></div>
+            </div>
+
+            <br />
+
+            //@Html.Hidden(model => model.selectedRecipe)
+            //List<SelectListItem>
+            //    recipes = new List<SelectListItem>
+            //        ();
+            //foreach (RecipeModel recipe in model.Recipes)
+            //{
+            //    recipes.Add(new SelectListItem
+            //    {
+            //        Text = recipe.Name,
+            //        Value = recipe.RecipeID.ToString()
+            //    });
+            //}
+            @*<div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1">
+                        @Html.LabelFor(Model => model.selectedRecipe, "Recipe")
+                    </div>
+
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(Model => model.selectedRecipe, recipes, new { @class = "btn btn-default dropdown-toggle" })
+                    </div>
+                </div>
+            </div>*@
+
+            @Html.HiddenFor(Model => model.selectedRecipe)
+
+            <br />
+
+            List<SelectListItem>
+                days = new List<SelectListItem>
+                    ();
+            foreach (string day in model.Days)
+            {
+                days.Add(new SelectListItem
+                {
+                    Text = day,
+                    Value = day
+                });
+            }
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1">
+                        @Html.LabelFor(Model => model.selectedDay, "Day")
+                    </div>
+
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(Model => model.selectedDay, days, new { @class = "btn btn-default dropdown-toggle" })
+                    </div>
+                </div>
+            </div>
+
+
+            <br />
+
+            List<SelectListItem>
+                meals = new List<SelectListItem>
+                    ();
+            foreach (string meal in model.Meals)
+            {
+                meals.Add(new SelectListItem
+                {
+                    Text = meal,
+                    Value = meal
+                });
+            }
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1">
+                        @Html.LabelFor(Model => model.selectedMeal, "Meal")
+                    </div>
+
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(Model => model.selectedMeal, meals, new { @class = "btn btn-default dropdown-toggle" })
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <br />
+
+            <button class="btn btn-danger">Add Meal</button>
+            <br />
+            @Html.ActionLink("Back to List", "Index")
         }
     </div>
 
-                }
+}
 
+
+<div style="padding-bottom:35px">
+    @using Capstone.Web.DAL @if (Authorize.Admin((int?)Session["authorizationlevel"]) == true)
+    {
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <p>If Admin Would Like To Add Tags separated by semicolon (;)</p>
+            @Html.TextBoxFor(model => model.Tags, new { @class = "form-control" })
+            <button class="btn btn-outline-dark"> Submit </button>
+        </div>
+        <div class="col-md-3"></div>
+    }
+</div>
+
+                }

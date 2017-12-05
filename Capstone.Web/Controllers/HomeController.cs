@@ -150,7 +150,33 @@ namespace Capstone.Web.Controllers
             RecipeModel details = recipeDal.RecipeDetail(Convert.ToInt32(id));
             details.TagsList = recipeDal.GetTagsFromId(Convert.ToInt32(id));
             details.Categories = recipeDal.GetCatsFromId(Convert.ToInt32(id));
+            if (Authorize.Registered((int?)Session["authorizationlevel"]) == true || Authorize.Admin((int?)Session["authorizationlevel"]) == true)
+                {
+
+                UserModel user = Session["user"] as UserModel;
+                PlanModel p = new PlanModel();
+                DropDownPlans model = new DropDownPlans();
+
+                model.selectedRecipe = Convert.ToInt32(id);
+                List<PlanModel> plans = planDal.GetAllUserPlans(user.UserID);
+                foreach (PlanModel plan in plans)
+                {
+                    string planname = planDal.GetPlanName(plan.PlanId);
+                    plan.PlanName = planname;
+                }
+                List<string> days = p.Days;
+                List<string> meals = p.Meals;
+
+                //model.Recipes = recipes;
+                model.PlanModels = plans;
+                model.Days = days;
+                model.Meals = meals;
+                Session["dropDown"] = model;
+            }
+
             return View(details);
+
+
 
         }
 
@@ -183,6 +209,16 @@ namespace Capstone.Web.Controllers
             return RedirectToAction("Index");
 
         }
+
+        [HttpPost]
+        public ActionResult AddMealToPlan(DropDownPlans model)
+        {
+            int mealID = planDal.CreateMeal(model.selectedDay, model.selectedMeal);
+            planDal.AddMealAndPlanID(mealID, model.selectedPlan);
+            planDal.InsertMealAndRecipeID(mealID, model.selectedRecipe);
+
+            return RedirectToAction("AddMealConfirmation");
+        } 
 
         public ActionResult Admin()
         {
